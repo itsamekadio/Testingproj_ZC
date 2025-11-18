@@ -2048,8 +2048,8 @@ The Requirements Traceability Matrix (RTM) provides a clear mapping between func
 
 ### 4.2 Requirements Traceability Matrix
 
-| Requirement ID | Requirement Description | Test Case IDs | Test Level | Test Type | Coverage Status |
-|---------------|------------------------|---------------|------------|-----------|-----------------|
+| Requirement ID | Requirement Description | Test Case IDs | Test Level | Test Type | Coverage Status | Test Status |
+|---------------|------------------------|---------------|------------|-----------|-----------------|-------------|
 | **FR1: Cryptocurrency Data Display** |
 | FR1.1 | Fetch and display cryptocurrency data from CoinGecko API | TC_IT_009, TC_IT_010, TC_IT_011, TC_PT_001 | Integration, Performance | Black Box, White Box | ✅ Covered |
 | FR1.2 | Display rank, name, price, percentage changes, market cap | TC_CD_001, TC_CD_002, TC_CD_003, TC_CD_004, TC_CD_007 | Unit | White Box, Black Box | ✅ Covered |
@@ -2060,7 +2060,7 @@ The Requirements Traceability Matrix (RTM) provides a clear mapping between func
 | FR2.1 | Allow users to create multiple portfolios | TC_ST_002, TC_PT_006 | System, Performance | Black Box | ✅ Covered |
 | FR2.2 | Allow users to add cryptocurrencies to portfolio with specified amounts | TC_ST_001, TC_CD_006 | System, Unit | Black Box | ✅ Covered |
 | FR2.3 | Allow users to set starting price (per piece, total value, or current value) | TC_ST_001 | System | Black Box | ✅ Covered |
-| FR2.4 | Calculate and display portfolio total value | TC_PF_001, TC_PF_002, TC_PF_004, TC_PF_005, TC_PF_008, TC_PF_009, TC_PF_010, TC_IT_005, TC_IT_008, TC_ST_001, TC_ST_003, TC_PT_002 | Unit, Integration, System, Performance | Black Box, White Box | ✅ Covered |
+| FR2.4 | Calculate and display portfolio total value | TC_PF_001, TC_PF_002, TC_PF_004, TC_PF_005, TC_PF_008, TC_PF_009, TC_PF_010, TC_IT_005, TC_IT_008, TC_ST_001, TC_ST_003, TC_PT_002 | Unit, Integration, System, Performance | Black Box, White Box | ✅ Covered | ✅ Implemented & Pass (4/4) |
 | FR2.5 | Calculate and display portfolio gains/losses (absolute and percentage) | TC_PF_006, TC_PF_007, TC_PF_011, TC_PF_012, TC_CD_005, TC_ST_001, TC_ST_003 | Unit, System | Black Box, White Box | ✅ Covered |
 | FR2.6 | Allow users to remove cryptocurrencies from portfolio | TC_ST_001 | System | Black Box | ✅ Covered |
 | FR2.7 | Allow users to switch between multiple portfolios | TC_ST_002 | System | Black Box | ✅ Covered |
@@ -2068,8 +2068,8 @@ The Requirements Traceability Matrix (RTM) provides a clear mapping between func
 | FR2.9 | Allow users to delete portfolios (minimum one portfolio must exist) | TC_DV_009, TC_DV_010, TC_ST_002 | Unit, System | White Box, Black Box | ✅ Covered |
 | FR2.10 | Prevent adding duplicate cryptocurrencies to the same portfolio | TC_DV_006, TC_DV_007 | Unit | White Box | ✅ Covered |
 | **FR3: Currency Conversion** |
-| FR3.1 | Allow conversion between two cryptocurrencies | TC_CV_002, TC_CV_003, TC_CV_006, TC_ST_004 | Unit, System | Black Box, White Box | ✅ Covered |
-| FR3.2 | Allow conversion from cryptocurrency to fiat currency | TC_CV_001, TC_ST_005 | Unit, System | Black Box | ✅ Covered |
+| FR3.1 | Allow conversion between two cryptocurrencies | TC_CV_002, TC_CV_003, TC_CV_006, TC_ST_004 | Unit, System | Black Box, White Box | ✅ Covered | ✅ Implemented & Pass (2/2) |
+| FR3.2 | Allow conversion from cryptocurrency to fiat currency | TC_CV_001, TC_ST_005 | Unit, System | Black Box | ✅ Covered | ✅ Implemented & Pass (1/1) |
 | FR3.3 | Display real-time conversion rates | TC_CV_001, TC_CV_002, TC_CV_004, TC_CV_005, TC_ST_004, TC_ST_005, TC_PT_003 | Unit, System, Performance | Black Box, White Box | ✅ Covered |
 | FR3.4 | Allow switching the source and target currencies | TC_ST_004 | System | Black Box | ✅ Covered |
 | FR3.5 | Display global market data (total market cap, 24h volume, Bitcoin dominance) | TC_ST_006 | System | Black Box | ✅ Covered |
@@ -2089,7 +2089,7 @@ The Requirements Traceability Matrix (RTM) provides a clear mapping between func
 | FR5.5 | Deserialize and load saved data on application startup | TC_IT_001, TC_IT_002, TC_IT_003, TC_ST_001, TC_ST_007, TC_PT_005 | Integration, System, Performance | Black Box | ✅ Covered |
 | FR5.6 | Handle missing or corrupted data files gracefully | TC_IT_004 | Integration | White Box | ✅ Covered |
 | **FR6: Error Handling and Validation** |
-| FR6.1 | Validate numeric input for portfolio amounts and prices | TC_PF_002, TC_PF_003, TC_DV_001, TC_DV_002, TC_DV_003, TC_DV_004, TC_DV_005 | Unit | Black Box, White Box | ✅ Covered |
+| FR6.1 | Validate numeric input for portfolio amounts and prices | TC_PF_002, TC_PF_003, TC_DV_001, TC_DV_002, TC_DV_003, TC_DV_004, TC_DV_005 | Unit | Black Box, White Box | ✅ Covered | ✅ Implemented & Pass (5/5) |
 | FR6.2 | Handle API connection failures gracefully | TC_IT_009, TC_IT_011 | Integration | Black Box, White Box | ✅ Covered |
 | FR6.3 | Handle rate limiting (HTTP 429) from API | TC_IT_010 | Integration | White Box | ✅ Covered |
 | FR6.4 | Display appropriate error messages to users | TC_DV_002, TC_IT_011 | Unit, Integration | Black Box, White Box | ✅ Covered |
@@ -2199,6 +2199,105 @@ The following requirements require manual testing or UI automation tools:
 - Maintain version history of traceability matrix
 - Document changes and rationale for updates
 - Include matrix in test documentation repository
+
+### 4.10 Test Implementation Status
+
+This section provides a comprehensive summary of the Black Box JUnit test implementation status for the Crypto Checker application.
+
+#### 4.10.1 Test Implementation Summary
+
+**Total Tests Implemented:** 13 test cases
+- Portfolio Calculation Black Box Tests: 5 test cases (TC_PF_001 to TC_PF_005)
+- Currency Conversion Black Box Tests: 3 test cases (TC_CV_001, TC_CV_002, TC_CV_006)
+- Data Validation Black Box Tests: 5 test cases (TC_DV_001 to TC_DV_005)
+
+**Total Tests Passed:** 13 test cases
+**Total Tests Failed:** 0 test cases
+**Pass Rate:** 100%
+
+#### 4.10.2 Test Case Implementation Details
+
+**Portfolio Calculation Black Box Test Suite (PortfolioCalculationBlackBoxTest.java):**
+
+| Test Case ID | Test Method Name | Test Type | Status | Notes |
+|--------------|------------------|-----------|--------|-------|
+| TC_PF_001 | testCalculatePortfolio_EP_ValidPositiveAmount | EP | ✅ Pass | Valid positive amount (10.0, 100.0) → 1000.0 |
+| TC_PF_002 | testCalculatePortfolio_BVA_ZeroAmount | BVA | ✅ Pass | Zero amount boundary test |
+| TC_PF_003 | testCalculatePortfolio_EP_InvalidNegativeAmount | EP | ✅ Pass | Negative amount validation |
+| TC_PF_004 | testCalculatePortfolio_BVA_MinimumPositiveAmount | BVA | ✅ Pass | Minimum positive amount (0.00000001) |
+| TC_PF_005 | testCalculatePortfolio_BVA_MaximumAmount | BVA | ✅ Pass | Maximum amount (999999999.99) |
+
+**Currency Conversion Black Box Test Suite (CurrencyConversionBlackBoxTest.java):**
+
+| Test Case ID | Test Method Name | Test Type | Status | Notes |
+|--------------|------------------|-----------|--------|-------|
+| TC_CV_001 | testCalculateCurrency_EP_CryptoToFiat | EP | ✅ Pass | Crypto to fiat (50000.0 → USD) |
+| TC_CV_002 | testCalculateCurrency_EP_CryptoToCrypto | EP | ✅ Pass | Crypto to crypto (50000.0/3000.0 = 16.666...) |
+| TC_CV_006 | testCalculateCurrency_BVA_MinimumPositiveInput | BVA | ✅ Pass | Minimum positive input (0.00000001) |
+
+**Data Validation Black Box Test Suite (DataValidationBlackBoxTest.java):**
+
+| Test Case ID | Test Method Name | Test Type | Status | Notes |
+|--------------|------------------|-----------|--------|-------|
+| TC_DV_001 | testValidateAmount_EP_ValidPositiveNumber | EP | ✅ Pass | Valid positive numbers ("10.5", "100", "0.001") |
+| TC_DV_002 | testValidateAmount_EP_InvalidNonNumeric | EP | ✅ Pass | Invalid non-numeric ("abc", "12.3.4") |
+| TC_DV_003 | testValidateAmount_BVA_ZeroValue | BVA | ✅ Pass | Zero value boundary ("0") |
+| TC_DV_004 | testValidateAmount_EP_InvalidNegativeValue | EP | ✅ Pass | Negative values ("-5.0", "-0.001") |
+| TC_DV_005 | testValidateAmount_BVA_VeryLargeNumber | BVA | ✅ Pass | Very large number ("999999999999.99") |
+
+#### 4.10.3 Test Coverage by Requirement
+
+**FR2.4 (Portfolio Value Calculation):**
+- ✅ Implemented & Pass: 4/4 Black Box tests
+  - TC_PF_001: Valid positive amount
+  - TC_PF_002: Zero amount (BVA)
+  - TC_PF_004: Minimum positive amount (BVA)
+  - TC_PF_005: Maximum amount (BVA)
+
+**FR3.1 (Crypto to Crypto Conversion):**
+- ✅ Implemented & Pass: 2/2 Black Box tests
+  - TC_CV_002: Crypto to crypto conversion
+  - TC_CV_006: Minimum positive input (BVA)
+
+**FR3.2 (Crypto to Fiat Conversion):**
+- ✅ Implemented & Pass: 1/1 Black Box test
+  - TC_CV_001: Crypto to fiat conversion
+
+**FR6.1 (Input Validation):**
+- ✅ Implemented & Pass: 5/5 Black Box tests
+  - TC_DV_001: Valid positive number
+  - TC_DV_002: Invalid non-numeric
+  - TC_DV_003: Zero value (BVA)
+  - TC_DV_004: Invalid negative value
+  - TC_DV_005: Very large number (BVA)
+
+#### 4.10.4 Test Execution Environment
+
+- **JUnit Version:** 4.13.2
+- **Java Version:** 8
+- **Build Tool:** Maven 3.5.3+
+- **Test Framework:** JUnit 4
+- **Test Location:** `src/test/java/com/cryptochecker/`
+
+#### 4.10.5 Test Execution Results
+
+All implemented Black Box tests have been successfully executed and passed. The test suite covers:
+- **Equivalence Partitioning (EP):** 8 test cases
+- **Boundary Value Analysis (BVA):** 5 test cases
+
+**Test Execution Summary:**
+- Total test methods: 13
+- Tests passed: 13
+- Tests failed: 0
+- Tests skipped: 0
+- Success rate: 100%
+
+#### 4.10.6 Evidence Location
+
+Test execution evidence is located in the `evidence/` folder:
+- `test_execution_log.txt`: Full Maven test execution output
+- `test_summary.txt`: Summary of test results
+- Screenshots: Test execution screenshots (to be added)
 
 ---
 

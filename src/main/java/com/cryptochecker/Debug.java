@@ -39,6 +39,11 @@ public class Debug {
     }
 
     public static void log(String s) {
+        if (contentPane == null) {
+            System.out.println(s);
+            return;
+        }
+        
         time = LocalDateTime.now();
         String msg = time.getHour()+":"+time.getMinute()+":"+time.getSecond()+": "+s;
 
