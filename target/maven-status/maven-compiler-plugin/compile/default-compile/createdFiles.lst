@@ -5,6 +5,7 @@ com\cryptochecker\PanelSettings$bViewListener.class
 com\cryptochecker\WebData.class
 com\cryptochecker\PanelPortfolio$1.class
 com\cryptochecker\PanelPortfolio$bManagePortfolioListener.class
+com\cryptochecker\PortfolioCalculationService$PortfolioSummary.class
 com\cryptochecker\PanelConverter$bSwitchListener.class
 com\cryptochecker\PanelCoin$1.class
 com\cryptochecker\PanelPortfolio$TableMouseListener.class
@@ -25,6 +26,7 @@ com\cryptochecker\PanelCoin.class
 com\cryptochecker\PanelSettings$1.class
 com\cryptochecker\PanelPortfolio$TableRenderer.class
 com\cryptochecker\PanelSettings.class
+com\cryptochecker\PortfolioCalculationService.class
 com\cryptochecker\PanelSettings$bColorApplyListener.class
 com\cryptochecker\Menu$bSettingsListener.class
 com\cryptochecker\WebData$Coin.class
@@ -45,6 +47,7 @@ com\cryptochecker\PanelPortfolio.class
 com\cryptochecker\PanelConverter$bGlobalListener.class
 com\cryptochecker\PanelPortfolio$bRefreshListener.class
 com\cryptochecker\Menu.class
+com\cryptochecker\CurrencyConversionService.class
 com\cryptochecker\PanelSettings$bResetListener.class
 com\cryptochecker\PanelSettings$bThemeListener.class
 com\cryptochecker\Main.class

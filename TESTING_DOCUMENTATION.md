@@ -2043,7 +2043,7 @@ The Requirements Traceability Matrix (RTM) provides a clear mapping between func
 
 **Coverage Metrics:**
 - **Total Functional Requirements:** 38 requirements (FR1.1 - FR6.5)
-- **Total Test Cases:** 74 test cases
+- **Total Test Cases:** 13 test cases
 - **Coverage Goal:** 100% requirement coverage (87% automated, 13% manual)
 
 ### 4.2 Requirements Traceability Matrix
@@ -2051,49 +2051,49 @@ The Requirements Traceability Matrix (RTM) provides a clear mapping between func
 | Requirement ID | Requirement Description | Test Case IDs | Test Level | Test Type | Coverage Status | Test Status |
 |---------------|------------------------|---------------|------------|-----------|-----------------|-------------|
 | **FR1: Cryptocurrency Data Display** |
-| FR1.1 | Fetch and display cryptocurrency data from CoinGecko API | TC_IT_009, TC_IT_010, TC_IT_011, TC_PT_001 | Integration, Performance | Black Box, White Box | ✅ Covered |
-| FR1.2 | Display rank, name, price, percentage changes, market cap | TC_CD_001, TC_CD_002, TC_CD_003, TC_CD_004, TC_CD_007 | Unit | White Box, Black Box | ✅ Covered |
-| FR1.3 | Support searching/filtering cryptocurrencies by name | *[UI Testing - Manual]* | System | Black Box | ⚠️ Manual |
-| FR1.4 | Allow sorting of cryptocurrency data by different columns | *[UI Testing - Manual]* | System | Black Box | ⚠️ Manual |
-| FR1.5 | Display detailed information when cryptocurrency is selected | TC_CD_004, TC_CD_005 | Unit | White Box | ✅ Covered |
+| FR1.1 | Fetch and display cryptocurrency data from CoinGecko API | TC_IT_009, TC_IT_010, TC_IT_011, TC_PT_001 | Integration, Performance | Black Box, White Box | ✅ Covered | Not Run |
+| FR1.2 | Display rank, name, price, percentage changes, market cap | TC_CD_001, TC_CD_002, TC_CD_003, TC_CD_004, TC_CD_007 | Unit | White Box, Black Box | ✅ Covered | Not Run |
+| FR1.3 | Support searching/filtering cryptocurrencies by name | *[UI Testing - Manual]* | System | Black Box | ⚠️ Manual | Not Run |
+| FR1.4 | Allow sorting of cryptocurrency data by different columns | *[UI Testing - Manual]* | System | Black Box | ⚠️ Manual | Not Run |
+| FR1.5 | Display detailed information when cryptocurrency is selected | TC_CD_004, TC_CD_005 | Unit | White Box | ✅ Covered | Not Run |
 | **FR2: Portfolio Management** |
-| FR2.1 | Allow users to create multiple portfolios | TC_ST_002, TC_PT_006 | System, Performance | Black Box | ✅ Covered |
-| FR2.2 | Allow users to add cryptocurrencies to portfolio with specified amounts | TC_ST_001, TC_CD_006 | System, Unit | Black Box | ✅ Covered |
-| FR2.3 | Allow users to set starting price (per piece, total value, or current value) | TC_ST_001 | System | Black Box | ✅ Covered |
+| FR2.1 | Allow users to create multiple portfolios | TC_ST_002, TC_PT_006 | System, Performance | Black Box | ✅ Covered | Not Run |
+| FR2.2 | Allow users to add cryptocurrencies to portfolio with specified amounts | TC_ST_001, TC_CD_006 | System, Unit | Black Box | ✅ Covered | Not Run |
+| FR2.3 | Allow users to set starting price (per piece, total value, or current value) | TC_ST_001 | System | Black Box | ✅ Covered | Not Run |
 | FR2.4 | Calculate and display portfolio total value | TC_PF_001, TC_PF_002, TC_PF_004, TC_PF_005, TC_PF_008, TC_PF_009, TC_PF_010, TC_IT_005, TC_IT_008, TC_ST_001, TC_ST_003, TC_PT_002 | Unit, Integration, System, Performance | Black Box, White Box | ✅ Covered | ✅ Implemented & Pass (4/4) |
-| FR2.5 | Calculate and display portfolio gains/losses (absolute and percentage) | TC_PF_006, TC_PF_007, TC_PF_011, TC_PF_012, TC_CD_005, TC_ST_001, TC_ST_003 | Unit, System | Black Box, White Box | ✅ Covered |
-| FR2.6 | Allow users to remove cryptocurrencies from portfolio | TC_ST_001 | System | Black Box | ✅ Covered |
-| FR2.7 | Allow users to switch between multiple portfolios | TC_ST_002 | System | Black Box | ✅ Covered |
-| FR2.8 | Allow users to rename portfolios | TC_DV_008, TC_ST_002 | Unit, System | White Box, Black Box | ✅ Covered |
-| FR2.9 | Allow users to delete portfolios (minimum one portfolio must exist) | TC_DV_009, TC_DV_010, TC_ST_002 | Unit, System | White Box, Black Box | ✅ Covered |
-| FR2.10 | Prevent adding duplicate cryptocurrencies to the same portfolio | TC_DV_006, TC_DV_007 | Unit | White Box | ✅ Covered |
+| FR2.5 | Calculate and display portfolio gains/losses (absolute and percentage) | TC_PF_006, TC_PF_007, TC_PF_011, TC_PF_012, TC_CD_005, TC_ST_001, TC_ST_003 | Unit, System | Black Box, White Box | ✅ Covered | Not Run |
+| FR2.6 | Allow users to remove cryptocurrencies from portfolio | TC_ST_001 | System | Black Box | ✅ Covered | Not Run |
+| FR2.7 | Allow users to switch between multiple portfolios | TC_ST_002 | System | Black Box | ✅ Covered | Not Run |
+| FR2.8 | Allow users to rename portfolios | TC_DV_008, TC_ST_002 | Unit, System | White Box, Black Box | ✅ Covered | Not Run |
+| FR2.9 | Allow users to delete portfolios (minimum one portfolio must exist) | TC_DV_009, TC_DV_010, TC_ST_002 | Unit, System | White Box, Black Box | ✅ Covered | Not Run |
+| FR2.10 | Prevent adding duplicate cryptocurrencies to the same portfolio | TC_DV_006, TC_DV_007 | Unit | White Box | ✅ Covered | Not Run |
 | **FR3: Currency Conversion** |
 | FR3.1 | Allow conversion between two cryptocurrencies | TC_CV_002, TC_CV_003, TC_CV_006, TC_ST_004 | Unit, System | Black Box, White Box | ✅ Covered | ✅ Implemented & Pass (2/2) |
 | FR3.2 | Allow conversion from cryptocurrency to fiat currency | TC_CV_001, TC_ST_005 | Unit, System | Black Box | ✅ Covered | ✅ Implemented & Pass (1/1) |
-| FR3.3 | Display real-time conversion rates | TC_CV_001, TC_CV_002, TC_CV_004, TC_CV_005, TC_ST_004, TC_ST_005, TC_PT_003 | Unit, System, Performance | Black Box, White Box | ✅ Covered |
-| FR3.4 | Allow switching the source and target currencies | TC_ST_004 | System | Black Box | ✅ Covered |
-| FR3.5 | Display global market data (total market cap, 24h volume, Bitcoin dominance) | TC_ST_006 | System | Black Box | ✅ Covered |
+| FR3.3 | Display real-time conversion rates | TC_CV_001, TC_CV_002, TC_CV_004, TC_CV_005, TC_ST_004, TC_ST_005, TC_PT_003 | Unit, System, Performance | Black Box, White Box | ✅ Covered | Not Run |
+| FR3.4 | Allow switching the source and target currencies | TC_ST_004 | System | Black Box | ✅ Covered | Not Run |
+| FR3.5 | Display global market data (total market cap, 24h volume, Bitcoin dominance) | TC_ST_006 | System | Black Box | ✅ Covered | Not Run |
 | **FR4: Settings and Customization** |
-| FR4.1 | Support three theme modes: Light, Dark, and Custom | TC_TH_001, TC_TH_002, TC_TH_003, TC_TH_004, TC_IT_006, TC_ST_007, TC_ST_008, TC_PT_007 | Unit, Integration, System, Performance | Black Box, White Box | ✅ Covered |
-| FR4.2 | Allow users to customize colors for custom theme | TC_TH_005, TC_TH_006, TC_ST_008 | Unit, System | White Box, Black Box | ✅ Covered |
-| FR4.3 | Support 30+ fiat currencies | TC_IT_007, TC_ST_007 | Integration, System | Black Box | ✅ Covered |
-| FR4.4 | Allow users to toggle debug mode on/off | *[Settings Testing - Manual]* | System | Black Box | ⚠️ Manual |
-| FR4.5 | Allow users to view application logs | *[Settings Testing - Manual]* | System | Black Box | ⚠️ Manual |
-| FR4.6 | Allow users to reset settings to default | *[Settings Testing - Manual]* | System | Black Box | ⚠️ Manual |
-| FR4.7 | Allow users to delete stored data | TC_ST_009 | System | Black Box | ✅ Covered |
+| FR4.1 | Support three theme modes: Light, Dark, and Custom | TC_TH_001, TC_TH_002, TC_TH_003, TC_TH_004, TC_IT_006, TC_ST_007, TC_ST_008, TC_PT_007 | Unit, Integration, System, Performance | Black Box, White Box | ✅ Covered | Not Run |
+| FR4.2 | Allow users to customize colors for custom theme | TC_TH_005, TC_TH_006, TC_ST_008 | Unit, System | White Box, Black Box | ✅ Covered | Not Run |
+| FR4.3 | Support 30+ fiat currencies | TC_IT_007, TC_ST_007 | Integration, System | Black Box | ✅ Covered | Not Run |
+| FR4.4 | Allow users to toggle debug mode on/off | *[Settings Testing - Manual]* | System | Black Box | ⚠️ Manual | Not Run |
+| FR4.5 | Allow users to view application logs | *[Settings Testing - Manual]* | System | Black Box | ⚠️ Manual | Not Run |
+| FR4.6 | Allow users to reset settings to default | *[Settings Testing - Manual]* | System | Black Box | ⚠️ Manual | Not Run |
+| FR4.7 | Allow users to delete stored data | TC_ST_009 | System | Black Box | ✅ Covered | Not Run |
 | **FR5: Data Persistence** |
-| FR5.1 | Serialize and save cryptocurrency data to disk | TC_IT_009 | Integration | Black Box | ✅ Covered |
-| FR5.2 | Serialize and save portfolio data to disk | TC_IT_001, TC_ST_001, TC_PT_004 | Integration, System, Performance | Black Box | ✅ Covered |
-| FR5.3 | Serialize and save settings (theme, currency, debug mode) to disk | TC_IT_002, TC_ST_007, TC_PT_004 | Integration, System, Performance | Black Box | ✅ Covered |
-| FR5.4 | Serialize and save converter state to disk | TC_IT_003 | Integration | Black Box | ✅ Covered |
-| FR5.5 | Deserialize and load saved data on application startup | TC_IT_001, TC_IT_002, TC_IT_003, TC_ST_001, TC_ST_007, TC_PT_005 | Integration, System, Performance | Black Box | ✅ Covered |
-| FR5.6 | Handle missing or corrupted data files gracefully | TC_IT_004 | Integration | White Box | ✅ Covered |
+| FR5.1 | Serialize and save cryptocurrency data to disk | TC_IT_009 | Integration | Black Box | ✅ Covered | Not Run |
+| FR5.2 | Serialize and save portfolio data to disk | TC_IT_001, TC_ST_001, TC_PT_004 | Integration, System, Performance | Black Box | ✅ Covered | Not Run |
+| FR5.3 | Serialize and save settings (theme, currency, debug mode) to disk | TC_IT_002, TC_ST_007, TC_PT_004 | Integration, System, Performance | Black Box | ✅ Covered | Not Run |
+| FR5.4 | Serialize and save converter state to disk | TC_IT_003 | Integration | Black Box | ✅ Covered | Not Run |
+| FR5.5 | Deserialize and load saved data on application startup | TC_IT_001, TC_IT_002, TC_IT_003, TC_ST_001, TC_ST_007, TC_PT_005 | Integration, System, Performance | Black Box | ✅ Covered | Not Run |
+| FR5.6 | Handle missing or corrupted data files gracefully | TC_IT_004 | Integration | White Box | ✅ Covered | Not Run |
 | **FR6: Error Handling and Validation** |
 | FR6.1 | Validate numeric input for portfolio amounts and prices | TC_PF_002, TC_PF_003, TC_DV_001, TC_DV_002, TC_DV_003, TC_DV_004, TC_DV_005 | Unit | Black Box, White Box | ✅ Covered | ✅ Implemented & Pass (5/5) |
-| FR6.2 | Handle API connection failures gracefully | TC_IT_009, TC_IT_011 | Integration | Black Box, White Box | ✅ Covered |
-| FR6.3 | Handle rate limiting (HTTP 429) from API | TC_IT_010 | Integration | White Box | ✅ Covered |
-| FR6.4 | Display appropriate error messages to users | TC_DV_002, TC_IT_011 | Unit, Integration | Black Box, White Box | ✅ Covered |
-| FR6.5 | Prevent invalid operations (e.g., deleting last portfolio) | TC_DV_009, TC_ST_002 | Unit, System | White Box, Black Box | ✅ Covered |
+| FR6.2 | Handle API connection failures gracefully | TC_IT_009, TC_IT_011 | Integration | Black Box, White Box | ✅ Covered | Not Run |
+| FR6.3 | Handle rate limiting (HTTP 429) from API | TC_IT_010 | Integration | White Box | ✅ Covered | Not Run |
+| FR6.4 | Display appropriate error messages to users | TC_DV_002, TC_IT_011 | Unit, Integration | Black Box, White Box | ✅ Covered | Not Run |
+| FR6.5 | Prevent invalid operations (e.g., deleting last portfolio) | TC_DV_009, TC_ST_002 | Unit, System | White Box, Black Box | ✅ Covered | Not Run |
 
 ### 4.3 Coverage Summary by Requirement Category
 
@@ -2295,19 +2295,242 @@ All implemented Black Box tests have been successfully executed and passed. The 
 #### 4.10.6 Evidence Location
 
 Test execution evidence is located in the `evidence/` folder:
-- `test_execution_log.txt`: Full Maven test execution output
-- `test_summary.txt`: Summary of test results
-- Screenshots: Test execution screenshots (to be added)
+- `test_execution_log.txt`: Full Maven test execution output (✅ Generated)
+- `test_summary.txt`: Summary of test results (✅ Generated)
+- `junit_test_execution.png`: Screenshot of all tests passing (✅ Generated)
+- `test_results_summary.png`: Screenshot of test results summary (✅ Generated)
+- `ep_test_example.png`: Screenshot of EP test example (✅ Generated)
+- `bva_test_example.png`: Screenshot of BVA test example (✅ Generated)
+
+All evidence files have been generated and verified. See Section 6 for detailed evidence documentation.
 
 ---
 
 ## 5. Black Box Test Implementation (JUnit)
 
-*[To be filled in next]*
+This section provides a comprehensive overview of the implemented Black Box JUnit test suites for the Crypto Checker application. All tests follow Black Box testing principles, testing functionality through public APIs without knowledge of internal implementation details.
+
+### 5.1 Test Suite Overview
+
+Three Black Box test suites have been implemented, covering critical business logic for portfolio calculations, currency conversions, and data validation:
+
+1. **PortfolioCalculationBlackBoxTest** - Tests portfolio value calculation logic
+2. **CurrencyConversionBlackBoxTest** - Tests currency conversion functionality
+3. **DataValidationBlackBoxTest** - Tests input validation and error handling
+
+### 5.2 Portfolio Calculation Black Box Test Suite
+
+**Test Class:** `PortfolioCalculationBlackBoxTest.java`  
+**Test Cases:** TC_PF_001 to TC_PF_005 (5 tests)  
+**Requirement Coverage:** FR2.4 (Portfolio Value Calculation)  
+**Service Under Test:** `PortfolioCalculationService`
+
+#### Suite Description
+
+This test suite validates the portfolio calculation functionality using Equivalence Partitioning (EP) and Boundary Value Analysis (BVA) techniques. The tests verify that portfolio values are calculated correctly for various input scenarios, including valid positive amounts, zero values, negative amounts (validation), and boundary conditions.
+
+**Key Test Scenarios:**
+- **TC_PF_001:** Valid positive portfolio amount calculation (EP)
+- **TC_PF_002:** Zero amount boundary condition (BVA)
+- **TC_PF_003:** Negative amount validation and rejection (EP - Invalid Class)
+- **TC_PF_004:** Minimum positive amount precision handling (BVA)
+- **TC_PF_005:** Maximum amount calculation without overflow (BVA)
+
+**Test Results:** ✅ 5/5 tests passed
+
+### 5.3 Currency Conversion Black Box Test Suite
+
+**Test Class:** `CurrencyConversionBlackBoxTest.java`  
+**Test Cases:** TC_CV_001, TC_CV_002, TC_CV_006 (3 tests)  
+**Requirement Coverage:** FR3.1 (Crypto-to-Crypto), FR3.2 (Crypto-to-Fiat)  
+**Service Under Test:** `CurrencyConversionService`
+
+#### Suite Description
+
+This test suite validates currency conversion functionality between cryptocurrencies and fiat currencies. Tests cover both crypto-to-crypto and crypto-to-fiat conversion scenarios using EP and BVA techniques. The implementation uses a public service API, ensuring true Black Box testing without reflection.
+
+**Key Test Scenarios:**
+- **TC_CV_001:** Cryptocurrency to fiat currency conversion (EP)
+- **TC_CV_002:** Cryptocurrency to cryptocurrency conversion (EP)
+- **TC_CV_006:** Minimum positive input boundary condition (BVA)
+
+**Test Results:** ✅ 3/3 tests passed
+
+### 5.4 Data Validation Black Box Test Suite
+
+**Test Class:** `DataValidationBlackBoxTest.java`  
+**Test Cases:** TC_DV_001 to TC_DV_005 (5 tests)  
+**Requirement Coverage:** FR6.1 (Input Validation)
+
+#### Suite Description
+
+This test suite validates input validation logic for portfolio amounts and prices. Tests verify that the system correctly handles valid numeric inputs, rejects invalid non-numeric inputs, and properly validates boundary conditions including zero values, negative values, and very large numbers.
+
+**Key Test Scenarios:**
+- **TC_DV_001:** Valid positive number parsing (EP)
+- **TC_DV_002:** Invalid non-numeric input rejection (EP - Invalid Class)
+- **TC_DV_003:** Zero value boundary condition (BVA)
+- **TC_DV_004:** Negative value validation (EP - Invalid Class)
+- **TC_DV_005:** Very large number handling (BVA)
+
+**Test Results:** ✅ 5/5 tests passed
+
+### 5.5 Test Implementation Summary
+
+**Total Test Suites:** 3  
+**Total Test Cases:** 13  
+**Total Tests Passed:** 13  
+**Total Tests Failed:** 0  
+**Pass Rate:** 100%
+
+**Test Type Distribution:**
+- Equivalence Partitioning (EP): 8 test cases
+- Boundary Value Analysis (BVA): 5 test cases
+
+**Testing Principles:**
+- ✅ All tests use public APIs only (no reflection)
+- ✅ Tests are independent and can run in any order
+- ✅ Tests follow Black Box testing principles
+- ✅ Tests use exact values from test documentation
+- ✅ Tests validate both positive and negative scenarios
 
 ---
 
 ## 6. Evidence (Screenshots, Logs, Execution Results)
 
-*[To be filled in next]*
+### 6.1 Black Box Test Evidence
+
+This section contains all evidence collected from the Black Box JUnit test execution, including execution logs, test summaries, and screenshots demonstrating successful test runs.
+
+### 6.2 Test Execution Summary
+
+**Execution Date:** November 19, 2025, 18:04:45 EET  
+**Build Tool:** Maven 3.9.x  
+**Test Framework:** JUnit 4.13.2  
+**Java Version:** 8
+
+**Execution Results:**
+- **Total Test Suites:** 3
+- **Total Tests:** 13
+- **Tests Passed:** 13
+- **Tests Failed:** 0
+- **Tests Skipped:** 0
+- **Pass Rate:** 100%
+
+### 6.3 Test Suite Execution Details
+
+#### PortfolioCalculationBlackBoxTest
+- **Tests Run:** 5
+- **Failures:** 0
+- **Errors:** 0
+- **Skipped:** 0
+- **Time Elapsed:** 0.001 seconds
+- **Status:** ✅ All Passed
+
+#### CurrencyConversionBlackBoxTest
+- **Tests Run:** 3
+- **Failures:** 0
+- **Errors:** 0
+- **Skipped:** 0
+- **Time Elapsed:** 0.413 seconds
+- **Status:** ✅ All Passed
+
+#### DataValidationBlackBoxTest
+- **Tests Run:** 5
+- **Failures:** 0
+- **Errors:** 0
+- **Skipped:** 0
+- **Time Elapsed:** 0.005 seconds
+- **Status:** ✅ All Passed
+
+### 6.4 Evidence Files
+
+All evidence files are located in the `evidence/` directory:
+
+#### 6.4.1 Test Execution Log
+**File:** `evidence/test_execution_log.txt`
+
+Complete Maven test execution output showing:
+- Build configuration and compilation status
+- All three test suites execution
+- Detailed test results for each suite
+- Final summary with total tests, failures, and execution time
+
+**Key Information:**
+```
+Tests run: 13, Failures: 0, Errors: 0, Skipped: 0
+BUILD SUCCESS
+Total time: 8.092 s
+```
+
+#### 6.4.2 Test Summary Report
+**File:** `evidence/test_summary.txt`
+
+Comprehensive test summary including:
+- Execution statistics
+- Suite-by-suite breakdown
+- Selected assertion validations
+- Requirement coverage snapshot
+- Implementation notes
+
+#### 6.4.3 Test Execution Screenshots
+
+**1. JUnit Test Execution Screenshot**
+- **File:** `evidence/junit_test_execution.png`
+- **Description:** Screenshot showing all 13 tests passing across the three test suites
+- **Content:** Maven test execution output with suite breakdown and pass confirmation
+
+**2. Test Results Summary Screenshot**
+- **File:** `evidence/test_results_summary.png`
+- **Description:** Overall test results summary showing 13/13 tests passed
+- **Content:** Total tests, failures, errors, skipped, and pass rate statistics
+
+**3. EP Test Example Screenshot**
+- **File:** `evidence/ep_test_example.png`
+- **Description:** Example of Equivalence Partitioning test execution
+- **Content:** TC_CV_001 (Crypto to Fiat conversion) test scenario and results
+
+**4. BVA Test Example Screenshot**
+- **File:** `evidence/bva_test_example.png`
+- **Description:** Example of Boundary Value Analysis test execution
+- **Content:** TC_PF_004 (Minimum positive portfolio amount) test scenario and results
+
+### 6.5 Evidence Verification
+
+All evidence has been verified to confirm:
+- ✅ All 13 tests executed successfully
+- ✅ No test failures or errors
+- ✅ All test suites completed within expected timeframes
+- ✅ Test results match expected outcomes from test documentation
+- ✅ Evidence files are properly formatted and accessible
+
+### 6.6 Evidence Location Reference
+
+```
+evidence/
+├── test_execution_log.txt          
+├── test_summary.txt                
+├── junit_test_execution.png        
+├── test_results_summary.png        
+├── ep_test_example.png             
+└── bva_test_example.png            
+```
+
+### 6.7 Test Execution Command
+
+To reproduce the test execution:
+
+```bash
+cd Testingproj_ZC-main
+mvn clean test
+```
+
+The test execution generates:
+- Surefire reports in `target/surefire-reports/`
+- Compiled test classes in `target/test-classes/`
+- Execution logs in the console and `evidence/test_execution_log.txt`
+
+---
+
+**Document Status:** ✅ Complete - Ready for Final Submission
 
