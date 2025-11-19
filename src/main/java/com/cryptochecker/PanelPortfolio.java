@@ -33,6 +33,8 @@ public class PanelPortfolio {
     private JPanel overview;
     private JEditorPane overviewText;
 
+    private final PortfolioCalculationService portfolioCalculationService = new PortfolioCalculationService();
+
     public PanelPortfolio() {
         panel = new JPanel();
         panel.setVisible(false); // visible to false at startup
@@ -236,9 +238,14 @@ public class PanelPortfolio {
     public void calculatePortfolio() {
         double value = 0.0;
         double gains = 0.0;
-        for (int i = 0; i < Main.gui.webData.portfolio.get(nr).size(); ++i) {
-           value += Main.gui.webData.portfolio.get(nr).get(i).portfolio_value;
-           gains += Main.gui.webData.portfolio.get(nr).get(i).portfolio_gains;
+        try {
+            PortfolioCalculationService.PortfolioSummary summary = portfolioCalculationService.calculate(Main.gui.webData.portfolio.get(nr));
+            value = summary.getTotalValue();
+            gains = summary.getTotalGains();
+        } catch (IllegalArgumentException ex) {
+            Debug.log("Portfolio calculation error: " + ex.getMessage());
+            JOptionPane.showMessageDialog(Main.frame, ex.getMessage());
+            return;
         }
         
         DecimalFormat overviewFormat = new DecimalFormat("#,###.##");
@@ -460,6 +467,11 @@ public class PanelPortfolio {
             double amounts;
             try {
                 amounts = Double.parseDouble(input);
+                if (amounts < 0) {
+                    Debug.log("-- negative amounts not allowed");
+                    JOptionPane.showMessageDialog(Main.frame, "Amount must be zero or greater");
+                    return;
+                }
                 value.portfolio_amount = amounts;
                 Debug.log("-- "+amounts);
             } catch(Exception ex) {

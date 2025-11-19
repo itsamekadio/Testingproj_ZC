@@ -12,44 +12,27 @@ import java.util.ArrayList;
  */
 public class PortfolioCalculationBlackBoxTest {
 
-    private PanelPortfolio panelPortfolio;
-    private WebData webData;
+    private PortfolioCalculationService portfolioCalculationService;
+    private WebData testWebData;
     private ArrayList<WebData.Coin> testPortfolio;
 
     @Before
     public void setUp() throws Exception {
-        // Set system property for headless mode (no GUI)
-        System.setProperty("java.awt.headless", "false");
-        
-        // Initialize minimal GUI components
-        if (Main.frame == null) {
-            Main.frame = new javax.swing.JFrame();
-            Main.frame.setVisible(false);
-        }
-        
-        // Initialize test environment
-        Main.gui = new Main();
-        try {
-            Main.gui.webData = new WebData();
-        } catch (Exception e) {
-            // If WebData fails (e.g., no internet), create minimal setup
-            Main.gui.webData = new WebData();
-            Main.gui.webData.coin = new ArrayList<>();
-        }
-        Main.gui.webData.portfolio = new ArrayList<>();
-        Main.gui.webData.portfolio_names = new ArrayList<>();
-        Main.gui.webData.portfolio_nr = 0;
-        Main.gui.webData.portfolio.add(new ArrayList<WebData.Coin>());
-        Main.gui.webData.portfolio_names.add("Test Portfolio");
-        Main.gui.webData.portfolio_nr = 0;
-        
-        // Initialize theme
-        Main.theme = new Main.Theme(Main.themes.LIGHT);
-        Main.currency = "USD";
-        Main.currencyChar = "$";
-        
-        panelPortfolio = new PanelPortfolio();
-        testPortfolio = Main.gui.webData.portfolio.get(0);
+        portfolioCalculationService = new PortfolioCalculationService();
+        testWebData = new WebData(true);
+        testPortfolio = new ArrayList<>();
+    }
+
+    private WebData.Coin createCoin(double amount, double price) {
+        WebData.Coin coin = testWebData.getCoin();
+        coin.name = "TestCoin";
+        coin.portfolio_amount = amount;
+        coin.price = price;
+        coin.portfolio_price = price;
+        coin.portfolio_value = amount * price;
+        coin.portfolio_gains = 0.0;
+        coin.portfolio_value_start = coin.portfolio_value;
+        return coin;
     }
 
     /**
@@ -63,22 +46,11 @@ public class PortfolioCalculationBlackBoxTest {
     @Test
     public void testCalculatePortfolio_EP_ValidPositiveAmount() {
         // Setup: Create portfolio with coin: amount = 10.0, price = 100.0
-        WebData.Coin coin = Main.gui.webData.getCoin();
-        coin.name = "TestCoin";
-        coin.portfolio_amount = 10.0;
-        coin.price = 100.0;
-        coin.portfolio_value = coin.portfolio_amount * coin.price; // 1000.0
-        coin.portfolio_gains = 0.0;
-        testPortfolio.add(coin);
+        testPortfolio.clear();
+        testPortfolio.add(createCoin(10.0, 100.0));
 
-        // Execute: Call calculatePortfolio()
-        panelPortfolio.calculatePortfolio();
-
-        // Verify: Portfolio value = 1000.0
-        double totalValue = 0.0;
-        for (WebData.Coin c : testPortfolio) {
-            totalValue += c.portfolio_value;
-        }
+        PortfolioCalculationService.PortfolioSummary summary = portfolioCalculationService.calculate(testPortfolio);
+        double totalValue = summary.getTotalValue();
         assertEquals(1000.0, totalValue, 0.01);
     }
 
@@ -94,22 +66,11 @@ public class PortfolioCalculationBlackBoxTest {
     public void testCalculatePortfolio_BVA_ZeroAmount() {
         // Setup: Create portfolio with coin: amount = 0.0, price = 100.0
         testPortfolio.clear();
-        WebData.Coin coin = Main.gui.webData.getCoin();
-        coin.name = "TestCoin";
-        coin.portfolio_amount = 0.0;
-        coin.price = 100.0;
-        coin.portfolio_value = coin.portfolio_amount * coin.price; // 0.0
-        coin.portfolio_gains = 0.0;
-        testPortfolio.add(coin);
+        testPortfolio.clear();
+        testPortfolio.add(createCoin(0.0, 100.0));
 
-        // Execute: Call calculatePortfolio()
-        panelPortfolio.calculatePortfolio();
-
-        // Verify: Portfolio value = 0.0
-        double totalValue = 0.0;
-        for (WebData.Coin c : testPortfolio) {
-            totalValue += c.portfolio_value;
-        }
+        PortfolioCalculationService.PortfolioSummary summary = portfolioCalculationService.calculate(testPortfolio);
+        double totalValue = summary.getTotalValue();
         assertEquals(0.0, totalValue, 0.01);
     }
 
@@ -126,25 +87,10 @@ public class PortfolioCalculationBlackBoxTest {
     public void testCalculatePortfolio_EP_InvalidNegativeAmount() {
         // Setup: Attempt to create portfolio with coin: amount = -5.0, price = 100.0
         testPortfolio.clear();
-        WebData.Coin coin = Main.gui.webData.getCoin();
-        coin.name = "TestCoin";
-        coin.portfolio_amount = -5.0;
-        coin.price = 100.0;
-        coin.portfolio_value = coin.portfolio_amount * coin.price; // -500.0 (invalid)
-        coin.portfolio_gains = 0.0;
-        testPortfolio.add(coin);
+        testPortfolio.clear();
+        testPortfolio.add(createCoin(-5.0, 100.0));
 
-        // Execute: Call calculatePortfolio()
-        panelPortfolio.calculatePortfolio();
-
-        // Verify: System handles negative value (may result in negative total, which is invalid)
-        // In a real scenario, validation should prevent this, but we test the calculation behavior
-        double totalValue = 0.0;
-        for (WebData.Coin c : testPortfolio) {
-            totalValue += c.portfolio_value;
-        }
-        // The calculation itself will produce negative value, but this should be caught by validation
-        assertTrue("Negative amount should result in negative or zero value", totalValue <= 0.0);
+        assertThrows(IllegalArgumentException.class, () -> portfolioCalculationService.calculate(testPortfolio));
     }
 
     /**
@@ -159,22 +105,11 @@ public class PortfolioCalculationBlackBoxTest {
     public void testCalculatePortfolio_BVA_MinimumPositiveAmount() {
         // Setup: Create portfolio with coin: amount = 0.00000001, price = 100.0
         testPortfolio.clear();
-        WebData.Coin coin = Main.gui.webData.getCoin();
-        coin.name = "TestCoin";
-        coin.portfolio_amount = 0.00000001;
-        coin.price = 100.0;
-        coin.portfolio_value = coin.portfolio_amount * coin.price; // 0.000001
-        coin.portfolio_gains = 0.0;
-        testPortfolio.add(coin);
+        testPortfolio.clear();
+        testPortfolio.add(createCoin(0.00000001, 100.0));
 
-        // Execute: Call calculatePortfolio()
-        panelPortfolio.calculatePortfolio();
-
-        // Verify: Calculation handles very small numbers correctly
-        double totalValue = 0.0;
-        for (WebData.Coin c : testPortfolio) {
-            totalValue += c.portfolio_value;
-        }
+        PortfolioCalculationService.PortfolioSummary summary = portfolioCalculationService.calculate(testPortfolio);
+        double totalValue = summary.getTotalValue();
         assertEquals(0.000001, totalValue, 0.0000001);
     }
 
@@ -190,22 +125,11 @@ public class PortfolioCalculationBlackBoxTest {
     public void testCalculatePortfolio_BVA_MaximumAmount() {
         // Setup: Create portfolio with coin: amount = 999999999.99, price = 100.0
         testPortfolio.clear();
-        WebData.Coin coin = Main.gui.webData.getCoin();
-        coin.name = "TestCoin";
-        coin.portfolio_amount = 999999999.99;
-        coin.price = 100.0;
-        coin.portfolio_value = coin.portfolio_amount * coin.price; // 99999999999.0
-        coin.portfolio_gains = 0.0;
-        testPortfolio.add(coin);
+        testPortfolio.clear();
+        testPortfolio.add(createCoin(999999999.99, 100.0));
 
-        // Execute: Call calculatePortfolio()
-        panelPortfolio.calculatePortfolio();
-
-        // Verify: Calculation handles very large numbers correctly without overflow
-        double totalValue = 0.0;
-        for (WebData.Coin c : testPortfolio) {
-            totalValue += c.portfolio_value;
-        }
+        PortfolioCalculationService.PortfolioSummary summary = portfolioCalculationService.calculate(testPortfolio);
+        double totalValue = summary.getTotalValue();
         assertEquals(99999999999.0, totalValue, 0.01);
         assertTrue("Value should be positive and finite", totalValue > 0 && Double.isFinite(totalValue));
     }

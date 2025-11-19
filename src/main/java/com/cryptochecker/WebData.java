@@ -22,6 +22,19 @@ public class WebData {
         }
     }
 
+    public WebData(boolean skipDeserialize) throws Exception {
+        if (skipDeserialize) {
+            coin = new ArrayList<>();
+            portfolio = new ArrayList<>();
+            portfolio_names = new ArrayList<>();
+            global_data = new Global_Data();
+        } else {
+            if (coin == null && global_data == null) {
+                this.deserialize();
+            }
+        }
+    }
+
     String fetchJson(String urlString) throws IOException, InterruptedException {
         int attempts = 0;
         while (attempts < 3) { // retry up to 3 times

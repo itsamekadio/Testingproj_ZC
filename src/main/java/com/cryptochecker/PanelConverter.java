@@ -46,6 +46,7 @@ public class PanelConverter {
     private DecimalFormat df4 = new DecimalFormat("#.#####");
     private DecimalFormat df5 = new DecimalFormat("#.######");
     private DecimalFormat df6 = new DecimalFormat("#.############");
+    private final CurrencyConversionService currencyConversionService = new CurrencyConversionService();
 
     public PanelConverter() {
         panel = new JPanel();
@@ -317,27 +318,18 @@ public class PanelConverter {
     }
 
     private String calculateCurrency(double x) {
-        Double returnValue = 0.0;
-        String returnString = "";
+        boolean targetIsFiat = buttonCurrency2.getText().equals(Main.currency);
+        double returnValue = currencyConversionService.calculate(priceCurrency1, priceCurrency2, x, targetIsFiat);
+        return formatConversionResult(returnValue);
+    }
 
-        if (priceCurrency2 == 0.0 && buttonCurrency2.getText().equals(Main.currency)) {
-            returnValue = priceCurrency1*x;
-        }
-        else if (priceCurrency1 == 0 || priceCurrency2 == 0) {
-            return String.valueOf(0);
-        }
-        else {
-            returnValue = (priceCurrency1/priceCurrency2)*x;
-        }
-
-        if (returnValue > 1) returnString = String.valueOf(df1.format(returnValue));
-        else if (returnValue > 0.1) returnString = String.valueOf(df2.format(returnValue));
-        else if (returnValue > 0.01) returnString = String.valueOf(df3.format(returnValue));
-        else if (returnValue > 0.001) returnString = String.valueOf(df4.format(returnValue));
-        else if (returnValue > 0.0001) returnString = String.valueOf(df5.format(returnValue));
-        else returnString = String.valueOf(df6.format(returnValue));
-
-        return returnString;
+    private String formatConversionResult(double value) {
+        if (value > 1) return String.valueOf(df1.format(value));
+        else if (value > 0.1) return String.valueOf(df2.format(value));
+        else if (value > 0.01) return String.valueOf(df3.format(value));
+        else if (value > 0.001) return String.valueOf(df4.format(value));
+        else if (value > 0.0001) return String.valueOf(df5.format(value));
+        else return String.valueOf(df6.format(value));
     }
 
     private void calculateGlobal() {
