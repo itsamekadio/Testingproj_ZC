@@ -136,19 +136,29 @@ Save all screenshots in:
 ```
 evidence/
   manual_tests/
-    TC_UI_001/
+    TC_UI_001(Search)/
       TC_UI_001_01_initial_coin_list.png
       TC_UI_001_02_search_bitcoin.png
-      ...
-    TC_UI_002/
-      TC_UI_002_01_default_sort.png
-      ...
-    TC_UI_003/
-      ...
-    TC_UI_004/
-      ...
-    TC_UI_005/
-      ...
+      TC_UI_001_03_search_eth.png
+      TC_UI_001_04_search_cleared.png
+    TC_UI_002(Sort Cryptocurrency Data)/
+      TC_UI_002_01_default_sort(by rank).png
+      TC_UI_002_03_sort_name_alpha.png
+      TC_UI_002_04_sort_price_desc.png
+      TC_UI_002_05_sort_24h_percent.png
+      TC_UI_002_06_sort_market_cap.png
+    TC_UI_003(Toggle Debug Mode)/
+      TC_UI_003_01_debug_mode_off.png
+      TC_UI_003_02_debug_mode_on.png
+      TC_UI_003_03_debug_mode_off_again.png
+    TC_UI_004(View Application Logs)/
+      TC_UI_004_01_view_logs_button.png
+      TC_UI_004_02_log_file_content.png
+    TC_UI_005(Reset Settings to Default)/
+      TC_UI_005_01_modified_settings.png
+      TC_UI_005_02_dark_theme_applied.png
+      TC_UI_005_03_reset_button.png
+      TC_UI_005_04_settings_reset.png
 ```
 
 ---
@@ -177,12 +187,13 @@ Example:
 ### Test Case TC_UI_001: Search/Filter Cryptocurrencies
 
 **Evidence:**
-- Initial state: See `evidence/manual_tests/TC_UI_001/TC_UI_001_01_initial_coin_list.png`
-- Search Bitcoin: See `evidence/manual_tests/TC_UI_001/TC_UI_001_02_search_bitcoin.png`
-- Search eth: See `evidence/manual_tests/TC_UI_001/TC_UI_001_03_search_eth.png`
-- Cleared search: See `evidence/manual_tests/TC_UI_001/TC_UI_001_04_search_cleared.png`
+- Initial state: See `evidence/manual_tests/TC_UI_001(Search)/TC_UI_001_01_initial_coin_list.png`
+- Search Bitcoin: See `evidence/manual_tests/TC_UI_001(Search)/TC_UI_001_02_search_bitcoin.png`
+- Search eth: See `evidence/manual_tests/TC_UI_001(Search)/TC_UI_001_03_search_eth.png`
+- Cleared search: See `evidence/manual_tests/TC_UI_001(Search)/TC_UI_001_04_search_cleared.png`
 
 **Result:** ✅ PASS - All search filtering operations work correctly
+```
 
 **Good luck! We're almost done! 🎉**
 

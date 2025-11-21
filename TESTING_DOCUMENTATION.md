@@ -2584,10 +2584,10 @@ The test execution generates:
    - **Result:** All coins containing "bit" were displayed
 
 **Evidence (Screenshots):**
-- Initial coin list: `evidence/manual_tests/TC_UI_001/TC_UI_001_01_initial_coin_list.png`
-- Search Bitcoin: `evidence/manual_tests/TC_UI_001/TC_UI_001_02_search_bitcoin.png`
-- Search eth: `evidence/manual_tests/TC_UI_001/TC_UI_001_03_search_eth.png`
-- Cleared search: `evidence/manual_tests/TC_UI_001/TC_UI_001_04_search_cleared.png`
+- Initial coin list: `evidence/manual_tests/TC_UI_001(Search)/TC_UI_001_01_initial_coin_list.png`
+- Search Bitcoin: `evidence/manual_tests/TC_UI_001(Search)/TC_UI_001_02_search_bitcoin.png`
+- Search eth: `evidence/manual_tests/TC_UI_001(Search)/TC_UI_001_03_search_eth.png`
+- Cleared search: `evidence/manual_tests/TC_UI_001(Search)/TC_UI_001_04_search_cleared.png`
 
 **Test Result:** ✅ PASS
 
@@ -2644,12 +2644,11 @@ The test execution generates:
     - **Result:** Filtered results maintained sorting order
 
 **Evidence (Screenshots):**
-- Default sort: `evidence/manual_tests/TC_UI_002/TC_UI_002_01_default_sort.png`
-- Sort by Rank (ascending): `evidence/manual_tests/TC_UI_002/TC_UI_002_02_sort_rank_asc.png`
-- Sort by Name (alphabetical): `evidence/manual_tests/TC_UI_002/TC_UI_002_03_sort_name_alpha.png`
-- Sort by Price (descending): `evidence/manual_tests/TC_UI_002/TC_UI_002_04_sort_price_desc.png`
-- Sort by 24h %: `evidence/manual_tests/TC_UI_002/TC_UI_002_05_sort_24h_percent.png`
-- Sort by Market Cap: `evidence/manual_tests/TC_UI_002/TC_UI_002_06_sort_market_cap.png`
+- Default sort (by rank): `evidence/manual_tests/TC_UI_002(Sort Cryptocurrency Data)/TC_UI_002_01_default_sort(by rank).png`
+- Sort by Name (alphabetical): `evidence/manual_tests/TC_UI_002(Sort Cryptocurrency Data)/TC_UI_002_03_sort_name_alpha.png`
+- Sort by Price (descending): `evidence/manual_tests/TC_UI_002(Sort Cryptocurrency Data)/TC_UI_002_04_sort_price_desc.png`
+- Sort by 24h %: `evidence/manual_tests/TC_UI_002(Sort Cryptocurrency Data)/TC_UI_002_05_sort_24h_percent.png`
+- Sort by Market Cap: `evidence/manual_tests/TC_UI_002(Sort Cryptocurrency Data)/TC_UI_002_06_sort_market_cap.png`
 
 **Test Result:** ✅ PASS
 
@@ -2706,9 +2705,9 @@ The test execution generates:
     - **Result:** Each toggle worked correctly without errors
 
 **Evidence (Screenshots):**
-- Debug mode OFF (initial): `evidence/manual_tests/TC_UI_003/TC_UI_003_01_debug_mode_off.png`
-- Debug mode ON with debug window: `evidence/manual_tests/TC_UI_003/TC_UI_003_02_debug_mode_on.png`
-- Debug mode OFF (after toggle): `evidence/manual_tests/TC_UI_003/TC_UI_003_03_debug_mode_off_again.png`
+- Debug mode OFF (initial): `evidence/manual_tests/TC_UI_003(Toggle Debug Mode)/TC_UI_003_01_debug_mode_off.png`
+- Debug mode ON with debug window: `evidence/manual_tests/TC_UI_003(Toggle Debug Mode)/TC_UI_003_02_debug_mode_on.png`
+- Debug mode OFF (after toggle): `evidence/manual_tests/TC_UI_003(Toggle Debug Mode)/TC_UI_003_03_debug_mode_off_again.png`
 
 **Test Result:** ✅ PASS
 
@@ -2770,8 +2769,8 @@ The test execution generates:
 10. ✅ Verified log file can be viewed multiple times without errors
 
 **Evidence (Screenshots):**
-- View Logs button in Settings: `evidence/manual_tests/TC_UI_004/TC_UI_004_01_view_logs_button.png`
-- Log file content in text editor: `evidence/manual_tests/TC_UI_004/TC_UI_004_02_log_file_content.png`
+- View Logs button in Settings: `evidence/manual_tests/TC_UI_004(View Application Logs)/TC_UI_004_01_view_logs_button.png`
+- Log file content in text editor: `evidence/manual_tests/TC_UI_004(View Application Logs)/TC_UI_004_02_log_file_content.png`
 
 **Test Result:** ✅ PASS
 
@@ -2846,10 +2845,10 @@ The test execution generates:
     - **Result:** Portfolio data remains intact (only settings reset)
 
 **Evidence (Screenshots):**
-- Modified settings (Dark theme, EUR): `evidence/manual_tests/TC_UI_005/TC_UI_005_01_modified_settings.png`
-- Dark theme applied to application: `evidence/manual_tests/TC_UI_005/TC_UI_005_02_dark_theme_applied.png`
-- Reset Settings button: `evidence/manual_tests/TC_UI_005/TC_UI_005_03_reset_button.png`
-- Settings reset to defaults: `evidence/manual_tests/TC_UI_005/TC_UI_005_04_settings_reset.png`
+- Modified settings (Dark theme, EUR): `evidence/manual_tests/TC_UI_005(Reset Settings to Default)/TC_UI_005_01_modified_settings.png`
+- Dark theme applied to application: `evidence/manual_tests/TC_UI_005(Reset Settings to Default)/TC_UI_005_02_dark_theme_applied.png`
+- Reset Settings button: `evidence/manual_tests/TC_UI_005(Reset Settings to Default)/TC_UI_005_03_reset_button.png`
+- Settings reset to defaults: `evidence/manual_tests/TC_UI_005(Reset Settings to Default)/TC_UI_005_04_settings_reset.png`
 
 **Test Result:** ✅ PASS
 
@@ -3082,13 +3081,13 @@ All manual test screenshots are organized in the following directory structure:
 ```
 evidence/
 └── manual_tests/
-    ├── TC_UI_001/           (Search/Filter Tests - 4 screenshots)
+    ├── TC_UI_001(Search)/           (Search/Filter Tests - 4 screenshots)
     │   ├── TC_UI_001_01_initial_coin_list.png
     │   ├── TC_UI_001_02_search_bitcoin.png
     │   ├── TC_UI_001_03_search_eth.png
     │   └── TC_UI_001_04_search_cleared.png
     │
-    ├── TC_UI_002/           (Sort Tests - 6 screenshots)
+    ├── TC_UI_002(Sort Cryptocurrency Data)/           (Sort Tests - 6 screenshots)
     │   ├── TC_UI_002_01_default_sort.png
     │   ├── TC_UI_002_02_sort_rank_asc.png
     │   ├── TC_UI_002_03_sort_name_alpha.png
@@ -3096,16 +3095,16 @@ evidence/
     │   ├── TC_UI_002_05_sort_24h_percent.png
     │   └── TC_UI_002_06_sort_market_cap.png
     │
-    ├── TC_UI_003/           (Debug Mode Tests - 3 screenshots)
+    ├── TC_UI_003(Toggle Debug Mode)/           (Debug Mode Tests - 3 screenshots)
     │   ├── TC_UI_003_01_debug_mode_off.png
     │   ├── TC_UI_003_02_debug_mode_on.png
     │   └── TC_UI_003_03_debug_mode_off_again.png
     │
-    ├── TC_UI_004/           (View Logs Tests - 2 screenshots)
+    ├── TC_UI_004(View Application Logs)/           (View Logs Tests - 2 screenshots)
     │   ├── TC_UI_004_01_view_logs_button.png
     │   └── TC_UI_004_02_log_file_content.png
     │
-    └── TC_UI_005/           (Reset Settings Tests - 4 screenshots)
+    └── TC_UI_005(Reset Settings to Default)/           (Reset Settings Tests - 4 screenshots)
         ├── TC_UI_005_01_modified_settings.png
         ├── TC_UI_005_02_dark_theme_applied.png
         ├── TC_UI_005_03_reset_button.png
