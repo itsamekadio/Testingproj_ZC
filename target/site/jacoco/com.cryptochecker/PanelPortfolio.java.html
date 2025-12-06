@@ -1,0 +1,766 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PanelPortfolio.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">crypto-checker</a> &gt; <a href="index.source.html" class="el_package">com.cryptochecker</a> &gt; <span class="el_source">PanelPortfolio.java</span></div><h1>PanelPortfolio.java</h1><pre class="source lang-java linenums">package com.cryptochecker;
+
+import java.awt.*;
+import java.awt.event.*;
+import java.io.*;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
+import java.util.*;
+import javax.swing.*;
+import javax.swing.table.*;
+
+public class PanelPortfolio {
+    public JPanel panel;
+    public WebData webData;
+<span class="fc" id="L16">    public int nr = Main.gui.webData.portfolio_nr;</span>
+<span class="fc" id="L17">    public ArrayList&lt;String&gt; names = Main.gui.webData.portfolio_names;</span>
+
+    private JTable table;
+    private TableRenderer renderer;
+    private DefaultTableCellRenderer headerRenderer;
+    private TableModel model;
+    private JScrollPane pane;
+    private JScrollPane contentPane;
+
+<span class="fc" id="L26">    private final int rowHeight = 40;</span>
+<span class="fc" id="L27">    private final int leftAmountHeaderButtons = 3;</span>
+<span class="fc" id="L28">    private final int rightAmountHeaderButtons = 2;</span>
+<span class="fc" id="L29">    private final int headerSearchSize = 14;</span>
+<span class="fc" id="L30">    private final Dimension searchFieldSize = new Dimension(Main.panelWidth * 2, Main.panelHeight - 10);</span>
+
+    private JPanel content;
+    private JPanel overview;
+    private JEditorPane overviewText;
+
+<span class="fc" id="L36">    public PanelPortfolio() {</span>
+<span class="fc" id="L37">        panel = new JPanel();</span>
+<span class="fc" id="L38">        panel.setVisible(false); // visible to false at startup</span>
+<span class="fc" id="L39">        panel.setBackground(Color.WHITE);</span>
+<span class="fc" id="L40">        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));</span>
+
+<span class="fc" id="L42">        webData = Main.gui.webData;</span>
+<span class="fc" id="L43">        model = new TableModel(); // table model</span>
+
+        // rendering columns+rows
+<span class="fc" id="L46">        renderer = new TableRenderer();</span>
+<span class="fc" id="L47">        renderer.setHorizontalAlignment(JLabel.LEFT);</span>
+
+<span class="fc" id="L49">        JPanel headerTop = new JPanel();</span>
+<span class="fc" id="L50">        headerTop.setBackground(Color.GRAY);</span>
+<span class="fc" id="L51">        headerTop.setLayout(new BoxLayout(headerTop, BoxLayout.X_AXIS));</span>
+
+<span class="fc" id="L53">        content = new JPanel();</span>
+<span class="fc" id="L54">        content.setLayout(new BoxLayout(content, BoxLayout.Y_AXIS));</span>
+
+<span class="fc" id="L56">        table = new JTable(model); // create table with data</span>
+<span class="fc" id="L57">        table.setDefaultRenderer(Integer.class, renderer);</span>
+<span class="fc" id="L58">        table.setDefaultRenderer(Double.class, renderer);</span>
+<span class="fc" id="L59">        table.setDefaultRenderer(Short.class, renderer);</span>
+
+        // render header
+<span class="fc" id="L62">        headerRenderer = new DefaultTableCellRenderer();</span>
+<span class="fc" id="L63">        headerRenderer.setHorizontalAlignment(JLabel.CENTER);</span>
+<span class="fc" id="L64">        table.getTableHeader().setReorderingAllowed(false);</span>
+<span class="fc" id="L65">        table.getTableHeader().setPreferredSize(Main.tableHeaderSize);</span>
+<span class="fc" id="L66">        table.getTableHeader().setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.GRAY));</span>
+<span class="fc" id="L67">        table.getTableHeader().setDefaultRenderer(headerRenderer);</span>
+
+        // table settings
+<span class="fc" id="L70">        table.setRowHeight(rowHeight);</span>
+<span class="fc" id="L71">        table.getColumnModel().getColumn(4).setMaxWidth(100); // 1h</span>
+<span class="fc" id="L72">        table.getColumnModel().getColumn(5).setMaxWidth(100); // 24h</span>
+<span class="fc" id="L73">        table.getColumnModel().getColumn(6).setMaxWidth(100); // 7d</span>
+
+<span class="fc" id="L75">        table.setFont(Main.tableFont);</span>
+<span class="fc" id="L76">        table.setShowHorizontalLines(true);</span>
+<span class="fc" id="L77">        table.setShowVerticalLines(false);</span>
+<span class="fc" id="L78">        table.setIntercellSpacing(Main.tableIntercellSpacing);</span>
+<span class="fc" id="L79">        table.setFocusable(false);</span>
+
+<span class="fc" id="L81">        table.setDefaultRenderer(Object.class, renderer);</span>
+<span class="fc" id="L82">        table.addMouseListener(new TableMouseListener()); // Mouse Listener</span>
+
+        // LEFT BUTTONS HEADER
+<span class="fc" id="L85">        JPanel leftHeaderButtons = new JPanel();</span>
+<span class="fc" id="L86">        leftHeaderButtons.setLayout(new BoxLayout(leftHeaderButtons, BoxLayout.X_AXIS));</span>
+<span class="fc" id="L87">        leftHeaderButtons</span>
+<span class="fc" id="L88">                .setPreferredSize(new Dimension(Main.panelWidth * leftAmountHeaderButtons, Main.panelHeight - 1)); // times</span>
+                                                                                                                   // button
+
+<span class="fc" id="L91">        JButton bRefresh = Main.gui.getButtonTemplate(&quot;Refresh&quot;);</span>
+<span class="fc" id="L92">        bRefresh.addActionListener(new bRefreshListener());</span>
+<span class="fc" id="L93">        bRefresh.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 1, Color.LIGHT_GRAY));</span>
+<span class="fc" id="L94">        bRefresh.setMinimumSize(new Dimension(Main.panelWidth, Main.panelHeight + 1));</span>
+
+<span class="fc" id="L96">        JButton bAddCoin = Main.gui.getButtonTemplate(&quot;Add Coin&quot;);</span>
+<span class="fc" id="L97">        bAddCoin.addActionListener(new bAddCoinListener());</span>
+<span class="fc" id="L98">        bAddCoin.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.LIGHT_GRAY));</span>
+<span class="fc" id="L99">        bAddCoin.setMinimumSize(new Dimension(Main.panelWidth, Main.panelHeight + 1));</span>
+
+<span class="fc" id="L101">        JButton bRemoveCoin = Main.gui.getButtonTemplate(&quot;Remove Coin&quot;);</span>
+<span class="fc" id="L102">        bRemoveCoin.addActionListener(new bRemoveCoinListener());</span>
+<span class="fc" id="L103">        bRemoveCoin.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.LIGHT_GRAY));</span>
+<span class="fc" id="L104">        bRemoveCoin.setMinimumSize(new Dimension(Main.panelWidth, Main.panelHeight + 1));</span>
+
+<span class="fc" id="L106">        leftHeaderButtons.add(bRefresh);</span>
+<span class="fc" id="L107">        leftHeaderButtons.add(bAddCoin);</span>
+<span class="fc" id="L108">        leftHeaderButtons.add(bRemoveCoin);</span>
+
+        // RIGHT BUTTONS HEADER
+<span class="fc" id="L111">        JPanel rightHeaderButtons = new JPanel();</span>
+<span class="fc" id="L112">        rightHeaderButtons.setLayout(new BoxLayout(rightHeaderButtons, BoxLayout.X_AXIS));</span>
+<span class="fc" id="L113">        rightHeaderButtons</span>
+<span class="fc" id="L114">                .setPreferredSize(new Dimension(Main.panelWidth * rightAmountHeaderButtons, Main.panelHeight - 1)); // times</span>
+                                                                                                                    // button
+
+<span class="fc" id="L117">        JButton bSwitchPortfolio = Main.gui.getButtonTemplate(&quot;Switch&quot;);</span>
+<span class="fc" id="L118">        bSwitchPortfolio.addActionListener(new bSwitchPortfolioListener());</span>
+<span class="fc" id="L119">        bSwitchPortfolio.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, Color.LIGHT_GRAY));</span>
+<span class="fc" id="L120">        bSwitchPortfolio.setPreferredSize(new Dimension(Main.panelWidth, Main.panelHeight + 1));</span>
+
+<span class="fc" id="L122">        JButton bManagePortfolio = Main.gui.getButtonTemplate(&quot;Manage&quot;);</span>
+<span class="fc" id="L123">        bManagePortfolio.addActionListener(new bManagePortfolioListener());</span>
+<span class="fc" id="L124">        bManagePortfolio.setBorder(BorderFactory.createMatteBorder(0, 1, 0, 0, Color.LIGHT_GRAY));</span>
+<span class="fc" id="L125">        bManagePortfolio.setPreferredSize(new Dimension(Main.panelWidth, Main.panelHeight + 1));</span>
+
+<span class="fc" id="L127">        rightHeaderButtons.add(bSwitchPortfolio);</span>
+<span class="fc" id="L128">        rightHeaderButtons.add(bManagePortfolio);</span>
+
+        // HEADER FILLING
+<span class="fc" id="L131">        JPanel headerFilling = new JPanel();</span>
+<span class="fc" id="L132">        headerFilling.setLayout(new BorderLayout());</span>
+<span class="fc" id="L133">        headerFilling.setMaximumSize(new Dimension((int) Main.screenResolution.getWidth(), Main.panelHeight - 1));</span>
+<span class="fc" id="L134">        headerFilling.setBackground(Color.GRAY);</span>
+
+        // SEARCH HEADER
+<span class="fc" id="L137">        JPanel headerSearch = new JPanel();</span>
+<span class="fc" id="L138">        headerSearch.setLayout(new BoxLayout(headerSearch, BoxLayout.X_AXIS));</span>
+<span class="fc" id="L139">        headerSearch.setMaximumSize(searchFieldSize);</span>
+<span class="fc" id="L140">        headerSearch.setBackground(Color.GRAY);</span>
+
+<span class="fc" id="L142">        JTextField headerSearchField = new JTextField(&quot;&quot;, headerSearchSize);</span>
+<span class="fc" id="L143">        headerSearch.add(headerSearchField);</span>
+
+        // sorting
+<span class="fc" id="L146">        TableRowSorter&lt;TableModel&gt; rowSorter = new TableRowSorter&lt;TableModel&gt;(model);</span>
+<span class="fc" id="L147">        table.setRowSorter(rowSorter);</span>
+
+<span class="fc" id="L149">        ArrayList&lt;RowSorter.SortKey&gt; sortKeys = new ArrayList&lt;RowSorter.SortKey&gt;(25);</span>
+<span class="fc" id="L150">        sortKeys.add(new RowSorter.SortKey(2, SortOrder.DESCENDING));</span>
+<span class="fc" id="L151">        rowSorter.setSortKeys(sortKeys);</span>
+
+        /*
+         * headerSearchField.getDocument().addDocumentListener(new DocumentListener() {
+         * public void insertUpdate(DocumentEvent e) {
+         * String text = headerSearchField.getText();
+         * 
+         * if (text.trim().length() == 0) {
+         * rowSorter.setRowFilter(null);
+         * } else {
+         * rowSorter.setRowFilter(RowFilter.regexFilter(&quot;(?i)&quot; + text));
+         * }
+         * }
+         * 
+         * public void removeUpdate(DocumentEvent e) {
+         * String text = headerSearchField.getText();
+         * 
+         * if (text.trim().length() == 0) {
+         * rowSorter.setRowFilter(null);
+         * } else {
+         * rowSorter.setRowFilter(RowFilter.regexFilter(&quot;(?i)&quot; + text));
+         * }
+         * }
+         * 
+         * public void changedUpdate(DocumentEvent e) {
+         * throw new UnsupportedOperationException(&quot;Not supported yet.&quot;); // to change
+         * body of generated methods, choose Tools | Templates.
+         * }
+         * });
+         */
+
+        // add headers together
+<span class="fc" id="L183">        headerTop.add(leftHeaderButtons);</span>
+<span class="fc" id="L184">        headerTop.add(headerFilling);</span>
+        // headerTop.add(headerSearch); // really needed?
+        // headerTop.add(headerFilling2);
+<span class="fc" id="L187">        headerTop.add(rightHeaderButtons);</span>
+
+        // overview data
+<span class="fc" id="L190">        overview = new JPanel();</span>
+<span class="fc" id="L191">        overview.setLayout(new FlowLayout());</span>
+<span class="fc" id="L192">        overview.setMaximumSize(new Dimension(10000, 0));</span>
+<span class="fc" id="L193">        calculatePortfolio();</span>
+<span class="fc" id="L194">        overview.add(overviewText);</span>
+
+        // scrolling pane, add JScrollPane to JPanel
+<span class="fc" id="L197">        table.setPreferredScrollableViewportSize(table.getPreferredSize());</span>
+<span class="fc" id="L198">        pane = new JScrollPane(table);</span>
+<span class="fc" id="L199">        pane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);</span>
+<span class="fc" id="L200">        pane.setBorder(null);</span>
+<span class="fc" id="L201">        pane.setViewportBorder(null);</span>
+<span class="fc" id="L202">        pane.addMouseWheelListener(new contentPaneScroll());</span>
+<span class="fc" id="L203">        pane.getVerticalScrollBar().setUnitIncrement(5);</span>
+<span class="fc" id="L204">        pane.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, Color.GRAY));</span>
+
+<span class="fc" id="L206">        content.add(overview);</span>
+<span class="fc" id="L207">        content.add(pane);</span>
+
+<span class="fc" id="L209">        contentPane = new JScrollPane(content);</span>
+        // contentPane.setVerticalScrollBarPolicy(pane.VERTICAL_SCROLLBAR_ALWAYS);
+<span class="fc" id="L211">        contentPane.getVerticalScrollBar().setUnitIncrement(12);</span>
+
+<span class="fc" id="L213">        panel.add(headerTop);</span>
+<span class="fc" id="L214">        panel.add(contentPane);</span>
+
+<span class="fc" id="L216">        themeSwitch(); // select theme color</span>
+<span class="fc" id="L217">    }</span>
+
+<span class="fc" id="L219">    public class contentPaneScroll implements MouseWheelListener {</span>
+        public void mouseWheelMoved(MouseWheelEvent e) {
+<span class="nc bnc" id="L221" title="All 2 branches missed.">            if (e.getWheelRotation() &lt; 0) {</span>
+<span class="nc" id="L222">                contentPane.getVerticalScrollBar()</span>
+<span class="nc" id="L223">                        .setValue(-e.getScrollAmount() * 12 + contentPane.getVerticalScrollBar().getValue());</span>
+            } else {
+<span class="nc" id="L225">                contentPane.getVerticalScrollBar()</span>
+<span class="nc" id="L226">                        .setValue(e.getScrollAmount() * 12 + contentPane.getVerticalScrollBar().getValue());</span>
+            }
+<span class="nc" id="L228">        }</span>
+    }
+
+    public void reCreate() {
+<span class="nc" id="L232">        model.list = Main.gui.webData.portfolio.get(nr);</span>
+<span class="nc" id="L233">        table.getRowSorter().allRowsChanged();</span>
+
+<span class="nc" id="L235">        calculatePortfolio();</span>
+<span class="nc" id="L236">        table.setPreferredScrollableViewportSize(table.getPreferredSize());</span>
+
+<span class="nc" id="L238">        Main.frame.getContentPane().add(BorderLayout.CENTER, Main.gui.panelPortfolio.panel);</span>
+<span class="nc" id="L239">        Main.frame.getContentPane().revalidate();</span>
+<span class="nc" id="L240">        Main.frame.getContentPane().repaint();</span>
+<span class="nc" id="L241">    }</span>
+
+    public void calculatePortfolio() {
+<span class="fc" id="L244">        double value = 0.0;</span>
+<span class="fc" id="L245">        double gains = 0.0;</span>
+<span class="fc bfc" id="L246" title="All 2 branches covered.">        for (int i = 0; i &lt; Main.gui.webData.portfolio.get(nr).size(); ++i) {</span>
+<span class="fc" id="L247">            value += Main.gui.webData.portfolio.get(nr).get(i).portfolio_value;</span>
+<span class="fc" id="L248">            gains += Main.gui.webData.portfolio.get(nr).get(i).portfolio_gains;</span>
+        }
+
+<span class="fc" id="L251">        DecimalFormat overviewFormat = new DecimalFormat(&quot;#,###.##&quot;);</span>
+
+<span class="fc" id="L253">        NumberFormat decimalFormat = NumberFormat.getPercentInstance();</span>
+<span class="fc" id="L254">        decimalFormat.setMinimumFractionDigits(2);</span>
+
+<span class="fc" id="L256">        String htmlFont = &quot;&lt;font color=\&quot;rgb(&quot; + Main.theme.foreground.getRed() + &quot;, &quot;</span>
+<span class="fc" id="L257">                + Main.theme.foreground.getGreen() + &quot;, &quot; + Main.theme.foreground.getBlue() + &quot;)\&quot;&gt;&quot;;</span>
+<span class="fc" id="L258">        String htmlGreen = &quot;&lt;font color=\&quot;rgb(&quot; + Main.theme.green.getRed() + &quot;, &quot; + Main.theme.green.getGreen() + &quot;, &quot;</span>
+<span class="fc" id="L259">                + Main.theme.green.getBlue() + &quot;)\&quot;&gt;&quot;;</span>
+<span class="fc" id="L260">        String htmlRed = &quot;&lt;font color=\&quot;rgb(&quot; + Main.theme.red.getRed() + &quot;, &quot; + Main.theme.red.getGreen() + &quot;, &quot;</span>
+<span class="fc" id="L261">                + Main.theme.red.getBlue() + &quot;)\&quot;&gt;&quot;;</span>
+
+        String htmlBottom;
+
+<span class="fc bfc" id="L265" title="All 2 branches covered.">        if (gains &gt;= 0) {</span>
+<span class="fc" id="L266">            htmlBottom = htmlGreen;</span>
+        } else {
+<span class="fc" id="L268">            htmlBottom = htmlRed;</span>
+        }
+
+        String percentGains;
+<span class="fc bfc" id="L272" title="All 2 branches covered.">        if (value == 0) {</span>
+<span class="fc" id="L273">            percentGains = &quot;0.00%&quot;;</span>
+        } else {
+<span class="fc" id="L275">            percentGains = decimalFormat.format(gains / (value - gains));</span>
+        }
+
+<span class="fc" id="L278">        String overviewHTML = htmlFont + &quot;&lt;font size=\&quot;6\&quot;&gt;&lt;font face=\&quot;helvetica\&quot;&gt;&quot; + &quot;&lt;center&gt;&quot;</span>
+<span class="fc" id="L279">                + &quot;{ &quot; + overviewFormat.format(value) + &quot; }&lt;br&gt;&quot;</span>
+<span class="fc" id="L280">                + &quot;&lt;font size=\&quot;5\&quot;&gt;&lt;b&gt;&quot; + htmlBottom + overviewFormat.format(gains) + &quot; (&quot; + percentGains + &quot;)&quot;</span>
+                + &quot;&lt;/b&gt;&lt;/center&gt;&quot;;
+
+        // set text
+<span class="fc bfc" id="L284" title="All 2 branches covered.">        if (overviewText != null) {</span>
+<span class="fc" id="L285">            overviewText.setText(overviewHTML);</span>
+        } else {
+<span class="fc" id="L287">            overviewText = new JEditorPane(&quot;text/html&quot;, overviewHTML);</span>
+<span class="fc" id="L288">            overviewText.setEditable(false);</span>
+        }
+<span class="fc" id="L290">    }</span>
+
+<span class="fc" id="L292">    private class TableMouseListener implements MouseListener {</span>
+        public void mousePressed(MouseEvent e) {
+<span class="nc bnc" id="L294" title="All 4 branches missed.">            if (table.getSelectedColumn() &lt; 0 || table.getSelectedRow() &lt; 0) // if nothing is selected or if user right</span>
+                                                                             // clicks
+<span class="nc" id="L296">                return;</span>
+
+<span class="nc" id="L298">            int columnNr = table.convertColumnIndexToModel(table.getSelectedColumn());</span>
+<span class="nc" id="L299">            int rowNr = table.convertRowIndexToModel(table.getSelectedRow());</span>
+<span class="nc" id="L300">            Debug.log(&quot;Table Portfolio &quot; + nr + &quot;, Row &quot; + rowNr + &quot;, Column &quot; + columnNr);</span>
+<span class="nc" id="L301">            JOptionPane.showMessageDialog(Main.frame, Main.gui.webData.portfolio.get(nr).get(rowNr).getPortfolio(),</span>
+<span class="nc" id="L302">                    Main.gui.webData.portfolio.get(nr).get(rowNr).toString(), JOptionPane.PLAIN_MESSAGE);</span>
+<span class="nc" id="L303">            table.clearSelection();</span>
+<span class="nc" id="L304">        }</span>
+
+        public void mouseExited(MouseEvent e) {
+<span class="nc" id="L307">        }</span>
+
+        public void mouseEntered(MouseEvent ev) {
+<span class="nc" id="L310">        }</span>
+
+        public void mouseReleased(MouseEvent ev) {
+<span class="nc" id="L313">        }</span>
+
+        public void mouseClicked(MouseEvent ev) {
+<span class="nc" id="L316">        }</span>
+
+    }
+
+<span class="fc" id="L320">    private class TableModel extends AbstractTableModel {</span>
+        private static final long serialVersionUID = 1L;
+<span class="fc" id="L322">        private String[] columnNames = { &quot;Name&quot;, &quot;Coin Value&quot;, &quot;Portfolio Value&quot;, &quot;Gains / Losses&quot;, &quot;1h&quot;, &quot;24h&quot;, &quot;7d&quot; };</span>
+<span class="fc" id="L323">        private ArrayList&lt;WebData.Coin&gt; list = webData.portfolio.get(nr); // PORTFOLIO</span>
+
+        public int getColumnCount() {
+<span class="fc" id="L326">            return columnNames.length;</span>
+        }
+
+        public int getRowCount() {
+<span class="fc" id="L330">            return list.size();</span>
+        }
+
+        public String getColumnName(int col) {
+<span class="fc" id="L334">            return columnNames[col];</span>
+        }
+
+        public Class&lt;?&gt; getColumnClass(int column) { // for sorting
+<span class="pc bpc" id="L338" title="1 of 8 branches missed.">            switch (column) {</span>
+                case 0:
+<span class="fc" id="L340">                    return String.class;</span>
+                case 1:
+<span class="fc" id="L342">                    return Double.class;</span>
+                case 2:
+<span class="fc" id="L344">                    return Double.class;</span>
+                case 3:
+<span class="fc" id="L346">                    return Double.class;</span>
+                case 4:
+<span class="fc" id="L348">                    return Double.class;</span>
+                case 5:
+<span class="fc" id="L350">                    return Double.class;</span>
+                case 6:
+<span class="fc" id="L352">                    return Double.class;</span>
+                default:
+<span class="nc" id="L354">                    return String.class;</span>
+            }
+        }
+
+        public Object getValueAt(int row, int col) {
+<span class="nc" id="L359">            Object value = null;</span>
+<span class="nc bnc" id="L360" title="All 8 branches missed.">            switch (col) {</span>
+                case 0:
+<span class="nc" id="L362">                    value = list.get(row).name;</span>
+<span class="nc" id="L363">                    break;</span>
+                case 1:
+<span class="nc" id="L365">                    value = list.get(row).price;</span>
+<span class="nc" id="L366">                    break;</span>
+                case 2:
+<span class="nc" id="L368">                    value = list.get(row).portfolio_value;</span>
+<span class="nc" id="L369">                    break;</span>
+                case 3:
+<span class="nc" id="L371">                    value = list.get(row).portfolio_gains;</span>
+<span class="nc" id="L372">                    break;</span>
+                case 4:
+<span class="nc" id="L374">                    value = list.get(row).percent_change_1h;</span>
+<span class="nc" id="L375">                    break;</span>
+                case 5:
+<span class="nc" id="L377">                    value = list.get(row).percent_change_24h;</span>
+<span class="nc" id="L378">                    break;</span>
+                case 6:
+<span class="nc" id="L380">                    value = list.get(row).percent_change_7d;</span>
+                    break;
+            }
+<span class="nc" id="L383">            return value;</span>
+        }
+    }
+
+<span class="fc" id="L387">    private class TableRenderer extends DefaultTableCellRenderer {</span>
+        private static final long serialVersionUID = 1L;
+<span class="fc" id="L389">        private NumberFormat nf = NumberFormat.getCurrencyInstance();</span>
+<span class="fc" id="L390">        private DecimalFormatSymbols decimalFormatSymbols = ((DecimalFormat) nf).getDecimalFormatSymbols();</span>
+
+        public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+                int row, int column) {
+<span class="fc" id="L394">            super.setBackground(Main.theme.background);</span>
+<span class="fc" id="L395">            super.setForeground(Main.theme.foreground);</span>
+
+<span class="pc bpc" id="L397" title="1 of 4 branches missed.">            if (column == 1 || column == 2) {</span>
+<span class="fc" id="L398">                decimalFormatSymbols.setCurrencySymbol(Main.currencyChar);</span>
+<span class="fc" id="L399">                ((DecimalFormat) nf).setDecimalFormatSymbols(decimalFormatSymbols);</span>
+
+<span class="fc" id="L401">                value = nf.format(value).trim();</span>
+            }
+
+<span class="pc bpc" id="L404" title="1 of 2 branches missed.">            if (column == 3) {</span>
+<span class="nc bnc" id="L405" title="All 2 branches missed.">                if (0 &lt;= (Double) table.getValueAt(row, column)) {</span>
+<span class="nc" id="L406">                    super.setForeground(Main.theme.green);</span>
+<span class="nc bnc" id="L407" title="All 2 branches missed.">                } else if (0 &gt; (Double) table.getValueAt(row, column)) {</span>
+<span class="nc" id="L408">                    super.setForeground(Main.theme.red);</span>
+                }
+
+<span class="nc" id="L411">                value = nf.format(value).trim();</span>
+            }
+
+<span class="pc bpc" id="L414" title="3 of 6 branches missed.">            if (column == 4 || column == 5 || column == 6) {</span>
+<span class="nc bnc" id="L415" title="All 2 branches missed.">                if (0 &lt;= (Double) table.getValueAt(row, column)) {</span>
+<span class="nc" id="L416">                    super.setForeground(Main.theme.green);</span>
+<span class="nc bnc" id="L417" title="All 2 branches missed.">                } else if (0 &gt; (Double) table.getValueAt(row, column)) {</span>
+<span class="nc" id="L418">                    super.setForeground(Main.theme.red);</span>
+                }
+
+<span class="nc" id="L421">                value = value + &quot;%&quot;;</span>
+            }
+
+<span class="fc" id="L424">            return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);</span>
+        }
+    }
+
+    public void themeSwitch() {
+<span class="fc" id="L429">        pane.getViewport().setBackground(Main.theme.emptyBackground);</span>
+
+<span class="fc" id="L431">        overview.setBackground(Main.theme.background);</span>
+<span class="fc" id="L432">        overviewText.setBackground(Main.theme.background);</span>
+<span class="fc" id="L433">        overviewText.setForeground(Main.theme.foreground);</span>
+
+<span class="fc" id="L435">        table.setSelectionForeground(Main.theme.selection);</span>
+<span class="fc" id="L436">        table.setSelectionBackground(Main.theme.background);</span>
+
+<span class="fc" id="L438">        table.setBackground(Main.theme.background);</span>
+<span class="fc" id="L439">        table.getTableHeader().setForeground(Main.theme.foreground);</span>
+<span class="fc" id="L440">        table.getTableHeader().setBackground(Main.theme.background);</span>
+
+<span class="fc" id="L442">        table.getTableHeader().setBackground(Main.theme.background);</span>
+<span class="fc" id="L443">        headerRenderer.setForeground(Main.theme.foreground);</span>
+
+<span class="fc" id="L445">        calculatePortfolio();</span>
+<span class="fc" id="L446">    }</span>
+
+<span class="fc" id="L448">    private class bRefreshListener implements ActionListener {</span>
+        public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L450">            Debug.log(&quot;Button Refresh Clicked&quot;);</span>
+<span class="nc" id="L451">            new WebData.RefreshCoins();</span>
+<span class="nc" id="L452">        }</span>
+    }
+
+<span class="fc" id="L455">    private class bAddCoinListener implements ActionListener {</span>
+        public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L457">            Debug.log(&quot;Button Add Coin Clicked&quot;);</span>
+
+<span class="nc" id="L459">            Object[] options = webData.coin.toArray();</span>
+
+            // SELECTING cryptocurrency
+<span class="nc" id="L462">            Object selectedValue = JOptionPane.showInputDialog(Main.frame, &quot;Select cryptocurrency to add&quot;,</span>
+                    &quot;Add To Portfolio&quot;, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+<span class="nc bnc" id="L464" title="All 2 branches missed.">            if (selectedValue == null) {</span>
+<span class="nc" id="L465">                Debug.log(&quot;-- cancel&quot;);</span>
+<span class="nc" id="L466">                return;</span>
+<span class="nc bnc" id="L467" title="All 2 branches missed.">            } else if (findPortfolioName(selectedValue.toString())) {</span>
+<span class="nc" id="L468">                Debug.log(&quot;-- &quot; + selectedValue + &quot; already exists, cancelling&quot;);</span>
+<span class="nc" id="L469">                JOptionPane.showMessageDialog(Main.frame, selectedValue + &quot; already exists!&quot;);</span>
+<span class="nc" id="L470">                return;</span>
+            } else {
+<span class="nc" id="L472">                Debug.log(&quot;-- &quot; + selectedValue);</span>
+            }
+            // convert to WebData.Coin
+<span class="nc" id="L475">            WebData.Coin shallowValue = (WebData.Coin) selectedValue;</span>
+<span class="nc" id="L476">            WebData.Coin value = (WebData.Coin) shallowValue.copy();</span>
+
+            // SELECTING amounts to cryptocurrency
+<span class="nc" id="L479">            String input = JOptionPane.showInputDialog(Main.frame, &quot;Amounts of &quot; + value, &quot;Add To Portfolio&quot;,</span>
+                    JOptionPane.PLAIN_MESSAGE);
+<span class="nc bnc" id="L481" title="All 2 branches missed.">            if (input == null) { // pressed &quot;cancel button&quot;</span>
+<span class="nc" id="L482">                Debug.log(&quot;-- cancel&quot;);</span>
+<span class="nc" id="L483">                return;</span>
+            }
+
+            double amounts;
+            try {
+<span class="nc" id="L488">                amounts = Double.parseDouble(input);</span>
+<span class="nc" id="L489">                value.portfolio_amount = amounts;</span>
+<span class="nc" id="L490">                Debug.log(&quot;-- &quot; + amounts);</span>
+<span class="nc" id="L491">            } catch (Exception ex) {</span>
+<span class="nc" id="L492">                Debug.log(&quot;-- cancel - incorrect format&quot;);</span>
+<span class="nc" id="L493">                JOptionPane.showMessageDialog(Main.frame,</span>
+                        &quot;Incorrect format!\nYou can only write a number with or without decimal\nexample: 51.2&quot;);
+<span class="nc" id="L495">                return;</span>
+<span class="nc" id="L496">            }</span>
+
+            // SELECTING per price/total price
+<span class="nc" id="L499">            Object[] paneSelectionOptions = { &quot;Value per piece&quot;, &quot;Total value&quot;, &quot;Retrieve current value&quot; };</span>
+<span class="nc" id="L500">            int paneSelection = JOptionPane.showOptionDialog(Main.frame, &quot;How do you want to enter the start value?&quot;,</span>
+                    &quot;Start Value&quot;, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null,
+                    paneSelectionOptions, paneSelectionOptions[1]);
+<span class="nc" id="L503">            Debug.log(&quot;-- menu selection &quot; + paneSelection);</span>
+<span class="nc bnc" id="L504" title="All 4 branches missed.">            switch (paneSelection) {</span>
+                case 0:
+                    // SELECTING price for cryptocurrency (optional)
+<span class="nc" id="L507">                    input = JOptionPane.showInputDialog(Main.frame, &quot;Price per &quot; + value, &quot;Add To Portfolio&quot;,</span>
+                            JOptionPane.PLAIN_MESSAGE);
+<span class="nc bnc" id="L509" title="All 2 branches missed.">                    if (input == null) { // pressed &quot;cancel button&quot;</span>
+<span class="nc" id="L510">                        Debug.log(&quot;-- cancel&quot;);</span>
+<span class="nc" id="L511">                        return;</span>
+                    }
+
+                    double price;
+                    try {
+<span class="nc" id="L516">                        price = Double.parseDouble(input);</span>
+<span class="nc" id="L517">                        value.portfolio_price_start = price;</span>
+<span class="nc" id="L518">                        Debug.log(&quot;-- &quot; + price);</span>
+<span class="nc" id="L519">                    } catch (Exception ex) {</span>
+<span class="nc" id="L520">                        value.portfolio_price_start = value.price;</span>
+<span class="nc" id="L521">                        Debug.log(&quot;-- incorrect format, getting current price &quot; + value.price);</span>
+<span class="nc" id="L522">                    }</span>
+
+<span class="nc" id="L524">                    value.portfolio_value = value.portfolio_price * value.portfolio_amount;</span>
+<span class="nc" id="L525">                    value.portfolio_value_start = value.portfolio_price_start * value.portfolio_amount;</span>
+<span class="nc" id="L526">                    break;</span>
+                case 1:
+                    // SELECT total price
+<span class="nc" id="L529">                    input = JOptionPane.showInputDialog(Main.frame, &quot;Total value of &quot; + value, &quot;Add To Portfolio&quot;,</span>
+                            JOptionPane.PLAIN_MESSAGE);
+<span class="nc bnc" id="L531" title="All 2 branches missed.">                    if (input == null) { // pressed &quot;cancel button&quot;</span>
+<span class="nc" id="L532">                        Debug.log(&quot;-- cancel&quot;);</span>
+<span class="nc" id="L533">                        return;</span>
+                    }
+
+                    double valueStart;
+                    try {
+<span class="nc" id="L538">                        valueStart = Double.parseDouble(input);</span>
+<span class="nc" id="L539">                        value.portfolio_value = valueStart;</span>
+<span class="nc" id="L540">                        value.portfolio_value_start = value.portfolio_value;</span>
+
+<span class="nc" id="L542">                        value.portfolio_price_start = valueStart / value.portfolio_amount;</span>
+<span class="nc" id="L543">                        Debug.log(&quot;-- &quot; + value.portfolio_price_start);</span>
+<span class="nc" id="L544">                    } catch (Exception ex) {</span>
+<span class="nc" id="L545">                        value.portfolio_price_start = value.price;</span>
+<span class="nc" id="L546">                        Debug.log(&quot;-- incorrect format, getting current price &quot; + value.portfolio_price_start);</span>
+
+<span class="nc" id="L548">                        value.portfolio_value = value.portfolio_price_start * value.portfolio_amount;</span>
+<span class="nc" id="L549">                        value.portfolio_value_start = value.portfolio_value;</span>
+<span class="nc" id="L550">                    }</span>
+
+<span class="nc" id="L552">                    break;</span>
+                case 2:
+                    // SELECT get current price
+<span class="nc" id="L555">                    value.portfolio_price_start = value.price;</span>
+<span class="nc" id="L556">                    Debug.log(&quot;-- getting current price &quot; + value.price);</span>
+<span class="nc" id="L557">                    value.portfolio_value_start = value.portfolio_price_start * value.portfolio_amount;</span>
+<span class="nc" id="L558">                    break;</span>
+                default:
+<span class="nc" id="L560">                    Debug.log(&quot;-- cancel&quot;);</span>
+<span class="nc" id="L561">                    return;</span>
+            }
+
+<span class="nc" id="L564">            value.portfolio_currency = Main.currency;</span>
+
+            // adding object to arraylist
+<span class="nc" id="L567">            webData.portfolio.get(nr).add((WebData.Coin) value);</span>
+<span class="nc" id="L568">            Debug.log(&quot;Portfolio &quot; + nr + &quot; Added &quot; + value);</span>
+
+            // serialize portfolio and re-setup the table
+<span class="nc" id="L571">            serializePortfolio();</span>
+<span class="nc" id="L572">            refreshPortfolio();</span>
+<span class="nc" id="L573">            reCreate();</span>
+<span class="nc" id="L574">        }</span>
+    }
+
+<span class="fc" id="L577">    private class bRemoveCoinListener implements ActionListener {</span>
+        public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L579">            Debug.log(&quot;Button Remove Coin Clicked&quot;);</span>
+
+            try {
+<span class="nc" id="L582">                Object[] options = webData.portfolio.get(nr).toArray();</span>
+<span class="nc" id="L583">                Object value = JOptionPane.showInputDialog(Main.frame, &quot;Select cryptocurrency to remove&quot;,</span>
+                        &quot;Remove From Portfolio&quot;, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+
+<span class="nc bnc" id="L586" title="All 2 branches missed.">                for (int i = 0; i &lt; webData.portfolio.get(nr).size(); ++i) {</span>
+<span class="nc bnc" id="L587" title="All 2 branches missed.">                    if (webData.portfolio.get(nr).get(i) == value) {</span>
+<span class="nc" id="L588">                        webData.portfolio.get(nr).remove(i);</span>
+<span class="nc" id="L589">                        Debug.log(&quot;Portfolio &quot; + nr + &quot; Removed &quot; + value);</span>
+<span class="nc" id="L590">                        break; // can only be one name in each</span>
+                    }
+                }
+
+<span class="nc" id="L594">                serializePortfolio();</span>
+<span class="nc" id="L595">                reCreate();</span>
+<span class="nc" id="L596">            } catch (Exception ex) {</span>
+<span class="nc" id="L597">                Debug.log(&quot;Portfolio Nothing Left To Remove&quot;);</span>
+<span class="nc" id="L598">                JOptionPane.showMessageDialog(Main.frame, &quot;Nothing Left To Remove&quot;);</span>
+<span class="nc" id="L599">            }</span>
+<span class="nc" id="L600">        }</span>
+    }
+
+<span class="fc" id="L603">    private class bSwitchPortfolioListener implements ActionListener {</span>
+        public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L605">            Debug.log(&quot;Button Switch Portfolio Clicked&quot;);</span>
+<span class="nc" id="L606">            Object[] portfolios = names.toArray();</span>
+<span class="nc" id="L607">            Object selectedValue = JOptionPane.showInputDialog(Main.frame, &quot;Select from the list&quot;,</span>
+<span class="nc" id="L608">                    &quot;Switch To Portfolio&quot;, JOptionPane.PLAIN_MESSAGE, null, portfolios, names.get(nr));</span>
+
+<span class="nc bnc" id="L610" title="All 2 branches missed.">            if (selectedValue != null) {</span>
+<span class="nc" id="L611">                String value = (String) selectedValue;</span>
+<span class="nc" id="L612">                Debug.log(&quot;Switching To Portfolio &quot; + value);</span>
+<span class="nc bnc" id="L613" title="All 2 branches missed.">                for (int i = 0; i &lt; names.size(); ++i) {</span>
+<span class="nc bnc" id="L614" title="All 2 branches missed.">                    if (value.equals(names.get(i))) {</span>
+<span class="nc" id="L615">                        nr = i;</span>
+                    }
+                }
+
+<span class="nc" id="L619">                serializePortfolio();</span>
+<span class="nc" id="L620">                refreshPortfolio();</span>
+<span class="nc" id="L621">                reCreate();</span>
+            }
+<span class="nc" id="L623">        }</span>
+    }
+
+<span class="fc" id="L626">    private class bManagePortfolioListener implements ActionListener {</span>
+        public void actionPerformed(ActionEvent e) {
+<span class="nc" id="L628">            Debug.log(&quot;Button Manage Portfolio Clicked&quot;);</span>
+
+<span class="nc" id="L630">            Object[] options = { &quot;Rename Current&quot;, &quot;Delete Current&quot;, &quot;New Portfolio&quot; };</span>
+
+<span class="nc" id="L632">            int selectedValue = JOptionPane.showOptionDialog(Main.frame, &quot;Select action for the current portfolio&quot;,</span>
+                    &quot;Manage Portfolio&quot;, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options,
+                    options);
+<span class="nc bnc" id="L635" title="All 4 branches missed.">            switch (selectedValue) {</span>
+                case 0:
+<span class="nc" id="L637">                    Debug.log(&quot;Renaming Portfolio &quot; + nr);</span>
+<span class="nc" id="L638">                    String message = JOptionPane.showInputDialog(Main.frame, &quot;Rename current portfolio&quot;, names.get(nr));</span>
+
+<span class="nc bnc" id="L640" title="All 2 branches missed.">                    if (message != null) {</span>
+<span class="nc bnc" id="L641" title="All 2 branches missed.">                        for (int i = 0; i &lt; names.size(); ++i) {</span>
+<span class="nc bnc" id="L642" title="All 2 branches missed.">                            if (names.get(i).equals(message)) {</span>
+<span class="nc bnc" id="L643" title="All 2 branches missed.">                                if (i != nr) {</span>
+<span class="nc" id="L644">                                    Debug.log(&quot;Name already existst, cancelling..&quot;);</span>
+<span class="nc" id="L645">                                    JOptionPane.showMessageDialog(Main.frame, &quot;Name already exists!&quot;);</span>
+<span class="nc" id="L646">                                    return;</span>
+                                }
+                            }
+                        }
+
+<span class="nc" id="L651">                        names.set(nr, message);</span>
+<span class="nc" id="L652">                        Debug.log(&quot;-- renamed to &quot; + message);</span>
+                    }
+                    break;
+                case 1:
+<span class="nc" id="L656">                    Debug.log(&quot;Deleting Portfolio &quot; + nr);</span>
+<span class="nc bnc" id="L657" title="All 2 branches missed.">                    if (webData.portfolio.size() == 1) {</span>
+<span class="nc" id="L658">                        Debug.log(&quot;-- cancel&quot;);</span>
+<span class="nc" id="L659">                        JOptionPane.showMessageDialog(Main.frame, &quot;You must have at least one portfolio!&quot;);</span>
+<span class="nc" id="L660">                        return;</span>
+                    }
+<span class="nc" id="L662">                    webData.portfolio.remove(nr);</span>
+<span class="nc" id="L663">                    names.remove(nr);</span>
+
+<span class="nc" id="L665">                    nr = 0;</span>
+<span class="nc" id="L666">                    Debug.log(&quot;-- completed&quot;);</span>
+<span class="nc" id="L667">                    break;</span>
+                case 2:
+<span class="nc" id="L669">                    Debug.log(&quot;New Portfolio&quot;);</span>
+<span class="nc" id="L670">                    webData.portfolio.add(new ArrayList&lt;WebData.Coin&gt;());</span>
+<span class="nc" id="L671">                    names.add(new String(&quot;Portfolio &quot; + webData.portfolio.size()));</span>
+
+<span class="nc bnc" id="L673" title="All 2 branches missed.">                    for (int i = 0; i &lt; names.size(); ++i) {</span>
+<span class="nc bnc" id="L674" title="All 2 branches missed.">                        if (names.get(names.size() - 1).equals(names.get(i))) {</span>
+<span class="nc bnc" id="L675" title="All 2 branches missed.">                            if (names.size() - 1 != i)</span>
+<span class="nc" id="L676">                                names.set(names.size() - 1, names.get(names.size() - 1) + &quot; &quot;);</span>
+                        }
+                    }
+
+<span class="nc" id="L680">                    nr = webData.portfolio.size() - 1;</span>
+<span class="nc" id="L681">                    Debug.log(&quot;-- completed&quot;);</span>
+                    break;
+            }
+
+<span class="nc bnc" id="L685" title="All 4 branches missed.">            if (selectedValue == 1 || selectedValue == 2) {</span>
+<span class="nc" id="L686">                serializePortfolio();</span>
+<span class="nc" id="L687">                refreshPortfolio();</span>
+<span class="nc" id="L688">                reCreate();</span>
+            }
+<span class="nc" id="L690">        }</span>
+    }
+
+    public void serializePortfolio() {
+        try {
+<span class="fc" id="L695">            FileOutputStream file = new FileOutputStream(Main.portfolioSerLocation);</span>
+<span class="fc" id="L696">            BufferedOutputStream buffer = new BufferedOutputStream(file);</span>
+<span class="fc" id="L697">            ObjectOutputStream out = new ObjectOutputStream(buffer);</span>
+<span class="fc" id="L698">            out.writeObject(webData.portfolio);</span>
+<span class="fc" id="L699">            out.writeObject(names);</span>
+<span class="fc" id="L700">            out.writeObject(nr);</span>
+<span class="fc" id="L701">            out.close();</span>
+<span class="fc" id="L702">            Debug.log(&quot;Serialized Portfolio To &quot; + Main.portfolioSerLocation);</span>
+
+<span class="nc" id="L704">        } catch (Exception ex) {</span>
+<span class="nc" id="L705">            Debug.log(&quot;EXCEPTION: PanelPortfolio.java - serializePortfolio()&quot;);</span>
+<span class="nc" id="L706">            ex.printStackTrace();</span>
+<span class="fc" id="L707">        }</span>
+<span class="fc" id="L708">    }</span>
+
+    private boolean findPortfolioName(String name) {
+<span class="fc bfc" id="L711" title="All 2 branches covered.">        for (int i = 0; i &lt; webData.portfolio.get(nr).size(); ++i) {</span>
+<span class="fc bfc" id="L712" title="All 2 branches covered.">            if (webData.portfolio.get(nr).get(i).name.equals(name)) {</span>
+<span class="fc" id="L713">                return true;</span>
+            }
+        }
+
+<span class="fc" id="L717">        return false;</span>
+    }
+
+    private WebData.Coin getPortfolioName(String name) {
+<span class="fc bfc" id="L721" title="All 2 branches covered.">        for (int i = 0; i &lt; webData.coin.size(); ++i) {</span>
+<span class="fc bfc" id="L722" title="All 2 branches covered.">            if (webData.coin.get(i).name.equals(name)) {</span>
+<span class="fc" id="L723">                return webData.coin.get(i);</span>
+            }
+        }
+
+<span class="fc" id="L727">        return webData.getCoin();</span>
+    }
+
+    public void refreshPortfolio() {
+<span class="fc bfc" id="L731" title="All 2 branches covered.">        for (int i = 0; i &lt; webData.portfolio.get(nr).size(); ++i) {</span>
+<span class="fc" id="L732">            WebData.Coin coin = getPortfolioName(webData.portfolio.get(nr).get(i).name);</span>
+
+<span class="fc bfc" id="L734" title="All 2 branches covered.">            if (Main.currency.equals(webData.portfolio.get(nr).get(i).portfolio_currency)) {</span>
+<span class="fc" id="L735">                webData.portfolio.get(nr).get(i).portfolio_price = webData.portfolio.get(nr)</span>
+<span class="fc" id="L736">                        .get(i).portfolio_price_start;</span>
+<span class="fc" id="L737">                webData.portfolio.get(nr).get(i).portfolio_value = coin.price</span>
+<span class="fc" id="L738">                        * webData.portfolio.get(nr).get(i).portfolio_amount;</span>
+<span class="fc" id="L739">                webData.portfolio.get(nr).get(i).portfolio_gains = webData.portfolio.get(nr).get(i).portfolio_value</span>
+<span class="fc" id="L740">                        - webData.portfolio.get(nr).get(i).portfolio_value_start;</span>
+            } else {
+<span class="fc" id="L742">                webData.portfolio.get(nr).get(i).portfolio_price *= (coin.price</span>
+<span class="fc" id="L743">                        / webData.portfolio.get(nr).get(i).price); // convert portfolio_start_price to new currency</span>
+<span class="fc" id="L744">                webData.portfolio.get(nr).get(i).portfolio_value = coin.price</span>
+<span class="fc" id="L745">                        * webData.portfolio.get(nr).get(i).portfolio_amount; // calculate current value of portfolio</span>
+<span class="fc" id="L746">                webData.portfolio.get(nr).get(i).portfolio_gains = webData.portfolio.get(nr).get(i).portfolio_value</span>
+<span class="fc" id="L747">                        - (webData.portfolio.get(nr).get(i).portfolio_price</span>
+<span class="fc" id="L748">                                * webData.portfolio.get(nr).get(i).portfolio_amount); // calculate gains</span>
+            }
+
+<span class="fc" id="L751">            webData.portfolio.get(nr).get(i).rank = coin.rank;</span>
+<span class="fc" id="L752">            webData.portfolio.get(nr).get(i).price = coin.price;</span>
+            // webData.portfolio.get(nr).get(i).price_btc = coin.price_btc;
+<span class="fc" id="L754">            webData.portfolio.get(nr).get(i)._24h_volume = coin._24h_volume;</span>
+<span class="fc" id="L755">            webData.portfolio.get(nr).get(i).market_cap = coin.market_cap;</span>
+<span class="fc" id="L756">            webData.portfolio.get(nr).get(i).available_supply = coin.available_supply;</span>
+<span class="fc" id="L757">            webData.portfolio.get(nr).get(i).total_supply = coin.total_supply;</span>
+<span class="fc" id="L758">            webData.portfolio.get(nr).get(i).max_supply = coin.max_supply;</span>
+<span class="fc" id="L759">            webData.portfolio.get(nr).get(i).percent_change_1h = coin.percent_change_1h;</span>
+<span class="fc" id="L760">            webData.portfolio.get(nr).get(i).percent_change_24h = coin.percent_change_24h;</span>
+<span class="fc" id="L761">            webData.portfolio.get(nr).get(i).percent_change_7d = coin.percent_change_7d;</span>
+<span class="fc" id="L762">            webData.portfolio.get(nr).get(i).last_updated = coin.last_updated;</span>
+        }
+<span class="fc" id="L764">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

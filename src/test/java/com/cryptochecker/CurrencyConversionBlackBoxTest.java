@@ -19,13 +19,13 @@ public class CurrencyConversionBlackBoxTest {
     public void setUp() throws Exception {
         // Set system property for headless mode (no GUI)
         System.setProperty("java.awt.headless", "false");
-        
+
         // Initialize minimal GUI components
         if (Main.frame == null) {
             Main.frame = new javax.swing.JFrame();
             Main.frame.setVisible(false);
         }
-        
+
         // Initialize test environment
         Main.gui = new Main();
         try {
@@ -38,10 +38,10 @@ public class CurrencyConversionBlackBoxTest {
         Main.theme = new Main.Theme(Main.themes.LIGHT);
         Main.currency = "USD";
         Main.currencyChar = "$";
-        
+
         // Create panel converter
         panelConverter = new PanelConverter();
-        
+
         // Use reflection to access private calculateCurrency method for testing
         calculateCurrencyMethod = PanelConverter.class.getDeclaredMethod("calculateCurrency", double.class);
         calculateCurrencyMethod.setAccessible(true);
@@ -52,7 +52,8 @@ public class CurrencyConversionBlackBoxTest {
      * Test Level: Unit
      * Test Type: Black Box (Equivalence Partitioning)
      * Requirement: FR3.2
-     * Input: priceCurrency1 = 50000.0, priceCurrency2 = 0.0, buttonCurrency2 = "USD", x = 1.0
+     * Input: priceCurrency1 = 50000.0, priceCurrency2 = 0.0, buttonCurrency2 =
+     * "USD", x = 1.0
      * Expected: returnValue = 50000.0
      */
     @Test
@@ -77,7 +78,8 @@ public class CurrencyConversionBlackBoxTest {
      * Test Level: Unit
      * Test Type: Black Box (Equivalence Partitioning)
      * Requirement: FR3.1
-     * Input: priceCurrency1 = 50000.0 (Bitcoin), priceCurrency2 = 3000.0 (Ethereum), x = 1.0
+     * Input: priceCurrency1 = 50000.0 (Bitcoin), priceCurrency2 = 3000.0
+     * (Ethereum), x = 1.0
      * Expected: returnValue = 16.666... (50000/3000)
      */
     @Test
@@ -137,4 +139,3 @@ public class CurrencyConversionBlackBoxTest {
         return field.get(obj);
     }
 }
-

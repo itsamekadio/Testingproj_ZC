@@ -21,13 +21,13 @@ public class DataValidationBlackBoxTest {
     @Test
     public void testValidateAmount_EP_ValidPositiveNumber() {
         // Test valid positive numbers
-        String[] validInputs = {"10.5", "100", "0.001"};
-        
+        String[] validInputs = { "10.5", "100", "0.001" };
+
         for (String input : validInputs) {
             try {
                 double amount = Double.parseDouble(input);
                 assertTrue("Valid input should parse successfully: " + input, amount >= 0);
-                
+
                 if (input.equals("10.5")) {
                     assertEquals(10.5, amount, 0.01);
                 }
@@ -48,8 +48,8 @@ public class DataValidationBlackBoxTest {
     @Test
     public void testValidateAmount_EP_InvalidNonNumeric() {
         // Test invalid non-numeric strings
-        String[] invalidInputs = {"abc", "12.3.4", "ten", ""};
-        
+        String[] invalidInputs = { "abc", "12.3.4", "ten", "" };
+
         for (String input : invalidInputs) {
             try {
                 double amount = Double.parseDouble(input);
@@ -73,7 +73,7 @@ public class DataValidationBlackBoxTest {
     public void testValidateAmount_BVA_ZeroValue() {
         // Test boundary: zero value
         String input = "0";
-        
+
         try {
             double amount = Double.parseDouble(input);
             assertEquals(0.0, amount, 0.01);
@@ -90,18 +90,19 @@ public class DataValidationBlackBoxTest {
      * Test Type: Black Box (Equivalence Partitioning - Invalid Class)
      * Requirement: FR6.1
      * Input: "-5.0", "-0.001", "-100"
-     * Expected: Parsing succeeds but value is negative (should be rejected by validation)
+     * Expected: Parsing succeeds but value is negative (should be rejected by
+     * validation)
      */
     @Test
     public void testValidateAmount_EP_InvalidNegativeValue() {
         // Test negative numbers
-        String[] negativeInputs = {"-5.0", "-0.001", "-100"};
-        
+        String[] negativeInputs = { "-5.0", "-0.001", "-100" };
+
         for (String input : negativeInputs) {
             try {
                 double amount = Double.parseDouble(input);
                 assertTrue("Negative input should parse but value is negative: " + input, amount < 0);
-                
+
                 if (input.equals("-5.0")) {
                     assertEquals(-5.0, amount, 0.01);
                 }
@@ -125,7 +126,7 @@ public class DataValidationBlackBoxTest {
     public void testValidateAmount_BVA_VeryLargeNumber() {
         // Test very large number
         String input = "999999999999.99";
-        
+
         try {
             double amount = Double.parseDouble(input);
             assertEquals(999999999999.99, amount, 0.01);
@@ -138,4 +139,3 @@ public class DataValidationBlackBoxTest {
         }
     }
 }
-

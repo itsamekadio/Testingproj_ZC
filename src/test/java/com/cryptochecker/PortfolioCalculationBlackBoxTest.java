@@ -20,13 +20,13 @@ public class PortfolioCalculationBlackBoxTest {
     public void setUp() throws Exception {
         // Set system property for headless mode (no GUI)
         System.setProperty("java.awt.headless", "false");
-        
+
         // Initialize minimal GUI components
         if (Main.frame == null) {
             Main.frame = new javax.swing.JFrame();
             Main.frame.setVisible(false);
         }
-        
+
         // Initialize test environment
         Main.gui = new Main();
         try {
@@ -42,12 +42,12 @@ public class PortfolioCalculationBlackBoxTest {
         Main.gui.webData.portfolio.add(new ArrayList<WebData.Coin>());
         Main.gui.webData.portfolio_names.add("Test Portfolio");
         Main.gui.webData.portfolio_nr = 0;
-        
+
         // Initialize theme
         Main.theme = new Main.Theme(Main.themes.LIGHT);
         Main.currency = "USD";
         Main.currencyChar = "$";
-        
+
         panelPortfolio = new PanelPortfolio();
         testPortfolio = Main.gui.webData.portfolio.get(0);
     }
@@ -120,7 +120,8 @@ public class PortfolioCalculationBlackBoxTest {
      * Requirement: FR6.1
      * Input: amount = -5.0, price = 100.0
      * Expected: System should reject or handle error appropriately
-     * Note: This tests validation logic - negative amounts should be caught before calculation
+     * Note: This tests validation logic - negative amounts should be caught before
+     * calculation
      */
     @Test
     public void testCalculatePortfolio_EP_InvalidNegativeAmount() {
@@ -137,13 +138,16 @@ public class PortfolioCalculationBlackBoxTest {
         // Execute: Call calculatePortfolio()
         panelPortfolio.calculatePortfolio();
 
-        // Verify: System handles negative value (may result in negative total, which is invalid)
-        // In a real scenario, validation should prevent this, but we test the calculation behavior
+        // Verify: System handles negative value (may result in negative total, which is
+        // invalid)
+        // In a real scenario, validation should prevent this, but we test the
+        // calculation behavior
         double totalValue = 0.0;
         for (WebData.Coin c : testPortfolio) {
             totalValue += c.portfolio_value;
         }
-        // The calculation itself will produce negative value, but this should be caught by validation
+        // The calculation itself will produce negative value, but this should be caught
+        // by validation
         assertTrue("Negative amount should result in negative or zero value", totalValue <= 0.0);
     }
 
@@ -210,4 +214,3 @@ public class PortfolioCalculationBlackBoxTest {
         assertTrue("Value should be positive and finite", totalValue > 0 && Double.isFinite(totalValue));
     }
 }
-
