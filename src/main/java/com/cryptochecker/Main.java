@@ -25,7 +25,7 @@ public class Main {
     public static enum themes { LIGHT, DARK, CUSTOM };
     public static Theme theme;
 
-    public static Dimension screenResolution = Toolkit.getDefaultToolkit().getScreenSize();
+    public static Dimension screenResolution = getScreenResolution();
 
     public static final int panelWidth = 110;
     public static final int panelHeight = 30;
@@ -41,6 +41,14 @@ public class Main {
     public static final String converterSerLocation = folderLocation+"converter.ser";
     public static final String imageLocation = folderLocation+"icon.png";
     public static final String logLocation = folderLocation+"log.txt";
+
+    private static Dimension getScreenResolution() {
+        try {
+            return Toolkit.getDefaultToolkit().getScreenSize();
+        } catch (java.awt.HeadlessException e) {
+            return new Dimension(1920, 1080);
+        }
+    }
 
     public static void main(String[] args) {
         if (!(new File(folderLocation).exists())) {

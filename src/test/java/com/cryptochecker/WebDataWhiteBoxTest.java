@@ -1,6 +1,7 @@
 package com.cryptochecker;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 import org.junit.Before;
 import org.junit.Test;
 import java.lang.reflect.Method;
@@ -31,13 +32,10 @@ public class WebDataWhiteBoxTest {
     public void setUp() throws Exception {
         System.setProperty("java.awt.headless", "false");
 
-        if (Main.frame == null) {
-            Main.frame = new javax.swing.JFrame();
-            Main.frame.setVisible(false);
-        }
+        Main.frame = mock(javax.swing.JFrame.class);
 
         Main.gui = new Main();
-        Main.gui.debug = new Debug();
+        try { Main.gui.debug = new Debug(); } catch (java.awt.HeadlessException e) { Main.gui.debug = null; }
         Main.theme = new Main.Theme(Main.themes.LIGHT);
         Main.currency = "USD";
         Main.currencyChar = "$";

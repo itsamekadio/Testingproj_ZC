@@ -1,6 +1,7 @@
 package com.cryptochecker;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 import org.junit.Before;
 import org.junit.Test;
 import java.util.ArrayList;
@@ -24,10 +25,7 @@ public class DataValidationWhiteBoxTest {
         System.setProperty("java.awt.headless", "false");
 
         // Initialize minimal GUI components
-        if (Main.frame == null) {
-            Main.frame = new javax.swing.JFrame();
-            Main.frame.setVisible(false);
-        }
+        Main.frame = mock(javax.swing.JFrame.class);
 
         // Initialize test environment
         Main.gui = new Main();

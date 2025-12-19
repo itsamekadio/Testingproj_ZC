@@ -1,6 +1,7 @@
 package com.cryptochecker;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 import org.junit.Before;
 import org.junit.Test;
 import java.lang.reflect.Method;
@@ -276,10 +277,7 @@ public class MainWhiteBoxTest {
     public void testGetIcon_FileNotFound() throws Exception {
         Main main = new Main();
 
-        if (Main.frame == null) {
-            Main.frame = new javax.swing.JFrame();
-            Main.frame.setVisible(false);
-        }
+        Main.frame = mock(javax.swing.JFrame.class);
 
         File iconFile = new File(Main.imageLocation);
         if (iconFile.exists()) {
@@ -465,10 +463,7 @@ public class MainWhiteBoxTest {
     public void testGetIcon_FileExists() throws Exception {
         Main main = new Main();
 
-        if (Main.frame == null) {
-            Main.frame = new javax.swing.JFrame();
-            Main.frame.setVisible(false);
-        }
+        Main.frame = mock(javax.swing.JFrame.class);
 
         // Create a dummy icon file
         File iconFile = new File(Main.imageLocation);

@@ -1,6 +1,7 @@
 package com.cryptochecker;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,13 +18,10 @@ public class PanelSettingsWhiteBoxTest {
         System.setProperty("java.awt.headless", "false");
 
         // Initialize Main components
-        if (Main.frame == null) {
-            Main.frame = new javax.swing.JFrame();
-            Main.frame.setVisible(false);
-        }
+        Main.frame = mock(javax.swing.JFrame.class);
 
         Main.gui = new Main();
-        Main.gui.debug = new Debug();
+        try { Main.gui.debug = new Debug(); } catch (java.awt.HeadlessException e) { Main.gui.debug = null; }
         Main.theme = new Main.Theme(Main.themes.LIGHT);
         Main.currency = "USD";
         Main.currencyChar = "$";
@@ -105,7 +103,7 @@ public class PanelSettingsWhiteBoxTest {
     public void testConstructor_LightThemeInitialization() throws Exception {
         // Set theme to LIGHT before constructing PanelSettings
         Main.theme = new Main.Theme(Main.themes.LIGHT);
-        Main.gui.debug = new Debug();
+        try { Main.gui.debug = new Debug(); } catch (java.awt.HeadlessException e) { Main.gui.debug = null; }
 
         // Create PanelSettings which will execute constructor
         PanelSettings testPanel = new PanelSettings();
@@ -125,7 +123,7 @@ public class PanelSettingsWhiteBoxTest {
     public void testConstructor_CustomThemeInitialization() throws Exception {
         // Set theme to CUSTOM before constructing PanelSettings
         Main.theme = new Main.Theme(Main.themes.CUSTOM);
-        Main.gui.debug = new Debug();
+        try { Main.gui.debug = new Debug(); } catch (java.awt.HeadlessException e) { Main.gui.debug = null; }
 
         // Create PanelSettings which will execute constructor
         PanelSettings testPanel = new PanelSettings();
@@ -146,7 +144,7 @@ public class PanelSettingsWhiteBoxTest {
         // Set Debug.mode to true before constructing PanelSettings
         Debug.mode = true;
         Main.theme = new Main.Theme(Main.themes.LIGHT);
-        Main.gui.debug = new Debug();
+        try { Main.gui.debug = new Debug(); } catch (java.awt.HeadlessException e) { Main.gui.debug = null; }
 
         // Create PanelSettings which will execute constructor
         PanelSettings testPanel = new PanelSettings();
