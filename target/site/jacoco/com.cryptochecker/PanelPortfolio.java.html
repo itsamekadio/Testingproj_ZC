@@ -221,7 +221,7 @@ public class PanelPortfolio {
 <span class="nc bnc" id="L221" title="All 2 branches missed.">            if (e.getWheelRotation() &lt; 0) {</span>
 <span class="nc" id="L222">                contentPane.getVerticalScrollBar()</span>
 <span class="nc" id="L223">                        .setValue(-e.getScrollAmount() * 12 + contentPane.getVerticalScrollBar().getValue());</span>
-            } else {
+<span class="nc" id="L224">            } else {</span>
 <span class="nc" id="L225">                contentPane.getVerticalScrollBar()</span>
 <span class="nc" id="L226">                        .setValue(e.getScrollAmount() * 12 + contentPane.getVerticalScrollBar().getValue());</span>
             }
@@ -264,26 +264,26 @@ public class PanelPortfolio {
 
 <span class="fc bfc" id="L265" title="All 2 branches covered.">        if (gains &gt;= 0) {</span>
 <span class="fc" id="L266">            htmlBottom = htmlGreen;</span>
-        } else {
+<span class="fc" id="L267">        } else {</span>
 <span class="fc" id="L268">            htmlBottom = htmlRed;</span>
         }
 
         String percentGains;
 <span class="fc bfc" id="L272" title="All 2 branches covered.">        if (value == 0) {</span>
 <span class="fc" id="L273">            percentGains = &quot;0.00%&quot;;</span>
-        } else {
+<span class="fc" id="L274">        } else {</span>
 <span class="fc" id="L275">            percentGains = decimalFormat.format(gains / (value - gains));</span>
         }
 
 <span class="fc" id="L278">        String overviewHTML = htmlFont + &quot;&lt;font size=\&quot;6\&quot;&gt;&lt;font face=\&quot;helvetica\&quot;&gt;&quot; + &quot;&lt;center&gt;&quot;</span>
 <span class="fc" id="L279">                + &quot;{ &quot; + overviewFormat.format(value) + &quot; }&lt;br&gt;&quot;</span>
 <span class="fc" id="L280">                + &quot;&lt;font size=\&quot;5\&quot;&gt;&lt;b&gt;&quot; + htmlBottom + overviewFormat.format(gains) + &quot; (&quot; + percentGains + &quot;)&quot;</span>
-                + &quot;&lt;/b&gt;&lt;/center&gt;&quot;;
+<span class="fc" id="L281">                + &quot;&lt;/b&gt;&lt;/center&gt;&quot;;</span>
 
         // set text
 <span class="fc bfc" id="L284" title="All 2 branches covered.">        if (overviewText != null) {</span>
 <span class="fc" id="L285">            overviewText.setText(overviewHTML);</span>
-        } else {
+<span class="fc" id="L286">        } else {</span>
 <span class="fc" id="L287">            overviewText = new JEditorPane(&quot;text/html&quot;, overviewHTML);</span>
 <span class="fc" id="L288">            overviewText.setEditable(false);</span>
         }
@@ -460,7 +460,7 @@ public class PanelPortfolio {
 
             // SELECTING cryptocurrency
 <span class="nc" id="L462">            Object selectedValue = JOptionPane.showInputDialog(Main.frame, &quot;Select cryptocurrency to add&quot;,</span>
-                    &quot;Add To Portfolio&quot;, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+<span class="nc" id="L463">                    &quot;Add To Portfolio&quot;, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);</span>
 <span class="nc bnc" id="L464" title="All 2 branches missed.">            if (selectedValue == null) {</span>
 <span class="nc" id="L465">                Debug.log(&quot;-- cancel&quot;);</span>
 <span class="nc" id="L466">                return;</span>
@@ -477,7 +477,7 @@ public class PanelPortfolio {
 
             // SELECTING amounts to cryptocurrency
 <span class="nc" id="L479">            String input = JOptionPane.showInputDialog(Main.frame, &quot;Amounts of &quot; + value, &quot;Add To Portfolio&quot;,</span>
-                    JOptionPane.PLAIN_MESSAGE);
+<span class="nc" id="L480">                    JOptionPane.PLAIN_MESSAGE);</span>
 <span class="nc bnc" id="L481" title="All 2 branches missed.">            if (input == null) { // pressed &quot;cancel button&quot;</span>
 <span class="nc" id="L482">                Debug.log(&quot;-- cancel&quot;);</span>
 <span class="nc" id="L483">                return;</span>
@@ -491,21 +491,21 @@ public class PanelPortfolio {
 <span class="nc" id="L491">            } catch (Exception ex) {</span>
 <span class="nc" id="L492">                Debug.log(&quot;-- cancel - incorrect format&quot;);</span>
 <span class="nc" id="L493">                JOptionPane.showMessageDialog(Main.frame,</span>
-                        &quot;Incorrect format!\nYou can only write a number with or without decimal\nexample: 51.2&quot;);
+<span class="nc" id="L494">                        &quot;Incorrect format!\nYou can only write a number with or without decimal\nexample: 51.2&quot;);</span>
 <span class="nc" id="L495">                return;</span>
-<span class="nc" id="L496">            }</span>
+            }
 
             // SELECTING per price/total price
 <span class="nc" id="L499">            Object[] paneSelectionOptions = { &quot;Value per piece&quot;, &quot;Total value&quot;, &quot;Retrieve current value&quot; };</span>
 <span class="nc" id="L500">            int paneSelection = JOptionPane.showOptionDialog(Main.frame, &quot;How do you want to enter the start value?&quot;,</span>
-                    &quot;Start Value&quot;, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null,
-                    paneSelectionOptions, paneSelectionOptions[1]);
+<span class="nc" id="L501">                    &quot;Start Value&quot;, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE, null,</span>
+<span class="nc" id="L502">                    paneSelectionOptions, paneSelectionOptions[1]);</span>
 <span class="nc" id="L503">            Debug.log(&quot;-- menu selection &quot; + paneSelection);</span>
 <span class="nc bnc" id="L504" title="All 4 branches missed.">            switch (paneSelection) {</span>
                 case 0:
                     // SELECTING price for cryptocurrency (optional)
 <span class="nc" id="L507">                    input = JOptionPane.showInputDialog(Main.frame, &quot;Price per &quot; + value, &quot;Add To Portfolio&quot;,</span>
-                            JOptionPane.PLAIN_MESSAGE);
+<span class="nc" id="L508">                            JOptionPane.PLAIN_MESSAGE);</span>
 <span class="nc bnc" id="L509" title="All 2 branches missed.">                    if (input == null) { // pressed &quot;cancel button&quot;</span>
 <span class="nc" id="L510">                        Debug.log(&quot;-- cancel&quot;);</span>
 <span class="nc" id="L511">                        return;</span>
@@ -519,7 +519,7 @@ public class PanelPortfolio {
 <span class="nc" id="L519">                    } catch (Exception ex) {</span>
 <span class="nc" id="L520">                        value.portfolio_price_start = value.price;</span>
 <span class="nc" id="L521">                        Debug.log(&quot;-- incorrect format, getting current price &quot; + value.price);</span>
-<span class="nc" id="L522">                    }</span>
+                    }
 
 <span class="nc" id="L524">                    value.portfolio_value = value.portfolio_price * value.portfolio_amount;</span>
 <span class="nc" id="L525">                    value.portfolio_value_start = value.portfolio_price_start * value.portfolio_amount;</span>
@@ -527,7 +527,7 @@ public class PanelPortfolio {
                 case 1:
                     // SELECT total price
 <span class="nc" id="L529">                    input = JOptionPane.showInputDialog(Main.frame, &quot;Total value of &quot; + value, &quot;Add To Portfolio&quot;,</span>
-                            JOptionPane.PLAIN_MESSAGE);
+<span class="nc" id="L530">                            JOptionPane.PLAIN_MESSAGE);</span>
 <span class="nc bnc" id="L531" title="All 2 branches missed.">                    if (input == null) { // pressed &quot;cancel button&quot;</span>
 <span class="nc" id="L532">                        Debug.log(&quot;-- cancel&quot;);</span>
 <span class="nc" id="L533">                        return;</span>
@@ -547,7 +547,7 @@ public class PanelPortfolio {
 
 <span class="nc" id="L548">                        value.portfolio_value = value.portfolio_price_start * value.portfolio_amount;</span>
 <span class="nc" id="L549">                        value.portfolio_value_start = value.portfolio_value;</span>
-<span class="nc" id="L550">                    }</span>
+                    }
 
 <span class="nc" id="L552">                    break;</span>
                 case 2:
@@ -581,7 +581,7 @@ public class PanelPortfolio {
             try {
 <span class="nc" id="L582">                Object[] options = webData.portfolio.get(nr).toArray();</span>
 <span class="nc" id="L583">                Object value = JOptionPane.showInputDialog(Main.frame, &quot;Select cryptocurrency to remove&quot;,</span>
-                        &quot;Remove From Portfolio&quot;, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+<span class="nc" id="L584">                        &quot;Remove From Portfolio&quot;, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);</span>
 
 <span class="nc bnc" id="L586" title="All 2 branches missed.">                for (int i = 0; i &lt; webData.portfolio.get(nr).size(); ++i) {</span>
 <span class="nc bnc" id="L587" title="All 2 branches missed.">                    if (webData.portfolio.get(nr).get(i) == value) {</span>
@@ -596,7 +596,7 @@ public class PanelPortfolio {
 <span class="nc" id="L596">            } catch (Exception ex) {</span>
 <span class="nc" id="L597">                Debug.log(&quot;Portfolio Nothing Left To Remove&quot;);</span>
 <span class="nc" id="L598">                JOptionPane.showMessageDialog(Main.frame, &quot;Nothing Left To Remove&quot;);</span>
-<span class="nc" id="L599">            }</span>
+            }
 <span class="nc" id="L600">        }</span>
     }
 
@@ -630,8 +630,8 @@ public class PanelPortfolio {
 <span class="nc" id="L630">            Object[] options = { &quot;Rename Current&quot;, &quot;Delete Current&quot;, &quot;New Portfolio&quot; };</span>
 
 <span class="nc" id="L632">            int selectedValue = JOptionPane.showOptionDialog(Main.frame, &quot;Select action for the current portfolio&quot;,</span>
-                    &quot;Manage Portfolio&quot;, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options,
-                    options);
+<span class="nc" id="L633">                    &quot;Manage Portfolio&quot;, JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE, null, options,</span>
+<span class="nc" id="L634">                    options);</span>
 <span class="nc bnc" id="L635" title="All 4 branches missed.">            switch (selectedValue) {</span>
                 case 0:
 <span class="nc" id="L637">                    Debug.log(&quot;Renaming Portfolio &quot; + nr);</span>
@@ -651,7 +651,7 @@ public class PanelPortfolio {
 <span class="nc" id="L651">                        names.set(nr, message);</span>
 <span class="nc" id="L652">                        Debug.log(&quot;-- renamed to &quot; + message);</span>
                     }
-                    break;
+<span class="nc" id="L654">                    break;</span>
                 case 1:
 <span class="nc" id="L656">                    Debug.log(&quot;Deleting Portfolio &quot; + nr);</span>
 <span class="nc bnc" id="L657" title="All 2 branches missed.">                    if (webData.portfolio.size() == 1) {</span>
@@ -701,10 +701,10 @@ public class PanelPortfolio {
 <span class="fc" id="L701">            out.close();</span>
 <span class="fc" id="L702">            Debug.log(&quot;Serialized Portfolio To &quot; + Main.portfolioSerLocation);</span>
 
-<span class="nc" id="L704">        } catch (Exception ex) {</span>
+<span class="pc" id="L704">        } catch (Exception ex) {</span>
 <span class="nc" id="L705">            Debug.log(&quot;EXCEPTION: PanelPortfolio.java - serializePortfolio()&quot;);</span>
 <span class="nc" id="L706">            ex.printStackTrace();</span>
-<span class="fc" id="L707">        }</span>
+        }
 <span class="fc" id="L708">    }</span>
 
     private boolean findPortfolioName(String name) {
@@ -738,7 +738,7 @@ public class PanelPortfolio {
 <span class="fc" id="L738">                        * webData.portfolio.get(nr).get(i).portfolio_amount;</span>
 <span class="fc" id="L739">                webData.portfolio.get(nr).get(i).portfolio_gains = webData.portfolio.get(nr).get(i).portfolio_value</span>
 <span class="fc" id="L740">                        - webData.portfolio.get(nr).get(i).portfolio_value_start;</span>
-            } else {
+<span class="fc" id="L741">            } else {</span>
 <span class="fc" id="L742">                webData.portfolio.get(nr).get(i).portfolio_price *= (coin.price</span>
 <span class="fc" id="L743">                        / webData.portfolio.get(nr).get(i).price); // convert portfolio_start_price to new currency</span>
 <span class="fc" id="L744">                webData.portfolio.get(nr).get(i).portfolio_value = coin.price</span>

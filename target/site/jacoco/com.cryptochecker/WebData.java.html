@@ -77,14 +77,14 @@ public class WebData {
 
 <span class="fc" id="L78">            Debug.log(&quot;✅ Successfully fetched and parsed data from CoinGecko.&quot;);</span>
 
-<span class="nc" id="L80">        } catch (Exception ex) {</span>
-<span class="nc" id="L81">            ex.printStackTrace();</span>
-<span class="nc" id="L82">            JOptionPane.showMessageDialog(Main.frame,</span>
-                    &quot;⚠️ Unable to connect or fetch from API.\nPlease check your internet or try again later.&quot;);
+<span class="fc" id="L80">        } catch (Exception ex) {</span>
+<span class="fc" id="L81">            ex.printStackTrace();</span>
+<span class="pc" id="L82">            JOptionPane.showMessageDialog(Main.frame,</span>
+<span class="fc" id="L83">                    &quot;⚠️ Unable to connect or fetch from API.\nPlease check your internet or try again later.&quot;);</span>
 <span class="nc bnc" id="L84" title="All 2 branches missed.">            if (coin == null) coin = new ArrayList&lt;&gt;();</span>
 <span class="nc bnc" id="L85" title="All 2 branches missed.">            if (global_data == null) global_data = new Global_Data();</span>
 <span class="nc" id="L86">            Debug.log(&quot;ERROR: Failed to fetch data from API&quot;);</span>
-<span class="fc" id="L87">        }</span>
+        }
 
         // ----------------------------
         // 3️⃣ Serialize fetched data
@@ -100,7 +100,7 @@ public class WebData {
 <span class="nc" id="L100">        } catch (IOException i) {</span>
 <span class="nc" id="L101">            Debug.log(&quot;EXCEPTION: WebData.java - fetch()&quot;);</span>
 <span class="nc" id="L102">            i.printStackTrace();</span>
-<span class="fc" id="L103">        }</span>
+        }
 <span class="fc" id="L104">    }</span>
     public static class RefreshCoins implements Runnable { // manuaully refresh with online API
 <span class="nc" id="L106">        public RefreshCoins() {</span>
@@ -127,7 +127,7 @@ public class WebData {
 <span class="nc" id="L127">            } catch(Exception ex) {</span>
 <span class="nc" id="L128">                Debug.log(&quot;EXCEPTION: WebData.java - RefreshCoins().run()&quot;);</span>
 <span class="nc" id="L129">                ex.printStackTrace();</span>
-<span class="nc" id="L130">            }</span>
+            }
 <span class="nc" id="L131">        }</span>
     }
 
@@ -149,13 +149,13 @@ public class WebData {
 <span class="fc" id="L149">            coin = (ArrayList&lt;Coin&gt;) in.readObject();</span>
 <span class="fc" id="L150">            Debug.log(&quot;Deserialized Data From &quot; + Main.dataSerLocation);</span>
 <span class="fc" id="L151">            in.close();</span>
-<span class="nc" id="L152">        } catch(Exception ex) {</span>
+<span class="pc" id="L152">        } catch(Exception ex) {</span>
 <span class="nc" id="L153">            Debug.log(&quot;ERROR: WebData.deserialize(), deleting &quot; + Main.dataSerLocation);</span>
 <span class="nc" id="L154">            File deleteFile = new File(Main.dataSerLocation);</span>
 <span class="nc" id="L155">            deleteFile.delete();</span>
 
 <span class="nc" id="L157">            this.fetch();</span>
-<span class="fc" id="L158">        }</span>
+        }
 <span class="fc" id="L159">    }</span>
 
 <span class="fc" id="L161">    public class Global_Data implements Serializable { // global data API</span>
@@ -181,11 +181,11 @@ public class WebData {
 <span class="fc" id="L181">            DecimalFormat df = new DecimalFormat(&quot;###,###&quot;);</span>
 <span class="fc" id="L182">            return &quot;Total Market Cap: &quot; + df.format(total_market_cap)</span>
 <span class="fc" id="L183">            + &quot;\nTotal 24 Hour Volume: &quot; + df.format(total_24h_volume)</span>
-            + &quot;\nBitcoin Dominance: &quot; + bitcoin_percentage_of_market_cap + &quot;%&quot;
-            + &quot;\nActive Currencies: &quot; + active_currencies
-            + &quot;\nActive Assets: &quot; + active_assets
-            + &quot;\nActive Markets: &quot; + active_markets
-            + &quot;\nLast Updated: &quot; + last_updated;
+<span class="fc" id="L184">            + &quot;\nBitcoin Dominance: &quot; + bitcoin_percentage_of_market_cap + &quot;%&quot;</span>
+<span class="fc" id="L185">            + &quot;\nActive Currencies: &quot; + active_currencies</span>
+<span class="fc" id="L186">            + &quot;\nActive Assets: &quot; + active_assets</span>
+<span class="fc" id="L187">            + &quot;\nActive Markets: &quot; + active_markets</span>
+<span class="fc" id="L188">            + &quot;\nLast Updated: &quot; + last_updated;</span>
         }
     }
 
@@ -269,19 +269,19 @@ public class WebData {
         public String getInfo() {
 <span class="fc" id="L270">            DecimalFormat df = new DecimalFormat(&quot;###,###&quot;);</span>
 <span class="fc" id="L271">            return &quot;Rank: &quot; + rank</span>
-                    + &quot;\nID: &quot; + id
-                    + &quot;\nName: &quot; + name
-                    + &quot;\nSymbol: &quot; + symbol
+<span class="fc" id="L272">                    + &quot;\nID: &quot; + id</span>
+<span class="fc" id="L273">                    + &quot;\nName: &quot; + name</span>
+<span class="fc" id="L274">                    + &quot;\nSymbol: &quot; + symbol</span>
 <span class="fc" id="L275">                    + &quot;\nPrice &quot; + Main.currency + &quot;: &quot; + trimPrice(price)</span>
 <span class="fc" id="L276">                    + &quot;\nMarket Cap: &quot; + df.format(market_cap)</span>
 <span class="fc" id="L277">                    + &quot;\n24 Hour Volume: &quot; + df.format(_24h_volume)</span>
 <span class="fc" id="L278">                    + &quot;\nAvailable Supply: &quot; + df.format(available_supply)</span>
 <span class="fc" id="L279">                    + &quot;\nTotal Supply: &quot; + df.format(total_supply)</span>
 <span class="fc" id="L280">                    + &quot;\nMax Supply: &quot; + df.format(max_supply)</span>
-                    + &quot;\nPercent 1 Hour: &quot; + percent_change_1h + &quot;%&quot;
-                    + &quot;\nPercent 24 Hour: &quot; + percent_change_24h + &quot;%&quot;
-                    + &quot;\nPercent 7 Days: &quot; + percent_change_7d + &quot;%&quot;
-                    + &quot;\nLast Updated: &quot; + last_updated;
+<span class="fc" id="L281">                    + &quot;\nPercent 1 Hour: &quot; + percent_change_1h + &quot;%&quot;</span>
+<span class="fc" id="L282">                    + &quot;\nPercent 24 Hour: &quot; + percent_change_24h + &quot;%&quot;</span>
+<span class="fc" id="L283">                    + &quot;\nPercent 7 Days: &quot; + percent_change_7d + &quot;%&quot;</span>
+<span class="fc" id="L284">                    + &quot;\nLast Updated: &quot; + last_updated;</span>
         }
 
         public String getPortfolio() {
@@ -290,7 +290,7 @@ public class WebData {
 <span class="fc" id="L290">                    + &quot;\n\nPortfolio Amount: &quot; + trimPrice(portfolio_amount)</span>
 <span class="fc" id="L291">                    + &quot;\nPortfolio Value: &quot; + df.format(portfolio_value)</span>
 <span class="fc" id="L292">                    + &quot;\nPortfolio Gains: &quot; + df.format(portfolio_gains)</span>
-                    + &quot;\n\nPortfolio Currency: &quot; + portfolio_currency
+<span class="fc" id="L293">                    + &quot;\n\nPortfolio Currency: &quot; + portfolio_currency</span>
 <span class="fc" id="L294">                    + &quot;\nPortfolio Price Start: &quot; + df.format(portfolio_price_start)</span>
 <span class="fc" id="L295">                    + &quot;\nPortfolio Value Start: &quot; + df.format(portfolio_value_start);</span>
         }

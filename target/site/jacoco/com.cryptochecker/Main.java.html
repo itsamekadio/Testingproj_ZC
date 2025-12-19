@@ -25,7 +25,7 @@ import javax.swing.*; // provides gui related components (frame, jbutton)
 <span class="fc" id="L25">    public static enum themes { LIGHT, DARK, CUSTOM };</span>
     public static Theme theme;
 
-<span class="fc" id="L28">    public static Dimension screenResolution = Toolkit.getDefaultToolkit().getScreenSize();</span>
+<span class="fc" id="L28">    public static Dimension screenResolution = getScreenResolution();</span>
 
     public static final int panelWidth = 110;
     public static final int panelHeight = 30;
@@ -42,136 +42,144 @@ import javax.swing.*; // provides gui related components (frame, jbutton)
 <span class="fc" id="L42">    public static final String imageLocation = folderLocation+&quot;icon.png&quot;;</span>
 <span class="fc" id="L43">    public static final String logLocation = folderLocation+&quot;log.txt&quot;;</span>
 
+    private static Dimension getScreenResolution() {
+        try {
+<span class="nc" id="L47">            return Toolkit.getDefaultToolkit().getScreenSize();</span>
+<span class="fc" id="L48">        } catch (java.awt.HeadlessException e) {</span>
+<span class="fc" id="L49">            return new Dimension(1920, 1080);</span>
+        }
+    }
+
     public static void main(String[] args) {
-<span class="nc bnc" id="L46" title="All 2 branches missed.">        if (!(new File(folderLocation).exists())) {</span>
-<span class="nc" id="L47">            new File(folderLocation).mkdirs();</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">        if (!(new File(folderLocation).exists())) {</span>
+<span class="nc" id="L55">            new File(folderLocation).mkdirs();</span>
         }
         
-<span class="nc" id="L50">        gui = new Main();</span>
+<span class="nc" id="L58">        gui = new Main();</span>
 
         try {
-<span class="nc" id="L53">            gui.setupGUI(); // create gui</span>
-<span class="nc" id="L54">        } catch(Exception ex) {</span>
-<span class="nc" id="L55">            ex.printStackTrace();</span>
-<span class="nc" id="L56">        }</span>
-<span class="nc" id="L57">    }</span>
+<span class="nc" id="L61">            gui.setupGUI(); // create gui</span>
+<span class="nc" id="L62">        } catch(Exception ex) {</span>
+<span class="nc" id="L63">            ex.printStackTrace();</span>
+        }
+<span class="nc" id="L65">    }</span>
 
     private void setupGUI() throws Exception {
-<span class="nc" id="L60">        debug = new Debug(); // log file</span>
+<span class="nc" id="L68">        debug = new Debug(); // log file</span>
 
-<span class="nc" id="L62">        frame = new JFrame(&quot;Crypto Checker&quot;); // create frame of program</span>
-<span class="nc" id="L63">        frame.setSize(900,600);</span>
-<span class="nc" id="L64">        frame.setLocationRelativeTo(null); // screen location to middle</span>
-<span class="nc" id="L65">        frame.setResizable(false); // disallow changes to size</span>
-<span class="nc" id="L66">        frame.setVisible(true);</span>
-<span class="nc" id="L67">        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L70">        frame = new JFrame(&quot;Crypto Checker&quot;); // create frame of program</span>
+<span class="nc" id="L71">        frame.setSize(900,600);</span>
+<span class="nc" id="L72">        frame.setLocationRelativeTo(null); // screen location to middle</span>
+<span class="nc" id="L73">        frame.setResizable(false); // disallow changes to size</span>
+<span class="nc" id="L74">        frame.setVisible(true);</span>
+<span class="nc" id="L75">        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
 
-<span class="nc" id="L69">        deserializeSettings();</span>
+<span class="nc" id="L77">        deserializeSettings();</span>
 
-<span class="nc" id="L71">        getIcon();</span>
-<span class="nc" id="L72">        webData = new WebData();</span>
+<span class="nc" id="L79">        getIcon();</span>
+<span class="nc" id="L80">        webData = new WebData();</span>
 
-<span class="nc" id="L74">        deserializePortfolio();</span>
+<span class="nc" id="L82">        deserializePortfolio();</span>
 
-<span class="nc" id="L76">        menu = new Menu();</span>
-<span class="nc" id="L77">        panelCoin = new PanelCoin();</span>
-<span class="nc" id="L78">        panelPortfolio = new PanelPortfolio();</span>
-<span class="nc" id="L79">        panelConverter = new PanelConverter();</span>
-<span class="nc" id="L80">        panelSettings = new PanelSettings();</span>
+<span class="nc" id="L84">        menu = new Menu();</span>
+<span class="nc" id="L85">        panelCoin = new PanelCoin();</span>
+<span class="nc" id="L86">        panelPortfolio = new PanelPortfolio();</span>
+<span class="nc" id="L87">        panelConverter = new PanelConverter();</span>
+<span class="nc" id="L88">        panelSettings = new PanelSettings();</span>
 
-<span class="nc bnc" id="L82" title="All 2 branches missed.">        if (!Debug.mode) new WebData.RefreshCoins(); // refresh upon startup unless in debug mode</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">        if (!Debug.mode) new WebData.RefreshCoins(); // refresh upon startup unless in debug mode</span>
 
         // add the panels to the frame
-<span class="nc" id="L85">        frame.getContentPane().add(BorderLayout.CENTER, panelCoin.panel);</span>
-<span class="nc" id="L86">        frame.getContentPane().add(BorderLayout.WEST, menu.panel);</span>
+<span class="nc" id="L93">        frame.getContentPane().add(BorderLayout.CENTER, panelCoin.panel);</span>
+<span class="nc" id="L94">        frame.getContentPane().add(BorderLayout.WEST, menu.panel);</span>
 
-<span class="nc" id="L88">        Main.frame.getContentPane().revalidate();</span>
-<span class="nc" id="L89">        Main.frame.getContentPane().repaint();</span>
-<span class="nc" id="L90">    }</span>
+<span class="nc" id="L96">        Main.frame.getContentPane().revalidate();</span>
+<span class="nc" id="L97">        Main.frame.getContentPane().repaint();</span>
+<span class="nc" id="L98">    }</span>
 
     private void deserializeSettings() throws Exception { // restore theme setting from data
-<span class="pc bpc" id="L93" title="1 of 2 branches missed.">        if (!(new File(settingsSerLocation).canRead())) {</span>
-<span class="nc" id="L94">            theme = new Theme(themes.LIGHT);</span>
-<span class="nc" id="L95">            Debug.log(&quot;ERROR: Couldn't find &quot;+settingsSerLocation+&quot;.. skipping&quot;);</span>
-        } else {
+<span class="pc bpc" id="L101" title="1 of 2 branches missed.">        if (!(new File(settingsSerLocation).canRead())) {</span>
+<span class="fc" id="L102">            theme = new Theme(themes.LIGHT);</span>
+<span class="fc" id="L103">            Debug.log(&quot;ERROR: Couldn't find &quot;+settingsSerLocation+&quot;.. skipping&quot;);</span>
+<span class="fc" id="L104">        } else {</span>
 
             try {
-<span class="fc" id="L99">                FileInputStream file = new FileInputStream(settingsSerLocation);</span>
-<span class="fc" id="L100">                BufferedInputStream buffer = new BufferedInputStream(file);</span>
-<span class="fc" id="L101">                ObjectInputStream in = new ObjectInputStream(buffer);</span>
+<span class="nc" id="L107">                FileInputStream file = new FileInputStream(settingsSerLocation);</span>
+<span class="nc" id="L108">                BufferedInputStream buffer = new BufferedInputStream(file);</span>
+<span class="nc" id="L109">                ObjectInputStream in = new ObjectInputStream(buffer);</span>
     
-<span class="fc" id="L103">                Debug.mode = (Boolean) in.readObject();</span>
-<span class="fc" id="L104">                theme = (Theme) in.readObject();</span>
-<span class="fc" id="L105">                currency = (String) in.readObject();</span>
-<span class="fc" id="L106">                currencyChar = (String) in.readObject();</span>
-<span class="fc" id="L107">                in.close();</span>
-<span class="fc" id="L108">                Debug.log(&quot;Deserialized Settings From &quot; + settingsSerLocation);</span>
+<span class="nc" id="L111">                Debug.mode = (Boolean) in.readObject();</span>
+<span class="nc" id="L112">                theme = (Theme) in.readObject();</span>
+<span class="nc" id="L113">                currency = (String) in.readObject();</span>
+<span class="nc" id="L114">                currencyChar = (String) in.readObject();</span>
+<span class="nc" id="L115">                in.close();</span>
+<span class="nc" id="L116">                Debug.log(&quot;Deserialized Settings From &quot; + settingsSerLocation);</span>
 
-<span class="fc bfc" id="L110" title="All 2 branches covered.">                if (Debug.mode) Debug.frame.setVisible(true); // if debug mode on, show debug frame</span>
-<span class="fc" id="L111">            } catch(Exception ex) {</span>
-<span class="fc" id="L112">                Debug.log(&quot;ERROR: Main.deserializeSettings(), deleting &quot; + settingsSerLocation);</span>
-<span class="fc" id="L113">                File deleteFile = new File(settingsSerLocation);</span>
-<span class="fc" id="L114">                deleteFile.delete();</span>
+<span class="nc bnc" id="L118" title="All 2 branches missed.">                if (Debug.mode) Debug.frame.setVisible(true); // if debug mode on, show debug frame</span>
+<span class="nc" id="L119">            } catch(Exception ex) {</span>
+<span class="nc" id="L120">                Debug.log(&quot;ERROR: Main.deserializeSettings(), deleting &quot; + settingsSerLocation);</span>
+<span class="nc" id="L121">                File deleteFile = new File(settingsSerLocation);</span>
+<span class="nc" id="L122">                deleteFile.delete();</span>
 
-<span class="fc" id="L116">                theme = new Theme(themes.LIGHT);</span>
-<span class="fc" id="L117">            }</span>
+<span class="nc" id="L124">                theme = new Theme(themes.LIGHT);</span>
+            }
         }
 
-<span class="fc" id="L120">        UIManager.put(&quot;OptionPane.background&quot;,theme.emptyBackground);</span>
-<span class="fc" id="L121">        UIManager.put(&quot;Panel.background&quot;,theme.emptyBackground);</span>
-<span class="fc" id="L122">        UIManager.put(&quot;OptionPane.messageForeground&quot;,theme.foreground);</span>
-<span class="fc" id="L123">    }</span>
+<span class="fc" id="L128">        UIManager.put(&quot;OptionPane.background&quot;,theme.emptyBackground);</span>
+<span class="fc" id="L129">        UIManager.put(&quot;Panel.background&quot;,theme.emptyBackground);</span>
+<span class="fc" id="L130">        UIManager.put(&quot;OptionPane.messageForeground&quot;,theme.foreground);</span>
+<span class="fc" id="L131">    }</span>
 
     @SuppressWarnings(&quot;unchecked&quot;) // coin = (ArrayList&lt;Coin&gt; in.readObject()) supressing
     private void deserializePortfolio() throws Exception {
-<span class="pc bpc" id="L127" title="1 of 2 branches missed.">        if (!(new File(portfolioSerLocation).canRead())) {</span>
-<span class="nc" id="L128">            webData.portfolio = new ArrayList&lt;ArrayList&lt;WebData.Coin&gt;&gt;();</span>
-<span class="nc" id="L129">            webData.portfolio.add(new ArrayList&lt;WebData.Coin&gt;());</span>
-<span class="nc" id="L130">            webData.portfolio_names.add(new String(&quot;Portfolio 1&quot;));</span>
-<span class="nc" id="L131">            Debug.log(&quot;ERROR: Couldn't find &quot;+portfolioSerLocation+&quot;.. skipping&quot;);</span>
-        } else {
+<span class="pc bpc" id="L135" title="1 of 2 branches missed.">        if (!(new File(portfolioSerLocation).canRead())) {</span>
+<span class="fc" id="L136">            webData.portfolio = new ArrayList&lt;ArrayList&lt;WebData.Coin&gt;&gt;();</span>
+<span class="fc" id="L137">            webData.portfolio.add(new ArrayList&lt;WebData.Coin&gt;());</span>
+<span class="fc" id="L138">            webData.portfolio_names.add(new String(&quot;Portfolio 1&quot;));</span>
+<span class="fc" id="L139">            Debug.log(&quot;ERROR: Couldn't find &quot;+portfolioSerLocation+&quot;.. skipping&quot;);</span>
+<span class="fc" id="L140">        } else {</span>
 
             try {
-<span class="fc" id="L135">                FileInputStream file = new FileInputStream(portfolioSerLocation);</span>
-<span class="fc" id="L136">                BufferedInputStream buffer = new BufferedInputStream(file);</span>
-<span class="fc" id="L137">                ObjectInputStream in = new ObjectInputStream(buffer);</span>
+<span class="nc" id="L143">                FileInputStream file = new FileInputStream(portfolioSerLocation);</span>
+<span class="nc" id="L144">                BufferedInputStream buffer = new BufferedInputStream(file);</span>
+<span class="nc" id="L145">                ObjectInputStream in = new ObjectInputStream(buffer);</span>
         
-<span class="fc" id="L139">                webData.portfolio = (ArrayList&lt;ArrayList&lt;WebData.Coin&gt;&gt;) in.readObject();</span>
-<span class="fc" id="L140">                webData.portfolio_names = (ArrayList&lt;String&gt;) in.readObject();</span>
-<span class="fc" id="L141">                webData.portfolio_nr = (Integer) in.readObject();</span>
-<span class="fc" id="L142">                in.close();</span>
-<span class="fc" id="L143">                Debug.log(&quot;Deserialized Portfolio From &quot; + portfolioSerLocation);</span>
-            }
-<span class="fc" id="L145">            catch(Exception ex) {</span>
-<span class="fc" id="L146">                Debug.log(&quot;ERROR: Main.deserializePortfolio(), deleting &quot; + portfolioSerLocation);</span>
-<span class="fc" id="L147">                File deleteFile = new File(portfolioSerLocation);</span>
-<span class="fc" id="L148">                deleteFile.delete();</span>
+<span class="nc" id="L147">                webData.portfolio = (ArrayList&lt;ArrayList&lt;WebData.Coin&gt;&gt;) in.readObject();</span>
+<span class="nc" id="L148">                webData.portfolio_names = (ArrayList&lt;String&gt;) in.readObject();</span>
+<span class="nc" id="L149">                webData.portfolio_nr = (Integer) in.readObject();</span>
+<span class="nc" id="L150">                in.close();</span>
+<span class="nc" id="L151">                Debug.log(&quot;Deserialized Portfolio From &quot; + portfolioSerLocation);</span>
+<span class="nc" id="L152">            }</span>
+<span class="nc" id="L153">            catch(Exception ex) {</span>
+<span class="nc" id="L154">                Debug.log(&quot;ERROR: Main.deserializePortfolio(), deleting &quot; + portfolioSerLocation);</span>
+<span class="nc" id="L155">                File deleteFile = new File(portfolioSerLocation);</span>
+<span class="nc" id="L156">                deleteFile.delete();</span>
 
-<span class="fc" id="L150">                webData.portfolio = new ArrayList&lt;ArrayList&lt;WebData.Coin&gt;&gt;();</span>
-<span class="fc" id="L151">                webData.portfolio.add(new ArrayList&lt;WebData.Coin&gt;());</span>
-<span class="fc" id="L152">                webData.portfolio_names.add(new String(&quot;Portfolio 1&quot;));</span>
-<span class="fc" id="L153">            }</span>
+<span class="nc" id="L158">                webData.portfolio = new ArrayList&lt;ArrayList&lt;WebData.Coin&gt;&gt;();</span>
+<span class="nc" id="L159">                webData.portfolio.add(new ArrayList&lt;WebData.Coin&gt;());</span>
+<span class="nc" id="L160">                webData.portfolio_names.add(new String(&quot;Portfolio 1&quot;));</span>
+            }
         }
-<span class="fc" id="L155">    }</span>
+<span class="fc" id="L163">    }</span>
 
     private void getIcon() throws Exception { // program icon
-<span class="fc bfc" id="L158" title="All 2 branches covered.">        if (!(new File(imageLocation).exists())) {</span>
+<span class="fc bfc" id="L166" title="All 2 branches covered.">        if (!(new File(imageLocation).exists())) {</span>
             try {
-<span class="fc" id="L160">                Debug.log(&quot;ERROR: Couldn't find &quot;+imageLocation+&quot;.. downloading&quot;); // get image from jar</span>
-<span class="fc" id="L161">                BufferedImage image = ImageIO.read(getClass().getResource(&quot;/icon.png&quot;));</span>
+<span class="fc" id="L168">                Debug.log(&quot;ERROR: Couldn't find &quot;+imageLocation+&quot;.. downloading&quot;); // get image from jar</span>
+<span class="fc" id="L169">                BufferedImage image = ImageIO.read(getClass().getResource(&quot;/icon.png&quot;));</span>
 
-<span class="fc" id="L163">                ImageIO.write(image, &quot;png&quot;, new File(imageLocation)); // write the image to location</span>
-<span class="fc" id="L164">                Debug.log(&quot;-- image downloaded&quot;);</span>
-<span class="nc" id="L165">            } catch(Exception ex) {</span>
-<span class="nc" id="L166">                Debug.log(&quot;ERROR: Couldn't find /icon.png in jar&quot;);</span>
-<span class="nc" id="L167">                return;</span>
-<span class="fc" id="L168">            }</span>
+<span class="fc" id="L171">                ImageIO.write(image, &quot;png&quot;, new File(imageLocation)); // write the image to location</span>
+<span class="fc" id="L172">                Debug.log(&quot;-- image downloaded&quot;);</span>
+<span class="pc" id="L173">            } catch(Exception ex) {</span>
+<span class="nc" id="L174">                Debug.log(&quot;ERROR: Couldn't find /icon.png in jar&quot;);</span>
+<span class="nc" id="L175">                return;</span>
+            }
         }
         
-<span class="pc bpc" id="L171" title="1 of 2 branches missed.">        if (imageLocation != null) { // do this if the image exists</span>
-<span class="fc" id="L172">            frame.setIconImage(Toolkit.getDefaultToolkit().getImage(imageLocation));</span>
+<span class="pc bpc" id="L179" title="1 of 2 branches missed.">        if (imageLocation != null) { // do this if the image exists</span>
+<span class="fc" id="L180">            frame.setIconImage(Toolkit.getDefaultToolkit().getImage(imageLocation));</span>
         }
-<span class="fc" id="L174">    }</span>
+<span class="fc" id="L182">    }</span>
 
     public static class Theme implements Serializable {
         private static final long serialVersionUID = 1L;
@@ -183,12 +191,12 @@ import javax.swing.*; // provides gui related components (frame, jbutton)
         public Color selection;
         public Color emptyBackground;
 
-<span class="fc" id="L186">        private Color defaultCustomBackground = new Color(0, 0, 0); // black </span>
-<span class="fc" id="L187">        private Color defaultCustomForeground = new Color(14, 255, 0); // light green</span>
-<span class="fc" id="L188">        private Color defaultCustomGreen = new Color(244, 255, 0); // light yellow</span>
-<span class="fc" id="L189">        private Color defaultCustomRed = new Color(255, 0, 0); // light red</span>
-<span class="fc" id="L190">        private Color defaultCustomSelection = new Color(128, 128, 128); // gray</span>
-<span class="fc" id="L191">        private Color defaultCustomEmptyBackground = new Color(45, 45, 45); // dark gray</span>
+<span class="fc" id="L194">        private Color defaultCustomBackground = new Color(0, 0, 0); // black </span>
+<span class="fc" id="L195">        private Color defaultCustomForeground = new Color(14, 255, 0); // light green</span>
+<span class="fc" id="L196">        private Color defaultCustomGreen = new Color(244, 255, 0); // light yellow</span>
+<span class="fc" id="L197">        private Color defaultCustomRed = new Color(255, 0, 0); // light red</span>
+<span class="fc" id="L198">        private Color defaultCustomSelection = new Color(128, 128, 128); // gray</span>
+<span class="fc" id="L199">        private Color defaultCustomEmptyBackground = new Color(45, 45, 45); // dark gray</span>
 
         public Color customBackground;
         public Color customForeground;
@@ -197,65 +205,65 @@ import javax.swing.*; // provides gui related components (frame, jbutton)
         public Color customSelection;
         public Color customEmptyBackground;
 
-<span class="fc" id="L200">        public Theme(themes currentTheme) {</span>
-<span class="fc" id="L201">            resetCustom();</span>
-<span class="fc" id="L202">            this.currentTheme = currentTheme;</span>
-<span class="fc" id="L203">            update();</span>
-<span class="fc" id="L204">        }</span>
+<span class="fc" id="L208">        public Theme(themes currentTheme) {</span>
+<span class="fc" id="L209">            resetCustom();</span>
+<span class="fc" id="L210">            this.currentTheme = currentTheme;</span>
+<span class="fc" id="L211">            update();</span>
+<span class="fc" id="L212">        }</span>
 
         public void change(themes currentTheme) {
-<span class="fc" id="L207">            this.currentTheme = currentTheme;</span>
-<span class="fc" id="L208">            update();</span>
-<span class="fc" id="L209">        }</span>
+<span class="fc" id="L215">            this.currentTheme = currentTheme;</span>
+<span class="fc" id="L216">            update();</span>
+<span class="fc" id="L217">        }</span>
 
         public void update() {
-<span class="pc bpc" id="L212" title="1 of 4 branches missed.">            switch (currentTheme) {</span>
+<span class="pc bpc" id="L220" title="1 of 4 branches missed.">            switch (currentTheme) {</span>
                 case LIGHT:
-<span class="fc" id="L214">                    background = Color.WHITE; // white</span>
-<span class="fc" id="L215">                    foreground = Color.BLACK; // black</span>
-<span class="fc" id="L216">                    green = new Color(0, 128, 0); // dark green</span>
-<span class="fc" id="L217">                    red = new Color(220, 20, 60); // dark red</span>
-<span class="fc" id="L218">                    selection = Color.GRAY; // gray</span>
-<span class="fc" id="L219">                    emptyBackground = new Color(250, 250, 250); // quite white</span>
-<span class="fc" id="L220">                    break;</span>
-                case DARK:
-<span class="fc" id="L222">                    background = new Color(15, 15, 15); // light black</span>
-<span class="fc" id="L223">                    foreground = Color.WHITE; // white</span>
-<span class="fc" id="L224">                    green = Color.GREEN; // light green</span>
-<span class="fc" id="L225">                    red = Color.RED; // dark red</span>
+<span class="fc" id="L222">                    background = Color.WHITE; // white</span>
+<span class="fc" id="L223">                    foreground = Color.BLACK; // black</span>
+<span class="fc" id="L224">                    green = new Color(0, 128, 0); // dark green</span>
+<span class="fc" id="L225">                    red = new Color(220, 20, 60); // dark red</span>
 <span class="fc" id="L226">                    selection = Color.GRAY; // gray</span>
-<span class="fc" id="L227">                    emptyBackground = new Color(78, 78, 78); // dark gray</span>
+<span class="fc" id="L227">                    emptyBackground = new Color(250, 250, 250); // quite white</span>
 <span class="fc" id="L228">                    break;</span>
+                case DARK:
+<span class="fc" id="L230">                    background = new Color(15, 15, 15); // light black</span>
+<span class="fc" id="L231">                    foreground = Color.WHITE; // white</span>
+<span class="fc" id="L232">                    green = Color.GREEN; // light green</span>
+<span class="fc" id="L233">                    red = Color.RED; // dark red</span>
+<span class="fc" id="L234">                    selection = Color.GRAY; // gray</span>
+<span class="fc" id="L235">                    emptyBackground = new Color(78, 78, 78); // dark gray</span>
+<span class="fc" id="L236">                    break;</span>
                 case CUSTOM:
-<span class="fc" id="L230">                    background = customBackground;</span>
-<span class="fc" id="L231">                    foreground = customForeground;</span>
-<span class="fc" id="L232">                    green = customGreen;</span>
-<span class="fc" id="L233">                    red = customRed;</span>
-<span class="fc" id="L234">                    selection = customSelection;</span>
-<span class="fc" id="L235">                    emptyBackground = customEmptyBackground;</span>
+<span class="fc" id="L238">                    background = customBackground;</span>
+<span class="fc" id="L239">                    foreground = customForeground;</span>
+<span class="fc" id="L240">                    green = customGreen;</span>
+<span class="fc" id="L241">                    red = customRed;</span>
+<span class="fc" id="L242">                    selection = customSelection;</span>
+<span class="fc" id="L243">                    emptyBackground = customEmptyBackground;</span>
                     break;
             }
-<span class="fc" id="L238">        }</span>
+<span class="fc" id="L246">        }</span>
 
         public void resetCustom() {
-<span class="fc" id="L241">            customBackground = defaultCustomBackground;</span>
-<span class="fc" id="L242">            customForeground = defaultCustomForeground;</span>
-<span class="fc" id="L243">            customGreen = defaultCustomGreen;</span>
-<span class="fc" id="L244">            customRed = defaultCustomRed;</span>
-<span class="fc" id="L245">            customSelection = defaultCustomSelection;</span>
-<span class="fc" id="L246">            customEmptyBackground = defaultCustomEmptyBackground;</span>
-<span class="fc" id="L247">        }</span>
+<span class="fc" id="L249">            customBackground = defaultCustomBackground;</span>
+<span class="fc" id="L250">            customForeground = defaultCustomForeground;</span>
+<span class="fc" id="L251">            customGreen = defaultCustomGreen;</span>
+<span class="fc" id="L252">            customRed = defaultCustomRed;</span>
+<span class="fc" id="L253">            customSelection = defaultCustomSelection;</span>
+<span class="fc" id="L254">            customEmptyBackground = defaultCustomEmptyBackground;</span>
+<span class="fc" id="L255">        }</span>
     } 
 
     public JButton getButtonTemplate(String s) {
-<span class="fc" id="L251">        JButton template = new JButton(s);</span>
-<span class="fc" id="L252">        template.setMinimumSize(new Dimension(panelWidth, panelHeight));</span>
-<span class="fc" id="L253">        template.setMaximumSize(new Dimension(panelWidth, panelHeight));</span>
-<span class="fc" id="L254">        template.setBackground(Color.GRAY);</span>
-<span class="fc" id="L255">        template.setForeground(Color.WHITE);</span>
-<span class="fc" id="L256">        template.setFocusable(false);</span>
+<span class="fc" id="L259">        JButton template = new JButton(s);</span>
+<span class="fc" id="L260">        template.setMinimumSize(new Dimension(panelWidth, panelHeight));</span>
+<span class="fc" id="L261">        template.setMaximumSize(new Dimension(panelWidth, panelHeight));</span>
+<span class="fc" id="L262">        template.setBackground(Color.GRAY);</span>
+<span class="fc" id="L263">        template.setForeground(Color.WHITE);</span>
+<span class="fc" id="L264">        template.setFocusable(false);</span>
 
-<span class="fc" id="L258">        return template;</span>
+<span class="fc" id="L266">        return template;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

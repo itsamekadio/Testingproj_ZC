@@ -1,11 +1,13 @@
 package com.cryptochecker;
 
 import static org.junit.Assert.*;
+import static org.junit.Assume.*;
 import static org.mockito.Mockito.*;
 import org.junit.Before;
 import org.junit.Test;
 import java.lang.reflect.Method;
 import java.io.File;
+import java.awt.GraphicsEnvironment;
 
 /**
  * Comprehensive White Box Test Suite for Main.java
@@ -297,6 +299,7 @@ public class MainWhiteBoxTest {
 
     @Test
     public void testDeserializeSettings_Success_DebugModeTrue() throws Exception {
+        assumeFalse("Skipping GUI test in headless environment", GraphicsEnvironment.isHeadless());
         Main main = new Main();
         Main.gui = main;
         main.debug = new Debug();
@@ -334,6 +337,7 @@ public class MainWhiteBoxTest {
 
     @Test
     public void testDeserializeSettings_Success_DebugModeFalse() throws Exception {
+        assumeFalse("Skipping GUI test in headless environment", GraphicsEnvironment.isHeadless());
         Main main = new Main();
         Main.gui = main;
         main.debug = new Debug();
@@ -370,6 +374,7 @@ public class MainWhiteBoxTest {
 
     @Test
     public void testDeserializeSettings_CorruptFile() throws Exception {
+        assumeFalse("Skipping GUI test in headless environment", GraphicsEnvironment.isHeadless());
         Main main = new Main();
         Main.gui = main;
         main.debug = new Debug();
@@ -396,6 +401,7 @@ public class MainWhiteBoxTest {
 
     @Test
     public void testDeserializePortfolio_Success() throws Exception {
+        assumeFalse("Skipping GUI test in headless environment", GraphicsEnvironment.isHeadless());
         Main main = new Main();
         Main.gui = main;
         main.webData = new WebData();
@@ -434,6 +440,7 @@ public class MainWhiteBoxTest {
 
     @Test
     public void testDeserializePortfolio_CorruptFile() throws Exception {
+        assumeFalse("Skipping GUI test in headless environment", GraphicsEnvironment.isHeadless());
         Main main = new Main();
         Main.gui = main;
         main.webData = new WebData();

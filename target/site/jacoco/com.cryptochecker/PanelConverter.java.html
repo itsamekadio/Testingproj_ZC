@@ -190,11 +190,11 @@ public class PanelConverter {
 <span class="nc" id="L190">                    docText = Double.parseDouble(fieldCurrency1.getText());</span>
 <span class="nc" id="L191">                } catch(Exception ex) {</span>
 <span class="nc" id="L192">                    docText = null;</span>
-<span class="nc" id="L193">                }</span>
+                }
 
 <span class="nc bnc" id="L195" title="All 2 branches missed.">                if (docText == null) {</span>
 <span class="nc" id="L196">                    fieldCurrency2.setText(&quot;&quot;);</span>
-                } else {
+<span class="nc" id="L197">                } else {</span>
 <span class="nc" id="L198">                    fieldCurrency2.setText(calculateCurrency(docText));</span>
                 }
 
@@ -207,11 +207,11 @@ public class PanelConverter {
 <span class="nc" id="L207">                    docText = Double.parseDouble(fieldCurrency1.getText());</span>
 <span class="nc" id="L208">                } catch(Exception ex) {</span>
 <span class="nc" id="L209">                    docText = null;</span>
-<span class="nc" id="L210">                }</span>
+                }
 
 <span class="nc bnc" id="L212" title="All 2 branches missed.">                if (docText == null) {</span>
 <span class="nc" id="L213">                    fieldCurrency2.setText(&quot;&quot;);</span>
-                } else {
+<span class="nc" id="L214">                } else {</span>
 <span class="nc" id="L215">                    fieldCurrency2.setText(calculateCurrency(docText));</span>
                 }
 
@@ -279,23 +279,23 @@ public class PanelConverter {
 <span class="fc" id="L279">                break;</span>
             }
         }
-<span class="fc bfc" id="L282" title="All 4 branches covered.">        if (priceCurrency2 != 0) for (int i = 0; i &lt; Main.gui.webData.coin.size(); ++i) {</span>
-<span class="fc bfc" id="L283" title="All 2 branches covered.">            if (Main.gui.webData.coin.get(i).name.equals(buttonCurrency2.getText())) {</span>
-<span class="fc" id="L284">                priceCurrency2 = Main.gui.webData.coin.get(i).price;</span>
-<span class="fc" id="L285">                retrieveText(2, Main.gui.webData.coin.get(i).getInfo());</span>
-<span class="fc" id="L286">                break;</span>
+<span class="pc bpc" id="L282" title="1 of 4 branches missed.">        if (priceCurrency2 != 0) for (int i = 0; i &lt; Main.gui.webData.coin.size(); ++i) {</span>
+<span class="pc bpc" id="L283" title="1 of 2 branches missed.">            if (Main.gui.webData.coin.get(i).name.equals(buttonCurrency2.getText())) {</span>
+<span class="nc" id="L284">                priceCurrency2 = Main.gui.webData.coin.get(i).price;</span>
+<span class="nc" id="L285">                retrieveText(2, Main.gui.webData.coin.get(i).getInfo());</span>
+<span class="nc" id="L286">                break;</span>
             }
-        }
+<span class="fc" id="L288">        }</span>
         else { // priceCurrency2 is 0, it's value is Main.currency
-<span class="fc" id="L290">            buttonCurrency2.setText(Main.currency);</span>
-<span class="fc" id="L291">            fieldCurrency1.setText(fieldCurrency1.getText()); // invoke documentlistener on currency change</span>
-<span class="fc" id="L292">            retrieveText(2, &quot;&quot;);</span>
+<span class="nc" id="L290">            buttonCurrency2.setText(Main.currency);</span>
+<span class="nc" id="L291">            fieldCurrency1.setText(fieldCurrency1.getText()); // invoke documentlistener on currency change</span>
+<span class="nc" id="L292">            retrieveText(2, &quot;&quot;);</span>
         }
 
 <span class="fc" id="L295">        fieldCurrency1.setText(fieldCurrency1.getText());</span>
-<span class="fc" id="L296">        Main.frame.getContentPane().revalidate();</span>
-<span class="fc" id="L297">        Main.frame.getContentPane().repaint();</span>
-<span class="fc" id="L298">    }</span>
+<span class="nc" id="L296">        Main.frame.getContentPane().revalidate();</span>
+<span class="nc" id="L297">        Main.frame.getContentPane().repaint();</span>
+<span class="nc" id="L298">    }</span>
 
     private void retrieveText(int box, String info) {
         //Debug.log(&quot;Retrieving Box &quot;+box);
@@ -322,7 +322,7 @@ public class PanelConverter {
 
 <span class="fc bfc" id="L323" title="All 4 branches covered.">        if (priceCurrency2 == 0.0 &amp;&amp; buttonCurrency2.getText().equals(Main.currency)) {</span>
 <span class="fc" id="L324">            returnValue = priceCurrency1*x;</span>
-        }
+<span class="fc" id="L325">        }</span>
 <span class="pc bpc" id="L326" title="1 of 4 branches missed.">        else if (priceCurrency1 == 0 || priceCurrency2 == 0) {</span>
 <span class="fc" id="L327">            return String.valueOf(0);</span>
         }
@@ -353,12 +353,12 @@ public class PanelConverter {
 <span class="fc" id="L353">        String htmlOverview = htmlFont+&quot;&lt;font size=\&quot;6\&quot;&gt;&lt;font face=\&quot;helvetica\&quot;&gt;&quot;+&quot;&lt;center&gt;&quot;</span>
 <span class="fc" id="L354">        +&quot;{ &quot;+htmlFormat.format(total_market_cap)+&quot; }&lt;br&gt;&quot;</span>
 <span class="fc" id="L355">        +&quot;&lt;font size=\&quot;4\&quot;&gt;&lt;b&gt;24 Hour Volume: &quot;+htmlGreen+htmlFormat.format(total_24h_volume)+htmlFont+&quot;&lt;br&gt;&quot;</span>
-        +&quot;Bitcoin Dominance: &quot;+htmlGreen+bitcoin_percentage+&quot;%&quot;+htmlFont+&quot;&lt;/b&gt;&lt;/center&gt;&quot;;
+<span class="fc" id="L356">        +&quot;Bitcoin Dominance: &quot;+htmlGreen+bitcoin_percentage+&quot;%&quot;+htmlFont+&quot;&lt;/b&gt;&lt;/center&gt;&quot;;</span>
 
         // set text
 <span class="fc bfc" id="L359" title="All 2 branches covered.">        if (overviewText != null) {</span>
 <span class="fc" id="L360">            overviewText.setText(htmlOverview);</span>
-        } else {
+<span class="fc" id="L361">        } else {</span>
 <span class="fc" id="L362">            overviewText = new JEditorPane(&quot;text/html&quot;, htmlOverview);</span>
 <span class="fc" id="L363">            overviewText.setEditable(false);</span>
         }
@@ -451,7 +451,7 @@ public class PanelConverter {
 <span class="nc" id="L451">                                break;</span>
                             }
                         }
-                    } else {
+<span class="nc" id="L454">                    } else {</span>
 <span class="nc" id="L455">                        Debug.log(&quot;EXCEPTION: incorrect nr in buttonCurrencyListener&quot;);</span>
 <span class="nc" id="L456">                        System.exit(0);</span>
                     }
@@ -531,11 +531,11 @@ public class PanelConverter {
 <span class="fc" id="L531">            infoCurrency2 = (String) in.readObject();</span>
 <span class="fc" id="L532">            in.close();</span>
 <span class="fc" id="L533">            Debug.log(&quot;Deserialized Converter From &quot; + Main.converterSerLocation);</span>
-<span class="nc" id="L534">        } catch(Exception ex) {</span>
+<span class="pc" id="L534">        } catch(Exception ex) {</span>
 <span class="nc" id="L535">            Debug.log(&quot;ERROR: PanelConverter.deserialize(), deleting &quot; + Main.converterSerLocation);</span>
 <span class="nc" id="L536">            File deleteFile = new File(Main.converterSerLocation);</span>
 <span class="nc" id="L537">            deleteFile.delete();</span>
-<span class="fc" id="L538">        }</span>
+        }
 <span class="fc" id="L539">    }</span>
 
     private void serialize() {
@@ -555,10 +555,10 @@ public class PanelConverter {
 <span class="fc" id="L555">            out.writeObject(infoCurrency2);</span>
 <span class="fc" id="L556">            out.close();</span>
             //Debug.log(&quot;Serialized Converter To &quot; + Main.converterSerLocation); // too noisy
-<span class="nc" id="L558">        } catch(Exception ex) {</span>
+<span class="pc" id="L558">        } catch(Exception ex) {</span>
 <span class="nc" id="L559">            Debug.log(&quot;EXCEPTION: PanelConverter.java - serialize()&quot;);</span>
 <span class="nc" id="L560">            ex.printStackTrace();</span>
-<span class="fc" id="L561">        }</span>
+        }
 <span class="fc" id="L562">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

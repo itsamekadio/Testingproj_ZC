@@ -11,7 +11,7 @@ public class Debug {
     private static JScrollPane contentPane;
     private static PrintWriter printWriter;
 <span class="fc" id="L13">    private static JTextArea print = new JTextArea(0, 0);</span>
-    private static LocalDateTime time;
+<span class="fc" id="L14">    private static LocalDateTime time;</span>
 
 <span class="fc" id="L16">    public Debug() throws Exception {</span>
 <span class="fc" id="L17">        printWriter = new PrintWriter(new BufferedWriter(new FileWriter(Main.logLocation, true))); // second line in filewriter appends the line</span>
@@ -25,23 +25,23 @@ public class Debug {
 <span class="fc" id="L25">        contentPane = new JScrollPane(print);</span>
 <span class="fc" id="L26">        contentPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);</span>
 
-<span class="fc" id="L28">        frame = new JFrame(&quot;Debug Log&quot;);</span>
-<span class="fc" id="L29">        frame.setSize(610, 300);</span>
-<span class="fc" id="L30">        frame.setVisible(false);</span>
-<span class="fc" id="L31">        frame.add(contentPane);</span>
+<span class="nc" id="L28">        frame = new JFrame(&quot;Debug Log&quot;);</span>
+<span class="nc" id="L29">        frame.setSize(610, 300);</span>
+<span class="nc" id="L30">        frame.setVisible(false);</span>
+<span class="nc" id="L31">        frame.add(contentPane);</span>
 
-<span class="fc" id="L33">        frame.addWindowListener(new WindowAdapter() {</span>
+<span class="nc" id="L33">        frame.addWindowListener(new WindowAdapter() {</span>
             @Override
             public void windowClosing(WindowEvent event) {
 <span class="nc" id="L36">                Main.gui.panelSettings.debugFunction();</span>
 <span class="nc" id="L37">            }</span>
         });
-<span class="fc" id="L39">    }</span>
+<span class="nc" id="L39">    }</span>
 
     public static void log(String s) {
-<span class="fc bfc" id="L42" title="All 2 branches covered.">        if (contentPane == null) {</span>
-<span class="fc" id="L43">            System.out.println(s);</span>
-<span class="fc" id="L44">            return;</span>
+<span class="pc bpc" id="L42" title="1 of 2 branches missed.">        if (contentPane == null) {</span>
+<span class="nc" id="L43">            System.out.println(s);</span>
+<span class="nc" id="L44">            return;</span>
         }
         
 <span class="fc" id="L47">        time = LocalDateTime.now();</span>
@@ -53,9 +53,9 @@ public class Debug {
 <span class="fc" id="L53">            contentPane.getVerticalScrollBar().setValue(contentPane.getVerticalScrollBar().getMaximum());</span>
 <span class="fc" id="L54">            printWriter.println(msg);</span>
 <span class="fc" id="L55">            printWriter.close();</span>
-<span class="nc" id="L56">        } catch(Exception ex) {</span>
+<span class="pc" id="L56">        } catch(Exception ex) {</span>
 <span class="nc" id="L57">            ex.printStackTrace();</span>
-<span class="fc" id="L58">        }</span>
+        }
 
 <span class="fc" id="L60">    }</span>
 }

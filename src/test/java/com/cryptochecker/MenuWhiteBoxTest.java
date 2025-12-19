@@ -1,6 +1,7 @@
 package com.cryptochecker;
 
 import static org.junit.Assert.*;
+import static org.junit.Assume.*;
 import static org.mockito.Mockito.*;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,15 +19,19 @@ public class MenuWhiteBoxTest {
 
     @Before
     public void setUp() {
-        System.setProperty("java.awt.headless", "true");
+        assumeFalse("Skipping GUI test in headless environment", GraphicsEnvironment.isHeadless());
 
         try {
             // Initialize frame first
-        Main.frame = mock(javax.swing.JFrame.class);
+            Main.frame = mock(javax.swing.JFrame.class);
 
             // Initialize Main and Debug
             Main.gui = new Main();
-            try { Main.gui.debug = new Debug(); } catch (java.awt.HeadlessException e) { Main.gui.debug = null; }
+            try {
+                Main.gui.debug = new Debug();
+            } catch (java.awt.HeadlessException e) {
+                Main.gui.debug = null;
+            }
 
             // Initialize Theme
             Main.theme = new Main.Theme(Main.themes.LIGHT);

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.241" tests="28" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" name="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.163" tests="28" errors="0" skipped="4" failures="0">
   <properties>
     <property name="sun.desktop" value="windows"/>
     <property name="awt.toolkit" value="sun.awt.windows.WToolkit"/>
@@ -7,8 +7,7 @@
     <property name="java.specification.version" value="1.8"/>
     <property name="sun.cpu.isalist" value="amd64"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.class.path" value="D:\Work\Learning\coourses\Y4S1\testing\proj\crypto-checker\crypto-checker\target\test-classes;D:\Work\Learning\coourses\Y4S1\testing\proj\crypto-checker\crypto-checker\target\classes;C:\Users\NEW LAP\.m2\repository\com\google\code\gson\gson\2.8.2\gson-2.8.2.jar;C:\Users\NEW LAP\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\NEW LAP\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
-    <property name="sun.awt.enableExtraMouseButtons" value="true"/>
+    <property name="java.class.path" value="D:\Work\Learning\coourses\Y4S1\testing\proj\crypto-checker\crypto-checker\target\test-classes;D:\Work\Learning\coourses\Y4S1\testing\proj\crypto-checker\crypto-checker\target\classes;C:\Users\NEW LAP\.m2\repository\com\google\code\gson\gson\2.8.2\gson-2.8.2.jar;C:\Users\NEW LAP\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\NEW LAP\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\NEW LAP\.m2\repository\org\mockito\mockito-core\4.11.0\mockito-core-4.11.0.jar;C:\Users\NEW LAP\.m2\repository\net\bytebuddy\byte-buddy\1.12.19\byte-buddy-1.12.19.jar;C:\Users\NEW LAP\.m2\repository\net\bytebuddy\byte-buddy-agent\1.12.19\byte-buddy-agent-1.12.19.jar;C:\Users\NEW LAP\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\NEW LAP\.m2\repository\org\mockito\mockito-inline\4.11.0\mockito-inline-4.11.0.jar;"/>
     <property name="java.vm.vendor" value="Oracle Corporation"/>
     <property name="sun.arch.data.model" value="64"/>
     <property name="user.variant" value=""/>
@@ -19,13 +18,14 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="US"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk1.8.0_202\jre\bin"/>
-    <property name="sun.java.command" value="C:\Users\NEW LAP\AppData\Local\Temp\surefire5831537991309335991\surefirebooter-20251206071904459_3.jar C:\Users\NEW LAP\AppData\Local\Temp\surefire5831537991309335991 2025-12-06T07-19-04_231-jvmRun1 surefire-20251206071904459_1tmp surefire_0-20251206071904459_2tmp"/>
-    <property name="surefire.test.class.path" value="D:\Work\Learning\coourses\Y4S1\testing\proj\crypto-checker\crypto-checker\target\test-classes;D:\Work\Learning\coourses\Y4S1\testing\proj\crypto-checker\crypto-checker\target\classes;C:\Users\NEW LAP\.m2\repository\com\google\code\gson\gson\2.8.2\gson-2.8.2.jar;C:\Users\NEW LAP\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\NEW LAP\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;"/>
+    <property name="sun.java.command" value="C:\Users\NEWLAP~1\AppData\Local\Temp\surefire5054140026945894003\surefirebooter8204562589017016987.jar C:\Users\NEW LAP\AppData\Local\Temp\surefire5054140026945894003 2025-12-19T19-13-39_594-jvmRun1 surefire8671065932534561421tmp surefire_07699373501218228375tmp"/>
+    <property name="surefire.test.class.path" value="D:\Work\Learning\coourses\Y4S1\testing\proj\crypto-checker\crypto-checker\target\test-classes;D:\Work\Learning\coourses\Y4S1\testing\proj\crypto-checker\crypto-checker\target\classes;C:\Users\NEW LAP\.m2\repository\com\google\code\gson\gson\2.8.2\gson-2.8.2.jar;C:\Users\NEW LAP\.m2\repository\junit\junit\4.13.2\junit-4.13.2.jar;C:\Users\NEW LAP\.m2\repository\org\hamcrest\hamcrest-core\1.3\hamcrest-core-1.3.jar;C:\Users\NEW LAP\.m2\repository\org\mockito\mockito-core\4.11.0\mockito-core-4.11.0.jar;C:\Users\NEW LAP\.m2\repository\net\bytebuddy\byte-buddy\1.12.19\byte-buddy-1.12.19.jar;C:\Users\NEW LAP\.m2\repository\net\bytebuddy\byte-buddy-agent\1.12.19\byte-buddy-agent-1.12.19.jar;C:\Users\NEW LAP\.m2\repository\org\objenesis\objenesis\3.3\objenesis-3.3.jar;C:\Users\NEW LAP\.m2\repository\org\mockito\mockito-inline\4.11.0\mockito-inline-4.11.0.jar;"/>
     <property name="sun.cpu.endian" value="little"/>
     <property name="user.home" value="C:\Users\NEW LAP"/>
     <property name="user.language" value="en"/>
     <property name="java.specification.vendor" value="Oracle Corporation"/>
     <property name="java.home" value="C:\Program Files\Java\jdk1.8.0_202\jre"/>
+    <property name="javax.accessibility.assistive_technologies" value=""/>
     <property name="basedir" value="D:\Work\Learning\coourses\Y4S1\testing\proj\crypto-checker\crypto-checker"/>
     <property name="style.color" value="always"/>
     <property name="file.separator" value="\"/>
@@ -33,8 +33,8 @@
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.awt.graphicsenv" value="sun.awt.Win32GraphicsEnvironment"/>
-    <property name="java.awt.headless" value="false"/>
-    <property name="surefire.real.class.path" value="C:\Users\NEW LAP\AppData\Local\Temp\surefire5831537991309335991\surefirebooter-20251206071904459_3.jar;C:\\Users\\NEW LAP\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.7\\org.jacoco.agent-0.8.7-runtime.jar"/>
+    <property name="java.awt.headless" value="true"/>
+    <property name="surefire.real.class.path" value="C:\Users\NEWLAP~1\AppData\Local\Temp\surefire5054140026945894003\surefirebooter8204562589017016987.jar;C:\\Users\\NEW LAP\\.m2\\repository\\org\\jacoco\\org.jacoco.agent\\0.8.7\\org.jacoco.agent-0.8.7-runtime.jar"/>
     <property name="sun.boot.class.path" value="C:\Program Files\Java\jdk1.8.0_202\jre\lib\resources.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\rt.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\sunrsasign.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\jsse.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\jce.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\charsets.jar;C:\Program Files\Java\jdk1.8.0_202\jre\lib\jfr.jar;C:\Program Files\Java\jdk1.8.0_202\jre\classes"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
@@ -67,32 +67,40 @@
     <property name="maven.repo.local" value="C:\Users\NEW LAP\.m2\repository"/>
     <property name="java.class.version" value="52.0"/>
   </properties>
-  <testcase name="testCalculateGlobal_Branch_OverviewTextNotNull" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.004"/>
-  <testcase name="testReCreate_MatchFoundInLoop1" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.007"/>
-  <testcase name="testReCreate_MatchFoundInLoop2" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.005"/>
-  <testcase name="testDeserialize_Branch_FileNotFound" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.005"/>
-  <testcase name="testCompleteWorkflow" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.006"/>
-  <testcase name="testCalculateCurrency_Branch_VerySmall" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.055"/>
+  <testcase name="testCalculateGlobal_Branch_OverviewTextNotNull" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.011"/>
+  <testcase name="testReCreate_MatchFoundInLoop1" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0">
+    <skipped message="Skipped: GUI interaction test requires non-headless environment"/>
+  </testcase>
+  <testcase name="testReCreate_MatchFoundInLoop2" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0">
+    <skipped message="Skipped: GUI interaction test requires non-headless environment"/>
+  </testcase>
+  <testcase name="testDeserialize_Branch_FileNotFound" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.009"/>
+  <testcase name="testCompleteWorkflow" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.007"/>
+  <testcase name="testCalculateCurrency_Branch_VerySmall" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.007"/>
   <testcase name="testCalculateCurrency_Branch_PriceZeroReturn" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.008"/>
-  <testcase name="testReCreate" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.009"/>
-  <testcase name="testCalculateCurrency_Branch_GreaterThan0Point001" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.008"/>
-  <testcase name="testThemeSwitch_Light" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.007"/>
-  <testcase name="testRetrieveText_Branch_Case1" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.007"/>
-  <testcase name="testRetrieveText_Branch_Case2" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.009"/>
-  <testcase name="testReCreate_Branch_EmptyCoinList" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.006"/>
-  <testcase name="testPanelInitialization" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.005"/>
-  <testcase name="testCalculateCurrency_Branch_GreaterThan0Point0001" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.006"/>
-  <testcase name="testSerialize_Branch_NormalExecution" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.009"/>
-  <testcase name="testCalculateCurrency_Branch_Price2ZeroAndMainCurrency" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.007"/>
-  <testcase name="testReCreate_Branch_PopulatedCoinList" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.008"/>
-  <testcase name="testReCreate_PriceCurrency2EqualsZero" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.01"/>
-  <testcase name="testThemeSwitch_Dark" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.008"/>
+  <testcase name="testReCreate" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0">
+    <skipped message="Skipped: GUI interaction test requires non-headless environment"/>
+  </testcase>
+  <testcase name="testCalculateCurrency_Branch_GreaterThan0Point001" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.005"/>
+  <testcase name="testThemeSwitch_Light" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.008"/>
+  <testcase name="testRetrieveText_Branch_Case1" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.006"/>
+  <testcase name="testRetrieveText_Branch_Case2" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.007"/>
+  <testcase name="testReCreate_Branch_EmptyCoinList" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.008"/>
+  <testcase name="testPanelInitialization" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.006"/>
+  <testcase name="testCalculateCurrency_Branch_GreaterThan0Point0001" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.007"/>
+  <testcase name="testSerialize_Branch_NormalExecution" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.008"/>
+  <testcase name="testCalculateCurrency_Branch_Price2ZeroAndMainCurrency" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.006"/>
+  <testcase name="testReCreate_Branch_PopulatedCoinList" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.007"/>
+  <testcase name="testReCreate_PriceCurrency2EqualsZero" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0">
+    <skipped message="Skipped: GUI interaction test requires non-headless environment"/>
+  </testcase>
+  <testcase name="testThemeSwitch_Dark" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.006"/>
   <testcase name="testThemeSwitch_Custom" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.007"/>
-  <testcase name="testCalculateCurrency_Branch_GreaterThan1" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.008"/>
-  <testcase name="testCalculateCurrency_OnlyPrice1Zero" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.005"/>
-  <testcase name="testMultipleCalculations" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.008"/>
-  <testcase name="testCalculateCurrency_Branch_GreaterThan0Point1" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.005"/>
-  <testcase name="testCalculateGlobal_Branch_OverviewTextNull" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.006"/>
+  <testcase name="testCalculateCurrency_Branch_GreaterThan1" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.007"/>
+  <testcase name="testCalculateCurrency_OnlyPrice1Zero" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.006"/>
+  <testcase name="testMultipleCalculations" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.005"/>
+  <testcase name="testCalculateCurrency_Branch_GreaterThan0Point1" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.006"/>
+  <testcase name="testCalculateGlobal_Branch_OverviewTextNull" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.007"/>
   <testcase name="testSerialize_Branch_EarlyReturn" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.005"/>
-  <testcase name="testCalculateCurrency_Branch_GreaterThan0Point01" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.005"/>
+  <testcase name="testCalculateCurrency_Branch_GreaterThan0Point01" classname="com.cryptochecker.PanelConverterWhiteBoxTest" time="0.004"/>
 </testsuite>

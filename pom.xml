@@ -77,29 +77,28 @@
             <groupId>org.pitest</groupId>
             <artifactId>pitest-maven</artifactId>
             <version>1.15.0</version>
-            <dependencies>
-                <dependency>
-                    <groupId>org.pitest</groupId>
-                    <artifactId>pitest-junit5-plugin</artifactId>
-                    <version>1.2.0</version>
-                </dependency>
-            </dependencies>
+            <!-- No JUnit5 plugin needed - project uses JUnit 4 which PIT supports natively -->
             <configuration>
+                <!-- Target only non-GUI classes for mutation testing -->
                 <targetClasses>
-                    <param>com.cryptochecker.WebData*</param>
-                    <param>com.cryptochecker.Debug*</param>
-                    <param>com.cryptochecker.PanelConverter*</param>
-                    <param>com.cryptochecker.PanelPortfolio*</param>
+                    <param>com.cryptochecker.WebData</param>
+                    <param>com.cryptochecker.WebData$Coin</param>
+                    <param>com.cryptochecker.WebData$Global_Data</param>
                 </targetClasses>
                 <targetTests>
                     <param>com.cryptochecker.*UnitTest</param>
                     <param>com.cryptochecker.*IntegrationTest</param>
+                    <param>com.cryptochecker.*WhiteBoxTest</param>
                 </targetTests>
+                <!-- Exclude all GUI/Swing classes that cause headless issues -->
                 <excludedClasses>
                     <param>com.cryptochecker.Main</param>
                     <param>com.cryptochecker.Menu</param>
                     <param>com.cryptochecker.PanelCoin</param>
                     <param>com.cryptochecker.PanelSettings</param>
+                    <param>com.cryptochecker.PanelConverter</param>
+                    <param>com.cryptochecker.PanelPortfolio</param>
+                    <param>com.cryptochecker.Debug</param>
                 </excludedClasses>
                 <outputFormats>
                     <outputFormat>HTML</outputFormat>
@@ -108,6 +107,18 @@
                 <mutationThreshold>60</mutationThreshold>
                 <coverageThreshold>70</coverageThreshold>
                 <timestampedReports>false</timestampedReports>
+                <!-- JVM args to run in headless mode -->
+                <jvmArgs>
+                    <jvmArg>-Djava.awt.headless=true</jvmArg>
+                    <jvmArg>-Djavax.accessibility.assistive_technologies=</jvmArg>
+                </jvmArgs>
+                <!-- Timeout settings -->
+                <timeoutConstant>8000</timeoutConstant>
+                <timeoutFactor>1.5</timeoutFactor>
+                <!-- Threads for faster execution -->
+                <threads>4</threads>
+                <!-- Verbose output for analysis -->
+                <verbose>true</verbose>
             </configuration>
         </plugin>
     </plugins>

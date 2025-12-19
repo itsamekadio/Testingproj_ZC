@@ -129,9 +129,9 @@ public class PanelCoin {
     public void reCreate() {
 <span class="fc" id="L130">        model.list = Main.gui.webData.coin;</span>
 
-<span class="fc" id="L132">        Main.frame.getContentPane().revalidate();</span>
-<span class="fc" id="L133">        Main.frame.getContentPane().repaint();</span>
-<span class="fc" id="L134">    }</span>
+<span class="nc" id="L132">        Main.frame.getContentPane().revalidate();</span>
+<span class="nc" id="L133">        Main.frame.getContentPane().repaint();</span>
+<span class="nc" id="L134">    }</span>
 
 <span class="fc" id="L136">    private class SearchDocumentListener implements DocumentListener {</span>
         public void insertUpdate(DocumentEvent e) {
@@ -139,7 +139,7 @@ public class PanelCoin {
 
 <span class="nc bnc" id="L140" title="All 2 branches missed.">            if (text.trim().length() == 0) {</span>
 <span class="nc" id="L141">                rowSorter.setRowFilter(null);</span>
-            } else {
+<span class="nc" id="L142">            } else {</span>
 <span class="nc" id="L143">                rowSorter.setRowFilter(RowFilter.regexFilter(&quot;(?i)&quot; + text));</span>
             }
 <span class="nc" id="L145">        }</span>
@@ -149,7 +149,7 @@ public class PanelCoin {
 
 <span class="nc bnc" id="L150" title="All 2 branches missed.">            if (text.trim().length() == 0) {</span>
 <span class="nc" id="L151">                rowSorter.setRowFilter(null);</span>
-            } else {
+<span class="nc" id="L152">            } else {</span>
 <span class="nc" id="L153">                rowSorter.setRowFilter(RowFilter.regexFilter(&quot;(?i)&quot; + text));</span>
             }
 <span class="nc" id="L155">        }</span>
@@ -263,7 +263,7 @@ public class PanelCoin {
 <span class="pc bpc" id="L263" title="2 of 6 branches missed.">            if (column == 3 || column == 4 || column == 5) {</span>
 <span class="pc bpc" id="L264" title="1 of 2 branches missed.">                if (0 &lt;= (Double) table.getValueAt(row,column)) {</span>
 <span class="fc" id="L265">                    super.setForeground(Main.theme.green);</span>
-                }
+<span class="fc" id="L266">                }</span>
 <span class="nc bnc" id="L267" title="All 2 branches missed.">                else if (0 &gt; (Double) table.getValueAt(row,column)) {</span>
 <span class="nc" id="L268">                    super.setForeground(Main.theme.red);</span>
                 }

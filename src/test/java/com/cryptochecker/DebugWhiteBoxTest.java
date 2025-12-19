@@ -1,9 +1,11 @@
 package com.cryptochecker;
 
 import static org.junit.Assert.*;
+import static org.junit.Assume.*;
 import org.junit.Before;
 import org.junit.Test;
 import java.io.File;
+import java.awt.GraphicsEnvironment;
 
 /**
  * White Box Test Suite for Debug Class
@@ -93,6 +95,7 @@ public class DebugWhiteBoxTest {
      */
     @Test
     public void testLog_WithGUI() {
+        assumeFalse("Skipping GUI test in headless environment", GraphicsEnvironment.isHeadless());
         try {
             // Initialize Debug with GUI
             new Debug();

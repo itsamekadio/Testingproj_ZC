@@ -1,0 +1,5 @@
+# Created at 2025-12-06T18:26:05.583
+Boot Manifest-JAR contains absolute paths in classpath 'D:\Work\Learning\coourses\Y4S1\testing\proj\crypto-checker\crypto-checker\target\test-classes'
+Hint: <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+'other' has different root
+

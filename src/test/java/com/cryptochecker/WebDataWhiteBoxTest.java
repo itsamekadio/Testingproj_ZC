@@ -35,7 +35,11 @@ public class WebDataWhiteBoxTest {
         Main.frame = mock(javax.swing.JFrame.class);
 
         Main.gui = new Main();
-        try { Main.gui.debug = new Debug(); } catch (java.awt.HeadlessException e) { Main.gui.debug = null; }
+        try {
+            Main.gui.debug = new Debug();
+        } catch (java.awt.HeadlessException e) {
+            Main.gui.debug = null;
+        }
         Main.theme = new Main.Theme(Main.themes.LIGHT);
         Main.currency = "USD";
         Main.currencyChar = "$";
@@ -78,42 +82,42 @@ public class WebDataWhiteBoxTest {
     public void testTrimPrice_Branch_GreaterThan1_True() throws Exception {
         WebData.Coin coin = webData.new Coin();
         String result = coin.trimPrice(5.0);
-        assertNotNull(result);
+        assertEquals("5", result);
     }
 
     @Test
     public void testTrimPrice_Branch_GreaterThan0Point1_True() throws Exception {
         WebData.Coin coin = webData.new Coin();
         String result = coin.trimPrice(0.5);
-        assertNotNull(result);
+        assertEquals("0.5", result);
     }
 
     @Test
     public void testTrimPrice_Branch_GreaterThan0Point01_True() throws Exception {
         WebData.Coin coin = webData.new Coin();
         String result = coin.trimPrice(0.05);
-        assertNotNull(result);
+        assertEquals("0.05", result);
     }
 
     @Test
     public void testTrimPrice_Branch_GreaterThan0Point001_True() throws Exception {
         WebData.Coin coin = webData.new Coin();
         String result = coin.trimPrice(0.005);
-        assertNotNull(result);
+        assertEquals("0.005", result);
     }
 
     @Test
     public void testTrimPrice_Branch_GreaterThan0Point0001_True() throws Exception {
         WebData.Coin coin = webData.new Coin();
         String result = coin.trimPrice(0.0005);
-        assertNotNull(result);
+        assertEquals("0.0005", result);
     }
 
     @Test
     public void testTrimPrice_Branch_LessThanOrEqual0Point0001_Else() throws Exception {
         WebData.Coin coin = webData.new Coin();
         String result = coin.trimPrice(0.00005);
-        assertNotNull(result);
+        assertEquals("0.00005", result);
     }
 
     // ========== BOUNDARY VALUE TESTS ==========
@@ -122,35 +126,35 @@ public class WebDataWhiteBoxTest {
     public void testTrimPrice_Boundary_Exactly1() throws Exception {
         WebData.Coin coin = webData.new Coin();
         String result = coin.trimPrice(1.0);
-        assertNotNull(result);
+        assertEquals("1", result);
     }
 
     @Test
     public void testTrimPrice_Boundary_Exactly0Point1() throws Exception {
         WebData.Coin coin = webData.new Coin();
         String result = coin.trimPrice(0.1);
-        assertNotNull(result);
+        assertEquals("0.1", result);
     }
 
     @Test
     public void testTrimPrice_Boundary_Exactly0Point01() throws Exception {
         WebData.Coin coin = webData.new Coin();
         String result = coin.trimPrice(0.01);
-        assertNotNull(result);
+        assertEquals("0.01", result);
     }
 
     @Test
     public void testTrimPrice_Boundary_Exactly0Point001() throws Exception {
         WebData.Coin coin = webData.new Coin();
         String result = coin.trimPrice(0.001);
-        assertNotNull(result);
+        assertEquals("0.001", result);
     }
 
     @Test
     public void testTrimPrice_Boundary_Exactly0Point0001() throws Exception {
         WebData.Coin coin = webData.new Coin();
         String result = coin.trimPrice(0.0001);
-        assertNotNull(result);
+        assertEquals("0.0001", result);
     }
 
     // ========== EDGE CASE TESTS ==========
@@ -409,11 +413,12 @@ public class WebDataWhiteBoxTest {
         WebData.Coin coin = webData.new Coin();
 
         // Test all branches in sequence
-        assertNotNull(coin.trimPrice(10.0)); // > 1
-        assertNotNull(coin.trimPrice(0.5)); // > 0.1
-        assertNotNull(coin.trimPrice(0.05)); // > 0.01
-        assertNotNull(coin.trimPrice(0.005)); // > 0.001
-        assertNotNull(coin.trimPrice(0.0005)); // > 0.0001
-        assertNotNull(coin.trimPrice(0.00001)); // else
+        // Test all branches in sequence
+        assertEquals("10", coin.trimPrice(10.0)); // > 1
+        assertEquals("0.5", coin.trimPrice(0.5)); // > 0.1
+        assertEquals("0.05", coin.trimPrice(0.05)); // > 0.01
+        assertEquals("0.005", coin.trimPrice(0.005)); // > 0.001
+        assertEquals("0.0005", coin.trimPrice(0.0005)); // > 0.0001
+        assertEquals("0.00001", coin.trimPrice(0.00001)); // else
     }
 }
