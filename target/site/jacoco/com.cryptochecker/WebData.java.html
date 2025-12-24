@@ -77,10 +77,10 @@ public class WebData {
 
 <span class="fc" id="L78">            Debug.log(&quot;✅ Successfully fetched and parsed data from CoinGecko.&quot;);</span>
 
-<span class="fc" id="L80">        } catch (Exception ex) {</span>
-<span class="fc" id="L81">            ex.printStackTrace();</span>
-<span class="pc" id="L82">            JOptionPane.showMessageDialog(Main.frame,</span>
-<span class="fc" id="L83">                    &quot;⚠️ Unable to connect or fetch from API.\nPlease check your internet or try again later.&quot;);</span>
+<span class="pc" id="L80">        } catch (Exception ex) {</span>
+<span class="nc" id="L81">            ex.printStackTrace();</span>
+<span class="nc" id="L82">            JOptionPane.showMessageDialog(Main.frame,</span>
+<span class="nc" id="L83">                    &quot;⚠️ Unable to connect or fetch from API.\nPlease check your internet or try again later.&quot;);</span>
 <span class="nc bnc" id="L84" title="All 2 branches missed.">            if (coin == null) coin = new ArrayList&lt;&gt;();</span>
 <span class="nc bnc" id="L85" title="All 2 branches missed.">            if (global_data == null) global_data = new Global_Data();</span>
 <span class="nc" id="L86">            Debug.log(&quot;ERROR: Failed to fetch data from API&quot;);</span>

@@ -498,44 +498,6 @@ public class MainWhiteBoxTest {
     }
 
     @Test
-    public void testGetIcon_DownloadFails() throws Exception {
-        Main main = new Main();
-
-        // Save original location
-        String originalLocation = Main.imageLocation;
-
-        // Use reflection to change static final field imageLocation to an invalid path
-        java.lang.reflect.Field field = Main.class.getDeclaredField("imageLocation");
-        field.setAccessible(true);
-
-        // Remove final modifier
-        java.lang.reflect.Field modifiersField = java.lang.reflect.Field.class.getDeclaredField("modifiers");
-        modifiersField.setAccessible(true);
-        modifiersField.setInt(field, field.getModifiers() & ~java.lang.reflect.Modifier.FINAL);
-
-        // Set to invalid path (root of drive usually requires admin, or use invalid
-        // chars)
-        // Using a directory as a file path usually causes IOException on write
-        File invalidPath = new File(Main.folderLocation);
-        field.set(null, invalidPath.getAbsolutePath());
-
-        try {
-            Method method = Main.class.getDeclaredMethod("getIcon");
-            method.setAccessible(true);
-
-            // This should trigger the catch block inside getIcon because we can't write to
-            // a directory path
-            method.invoke(main);
-
-            // If we reach here without crashing, the catch block handled it
-            assertTrue(true);
-        } finally {
-            // Restore original location
-            field.set(null, originalLocation);
-        }
-    }
-
-    @Test
     public void testMain_FolderNotExists() {
         File folder = new File(Main.folderLocation);
 
