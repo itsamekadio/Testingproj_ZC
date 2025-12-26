@@ -1,5 +1,0 @@
-timeStamp,elapsed,label,responseCode,responseMessage,threadName,dataType,success,failureMessage,bytes,sentBytes,grpThreads,allThreads,URL,Latency,IdleTime,Connect
-1766526970388,7922,Get Coins Market,200,OK,CoinGecko API Users 1-1,text,true,,80881,158,1,1,https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd,7252,0,2272
-1766526993326,2539,Get Global Data,200,OK,CoinGecko API Users 1-1,text,true,,4843,135,1,1,https://api.coingecko.com/api/v3/global,2539,0,0
-1766527010881,260,Get Coins Market,200,OK,CoinGecko API Users 1-1,text,true,,80880,158,1,1,https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd,195,0,0
-1766527026147,393,Get Global Data,200,OK,CoinGecko API Users 1-1,text,true,,4843,135,1,1,https://api.coingecko.com/api/v3/global,393,0,0

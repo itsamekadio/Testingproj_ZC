@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.cryptochecker.MainWhiteBoxTest
 -------------------------------------------------------------------------------
-Tests run: 38, Failures: 0, Errors: 0, Skipped: 5, Time elapsed: 0.134 s - in com.cryptochecker.MainWhiteBoxTest
+Tests run: 38, Failures: 0, Errors: 0, Skipped: 5, Time elapsed: 0.138 s - in com.cryptochecker.MainWhiteBoxTest

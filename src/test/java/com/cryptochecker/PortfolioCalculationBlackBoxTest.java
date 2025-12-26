@@ -5,12 +5,17 @@ import static org.mockito.Mockito.*;
 import org.junit.Before;
 import org.junit.Test;
 import java.util.ArrayList;
+import io.qameta.allure.*;
 
 /**
  * Black Box Test Suite for Portfolio Calculation
  * Test Cases: TC_PF_001 to TC_PF_005
  * Based on Section 3.4.1 of TESTING_DOCUMENTATION.md
+ * 
+ * Implements Lab 11 Requirement: "One test suite with Allure annotations"
  */
+@Epic("Portfolio Management")
+@Feature("Portfolio Calculation")
 public class PortfolioCalculationBlackBoxTest {
 
     private PanelPortfolio panelPortfolio;
@@ -59,6 +64,9 @@ public class PortfolioCalculationBlackBoxTest {
      * Expected: portfolio_value = 1000.0
      */
     @Test
+    @Story("Calculate Portfolio Value")
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Verify that portfolio value is calculated correctly for valid positive amounts.")
     public void testCalculatePortfolio_EP_ValidPositiveAmount() {
         // Setup: Create portfolio with coin: amount = 10.0, price = 100.0
         WebData.Coin coin = Main.gui.webData.getCoin();
@@ -89,6 +97,9 @@ public class PortfolioCalculationBlackBoxTest {
      * Expected: portfolio_value = 0.0
      */
     @Test
+    @Story("Calculate Portfolio Value")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Verify that portfolio value is 0.0 when amount is 0.0.")
     public void testCalculatePortfolio_BVA_ZeroAmount() {
         // Setup: Create portfolio with coin: amount = 0.0, price = 100.0
         testPortfolio.clear();
@@ -122,6 +133,9 @@ public class PortfolioCalculationBlackBoxTest {
      * calculation
      */
     @Test
+    @Story("Input Validation")
+    @Severity(SeverityLevel.MINOR)
+    @Description("Verify behavior when negative amount is provided (invalid input).")
     public void testCalculatePortfolio_EP_InvalidNegativeAmount() {
         // Setup: Attempt to create portfolio with coin: amount = -5.0, price = 100.0
         testPortfolio.clear();
@@ -158,6 +172,9 @@ public class PortfolioCalculationBlackBoxTest {
      * Expected: portfolio_value = 0.000001 (or appropriate precision)
      */
     @Test
+    @Story("Calculate Portfolio Value")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Verify calculation with minimum positive amount.")
     public void testCalculatePortfolio_BVA_MinimumPositiveAmount() {
         // Setup: Create portfolio with coin: amount = 0.00000001, price = 100.0
         testPortfolio.clear();
@@ -189,6 +206,9 @@ public class PortfolioCalculationBlackBoxTest {
      * Expected: portfolio_value calculated correctly without overflow
      */
     @Test
+    @Story("Calculate Portfolio Value")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Verify calculation with maximum valid amount.")
     public void testCalculatePortfolio_BVA_MaximumAmount() {
         // Setup: Create portfolio with coin: amount = 999999999.99, price = 100.0
         testPortfolio.clear();

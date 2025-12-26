@@ -52,8 +52,27 @@
             <artifactId>maven-surefire-plugin</artifactId>
             <version>2.22.2</version>
             <configuration>
-                <argLine>-Djava.awt.headless=true -Djavax.accessibility.assistive_technologies= @{argLine}</argLine>
+                <testFailureIgnore>false</testFailureIgnore>
+                <argLine>
+                    -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/1.9.6/aspectjweaver-1.9.6.jar"
+                    -Djava.awt.headless=true 
+                    -Djavax.accessibility.assistive_technologies=
+                    -Dallure.results.directory="${project.basedir}/target/allure-results"
+                </argLine>
+                <properties>
+                    <property>
+                        <name>listener</name>
+                        <value>io.qameta.allure.junit4.AllureJunit4</value>
+                    </property>
+                </properties>
             </configuration>
+            <dependencies>
+                <dependency>
+                    <groupId>org.aspectj</groupId>
+                    <artifactId>aspectjweaver</artifactId>
+                    <version>1.9.6</version>
+                </dependency>
+            </dependencies>
         </plugin>
         <plugin>
             <groupId>org.jacoco</groupId>
@@ -120,6 +139,14 @@
                 <threads>4</threads>
                 <!-- Verbose output for analysis -->
                 <verbose>true</verbose>
+            </configuration>
+        </plugin>
+        <plugin>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-maven</artifactId>
+            <version>2.12.0</version>
+            <configuration>
+                <reportVersion>2.14.0</reportVersion>
             </configuration>
         </plugin>
         <plugin>
@@ -219,6 +246,7 @@
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <allure.results.directory>${project.basedir}/target/allure-results</allure.results.directory>
   </properties>
   <dependencies>
     <dependency>
@@ -243,6 +271,18 @@
       <artifactId>mockito-inline</artifactId>
       <version>4.11.0</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>io.qameta.allure</groupId>
+        <artifactId>allure-junit4</artifactId>
+        <version>2.24.0</version>
+        <scope>test</scope>
+    </dependency>
+    <dependency>
+        <groupId>com.aventstack</groupId>
+        <artifactId>extentreports</artifactId>
+        <version>5.1.1</version>
+        <scope>test</scope>
     </dependency>
   </dependencies>
 </project>

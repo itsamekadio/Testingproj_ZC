@@ -2853,6 +2853,9 @@ To demonstrate a comprehensive audit, we have classified **ALL Findings (OWASP +
 
 ### 6.5 Deliverable 5: Automated Reporting Integration
 
+To streamline future audits, we have integrated comprehensive reporting tools matching Lab 11 requirements.
+
+#### 6.5.1 Maven Site Details
 To streamline future audits, we have integrated all testing tools into the Maven Site lifecycle.
 
 1.  **Configuration:** The `maven-site-plugin` was added to `pom.xml` along with reporting modules for Surefire, SpotBugs, and Dependency-Check.
@@ -2862,6 +2865,43 @@ To streamline future audits, we have integrated all testing tools into the Maven
     *   **Test Report:** `target/site/surefire-report.html` (JUnit Results)
     *   **Code Scan:** `target/site/spotbugs.html` (Static Analysis)
     *   **Dependency Scan:** `target/dependency-check-report.html` (SCA)
+
+### 6.5 Deliverable 5: Automated Reporting Integration
+
+To streamline future audits and align with **Lab 11: Automated Test Execution & Reporting** learning outcomes, we have integrated comprehensive reporting tools.
+
+#### 6.5.1 Allure Reporting (Lab 11 Requirement)
+In strict adherence to Lab 11, we have implemented Allure for rich, interactive test reporting suitable for CI/CD pipelines.
+
+1.  **Configuration:**
+    *   Added `allure-junit4` (v2.24.0) dependency.
+    *   Configured `maven-surefire-plugin` with `aspectjweaver` java agent.
+2.  **Annotations:** `PortfolioCalculationBlackBoxTest` uses `@Epic`, `@Feature`, and `@Severity`.
+3.  **Visual Evidence:**
+    > **📸 INSERT SCREENSHOT HERE**
+    > ![Allure Report](allurerep.png)
+    > *Figure 6.5.1: Allure Dashboard showing test execution trends and severity.*
+
+#### 6.5.2 ExtentReports Integration (Lab 11 Requirement)
+We have also implemented ExtentReports (`v5.1.1`) for programmatic, HTML-based reporting, which is ideal for "screenshot-heavy reports" and "custom logging" as noted in the Lab guidelines.
+
+1.  **Implementation:**
+    *   **Manager:** `ExtentManager.java` (Singleton Reporter).
+    *   **Test Suite:** `ExtentReportTest.java` (Demonstrates Pass/Fail/Info logs).
+2.  **Visual Evidence:**
+    > **📸 INSERT SCREENSHOT HERE**
+    > ![Extent Report](extentreport.png)
+    > *Figure 6.5.2: ExtentReports HTML dashboard showing custom logs.*
+
+#### 6.5.3 Tool Comparison (Lab 11 Deliverable 6)
+
+| Feature | Allure (Implemented) | ExtentReports (Implemented) |
+| :--- | :--- | :--- |
+| **Integration Style** | **Automatic** (via Maven Plugin/Listener) | **Manual** (Programmatic Setup in Code) |
+| **Report Generation** | Needs CLI command (`mvn allure:serve`) | **Immediate** HTML generation (`measure-report.html`) |
+| **Best Use Case** | CI/CD Pipelines, Historical Trends | Standalone Reports, Custom Logging |
+| **Screenshots** | Supported (via Attachments) | **Excellent** (Embedded Base64) |
+| **Project Usage** | `PortfolioCalculationBlackBoxTest` | `ExtentReportTest` |
 
 ### 6.6 Deliverable 6: Final Security Reflection
 
